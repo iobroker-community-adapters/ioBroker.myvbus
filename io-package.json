@@ -89,8 +89,7 @@
             }
         ]
     },
-    "native": {
-     },
+    "native": {},
     "objects": [],
     "instanceObjects": []
 }
