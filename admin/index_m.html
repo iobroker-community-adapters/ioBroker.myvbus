@@ -67,7 +67,7 @@
 
         <div class="row">
             <div class="col s12 m4 l2">
-                <img src="template.png" class="logo">
+                <img src="myvbus.png" class="logo">
             </div>
         </div>
 
@@ -75,16 +75,23 @@
 
         <!-- For example columns with settings: -->
         <div class="row">
-            <div class="col s6 input-field">
-                <input type="checkbox" class="value" id="option1" />
-                <label for="option1" class="translate">option1</label>
+            <div class="input-field col s12 m4">
+                <select class="value" id="connectionType">
+                    <option value="TCP" class="translate">TCP</option>
+                    <option value="Serial" class="translate">Serial</option>
+                </select>
+                <label for="connectionType" class="translate">Connection Type</label>
             </div>
-
-            <div class="col s6 input-field">
-                <input type="text" class="value" id="option2" />
-                <label for="option2" class="translate">option2</label>
+            <div class="input-field col s12 m4">
+                <input class="value" id="connectionIdentifier" type="text">
+                <label for="connectionIdentifier" class="translate">Connection Identifier</label>
+                <span class="translate">IP (when TCP) or  Port (when serial)</span>
             </div>
-        </div>
+            <div class="input-field col s12 m4">
+                <input class="value" id="sensorName" type="text">
+                <label for="vbusPassword" class="translate">VBus Password</label>
+                <span class="translate">Default: "vbus"</span>
+            </div>
 
     </div>
 
