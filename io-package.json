@@ -1,6 +1,6 @@
 {
     "common": {
-        "name": "template",
+        "name": "myvbus",
         "version": "0.0.1",
         "news": {
             "0.0.1": {
@@ -16,47 +16,49 @@
                 "zh-cn": "首次出版"
             }
         },
-        "title": "Template (JavaScript)",
+        "title": "ioBroker VBUS Adapter",
         "titleLang": {
-            "en": "Template (JavaScript)",
-            "de": "Vorlage (JavaScript)",
-            "ru": "Шаблон (JavaScript)",
-            "pt": "Modelo (JavaScript)",
-            "nl": "Sjabloon (JavaScript)",
-            "fr": "Modèle (JavaScript)",
+            "en": "ioBroker VBUS Adapter",
+            "de": "ioBroker VBUS Adapter",
+            "ru": "ioBroker VBUS Adapter",
+            "pt": "ioBroker VBUS Adapter",
+            "nl": "ioBroker VBUS Adapter",
+            "fr": "ioBroker VBUS Adapter",
             "it": "Modello (JavaScript)",
-            "es": "Plantilla (JavaScript)",
-            "pl": "Szablon (JavaScript)",
-            "zh-cn": "范本（JavaScript）"
+            "es": "ioBroker VBUS Adapter",
+            "pl": "ioBroker VBUS Adapter",
+            "zh-cn": "ioBroker VBUS Adapter"
         },
         "desc": {
-            "en": "Template for adapter development",
-            "de": "Vorlage für die Adapterentwicklung",
-            "ru": "Шаблон для разработки адаптера",
-            "pt": "Modelo para desenvolvimento de adaptadores",
-            "nl": "Sjabloon voor adapterontwikkeling",
-            "fr": "Modèle de développement d'adaptateur",
-            "it": "Modello per lo sviluppo dell'adattatore",
-            "es": "Plantilla para desarrollo de adaptadores",
-            "pl": "Szablon do opracowania adaptera",
-            "zh-cn": "适配器开发的模板"
+            "en": "ioBroker VBUS Adapter",
+            "de": "ioBroker VBUS Adapter",
+            "ru": "ioBroker VBUS Adapter",
+            "pt": "ioBroker VBUS Adapter",
+            "nl": "ioBroker VBUS Adapter",
+            "fr": "ioBroker VBUS Adapter",
+            "it": "ioBroker VBUS Adapter",
+            "es": "ioBroker VBUS Adapter",
+            "pl": "ioBroker VBUS Adapter",
+            "zh-cn": "ioBroker VBUS Adapter"
         },
         "authors": [
-            "Author <author@mail.com>"
+            "Author <jjensen@t-online.de>"
         ],
         "keywords": [
             "ioBroker",
-            "template",
+            "myvbus",
             "Smart Home",
-            "home automation"
+            "home automation",
+            "VBus",
+            "Resol"
         ],
         "license": "MIT",
         "platform": "Javascript/Node.js",
         "main": "main.js",
-        "icon": "template.png",
+        "icon": "myvbus.png",
         "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/Author/ioBroker.template/master/admin/template.png",
-        "readme": "https://github.com/Author/ioBroker.template/blob/master/README.md",
+        "extIcon": "https://raw.githubusercontent.com/pdbjjens/ioBroker.myvbus/master/admin/myvbus.png",
+        "readme": "https://github.com/pdbjjens/ioBroker.myvbus/blob/master/README.md",
         "loglevel": "info",
         "mode": "daemon",
         "type": "general",
@@ -66,16 +68,16 @@
         "adminTab": {
             "singleton": true,
             "name": {
-                "en": "Template (JavaScript)",
-                "de": "Vorlage (JavaScript)",
-                "ru": "Шаблон (JavaScript)",
-                "pt": "Modelo (JavaScript)",
-                "nl": "Sjabloon (JavaScript)",
-                "fr": "Modèle (JavaScript)",
-                "it": "Modello (JavaScript)",
-                "es": "Plantilla (JavaScript)",
-                "pl": "Szablon (JavaScript)",
-                "zh-cn": "范本（JavaScript）"
+                "en": "ioBroker VBus Adapter",
+                "de": "ioBroker VBus Adapter",
+                "ru": "ioBroker VBus Adapter",
+                "pt": "ioBroker VBus Adapter",
+                "nl": "ioBroker VBus Adapter",
+                "fr": "ioBroker VBus Adapter",
+                "it": "ioBroker VBus Adapter",
+                "es": "ioBroker VBus Adapter",
+                "pl": "ioBroker VBus Adapter",
+                "zh-cn": "ioBroker VBus Adapter"
             },
             "link": "",
             "fa-icon": "info"

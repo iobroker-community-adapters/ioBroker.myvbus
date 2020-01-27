@@ -1,22 +1,24 @@
 {
-  "name": "iobroker.template",
+  "name": "iobroker.myvbus",
   "version": "0.0.1",
-  "description": "Template for adapter development",
+  "description": "ioBroker Adapter for Resol VBus",
   "author": {
-    "name": "Author",
-    "email": "author@mail.com"
+    "name": "Jens-Peter Jensen",
+    "email": "jjensen@t-online.de"
   },
-  "homepage": "https://github.com/Author/ioBroker.template",
+  "homepage": "https://github.com/pdbjjens/ioBroker.myvbus",
   "license": "MIT",
   "keywords": [
     "ioBroker",
-    "template",
+    "myvbus",
     "Smart Home",
-    "home automation"
+    "home automation",
+    "VBus",
+    "Resol"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/Author/ioBroker.template"
+    "url": "https://github.com/pdbjjens/ioBroker.myvbus"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^2.1.0"
@@ -51,7 +53,7 @@
     "lint": "eslint"
   },
   "bugs": {
-    "url": "https://github.com/Author/ioBroker.template/issues"
+    "url": "https://github.com/Author/ioBroker.myvbus/issues"
   },
   "readmeFilename": "README.md"
 }
