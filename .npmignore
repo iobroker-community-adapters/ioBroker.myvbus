@@ -6,6 +6,8 @@ nbproject/
 *.code-workspace
 Thumbs.db
 gulpfile.js
+tsconfig.json
+admin/tsconfig.json
 
 test/
 travis/
