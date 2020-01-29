@@ -61,7 +61,7 @@
         "readme": "https://github.com/pdbjjens/ioBroker.myvbus/blob/master/README.md",
         "loglevel": "info",
         "mode": "daemon",
-        "type": "general",
+        "type": "climate-control",
         "compact": true,
         "materialize": true,
         "materializeTab": true,
