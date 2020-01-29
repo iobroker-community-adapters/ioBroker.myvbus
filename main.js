@@ -10,8 +10,16 @@ const utils = require('@iobroker/adapter-core');
 
 // Load your modules here, e.g.:
 // const fs = require("fs");
+const vbus = require('resol-vbus');
+const _ = require('lodash');
+var ctx = {
+    headerSet: null,
+    hsc: null,
+    connection: null,
+};
 
-class Template extends utils.Adapter {
+
+class myvbus extends utils.Adapter {
 
     /**
      * @param {Partial<ioBroker.AdapterOptions>} [options={}]
@@ -19,7 +27,7 @@ class Template extends utils.Adapter {
     constructor(options) {
         super({
             ...options,
-            name: 'template',
+            name: 'myvbus',
         });
         this.on('ready', this.onReady.bind(this));
         this.on('objectChange', this.onObjectChange.bind(this));
@@ -34,12 +42,157 @@ class Template extends utils.Adapter {
     async onReady() {
         // Initialize your adapter here
 
+
         // The adapters config (in the instance object everything under the attribute "native") is accessible via
         // this.config:
-        this.log.info('config option1: ' + this.config.option1);
-        this.log.info('config option2: ' + this.config.option2);
+        this.log.info('Connection Type: ' + this.config.connectionType);
+        this.log.info('Connection Identifier: ' + this.config.connectionIdentifier);
+        this.log.info('VBus Password: ' + this.config.vbusPassword);
+        this.log.info('VBus Interval: ' + this.config.vbusInterval);
+        this.log.info('Force ReInit: ' + this.config.forceReInit);
 
-        /*
+        // in this vbus adapter all states changes inside the adapters namespace are subscribed
+        this.subscribeStates('*');
+
+        // examples for the checkPassword/checkGroup functions
+        let result = await this.checkPasswordAsync('admin', 'iobroker');
+        this.log.info('check user admin pw iobroker: ' + result);
+
+        result = await this.checkGroupAsync('admin', 'admin');
+        this.log.info('check group user admin group admin: ' + result);
+
+  
+        var self = myvbus
+    function initResol(self) {
+
+        ctx.headerSet = new vbus.HeaderSet();
+        var forceReInit = self.config.forceReInit;
+        ctx.hsc = new vbus.HeaderSetConsolidator({
+            interval: self.config.vbusInterval * 1000,
+            timeToLive: (self.config.vbusInterval * 1000) + 1000,
+        });
+        var ConnectionClass = vbus['TcpConnection'];
+        ctx.connection = new ConnectionClass({
+            host: adapter.config.ipAddress,
+            password: adapter.config.password
+        });
+
+        ctx.connection.on('packet', function (packet) {
+            ctx.headerSet.removeAllHeaders();
+            ctx.headerSet.addHeader(packet);
+            ctx.hsc.addHeader(packet);
+
+            if (forceReInit) {
+                ctx.hsc.emit('headerSet', ctx.hsc);
+            }
+        });
+
+        ctx.hsc.on('headerSet', function (headerSet) {
+            var packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
+            var data = _.map(packetFields, function (pf) {
+                return {
+                    id: pf.id,
+                    name: pf.name,
+                    value: pf.rawValue,
+                    deviceName: pf.packetSpec.sourceDevice.fullName,
+                    deviceId: pf.packetSpec.sourceDevice.deviceId,
+                    addressId: pf.packetSpec.sourceDevice.selfAddress,
+                    unit: pf.packetFieldSpec.type.unit.unitId,
+                    typeId: pf.packetFieldSpec.type.typeId,
+                    rootTypeId: pf.packetFieldSpec.type.rootTypeId
+                };
+            });
+
+            _.each(data, function (item) {
+                var deviceId = item.deviceId.replace(/_/g, '');
+                var channelId = deviceId + '.' + item.addressId;
+                var objectId = channelId + '.' + item.id.replace(/_/g, '');
+
+                if (forceReInit) {
+                    initDevice(deviceId, channelId, objectId, item);
+                }
+                adapter.setState(objectId, item.value, true);
+            });
+
+            if (forceReInit) {
+                adapter.extendForeignObject('system.adapter.' + adapter.namespace, {
+                    native: {
+                        forceReInit: false
+                    }
+                });
+                forceReInit = false;
+            }
+        });
+
+        ctx.connection.connect();
+        ctx.hsc.startTimer();
+    }
+
+    function initDevice(deviceId, channelId, objectId, item) {
+        adapter.setObjectNotExists(deviceId, {
+            type: 'device',
+            common: {
+                name: item.deviceName
+            },
+            native: {}
+        });
+        adapter.setObjectNotExists(channelId, {
+            type: 'channel',
+            common: {
+                name: channelId
+            },
+            native: {}
+        });
+
+        var common = {
+            name: item.name,
+            type: 'number',
+            write: false
+        };
+        switch (item.unit) {
+            case 'DegreesCelsius':
+                var name = 'Unknown';
+                switch (item.name) {
+                    case 'Temperature S1':
+                        name = 'Kollektor';
+                        break;
+                    case 'Temperature S2':
+                        name = 'Boiler';
+                        break;
+                    case 'Temperature S3':
+                        name = 'Puffer';
+                        break;
+                };
+                common.name = name;
+                common.min = -100;
+                common.max = +300;
+                common.role = 'value.temperature';
+                break;
+            case 'Percent':
+                common.min = 0;
+                common.max = 100;
+                common.role = 'value.volume';
+                break;
+            case 'Hours':
+                break;
+            case 'WattHours':
+                break;
+            case 'None':
+                break;
+            default:
+                break;
+        }
+
+        adapter.setObjectNotExists(objectId, {
+            type: 'state',
+            common: common,
+            native: {}
+        });
+    }
+    initResol();
+}
+
+/*
         For every state in the system there has to be also an object of type state
         Here a simple template for a boolean variable named "testVariable"
         Because every adapter instance uses its own unique namespace variable names can't collide with other adapters variables
@@ -57,7 +210,7 @@ class Template extends utils.Adapter {
         });
 
         // in this template all states changes inside the adapters namespace are subscribed
-        this.subscribeStates('*');
+        
 
         /*
         setState examples
@@ -73,12 +226,7 @@ class Template extends utils.Adapter {
         // same thing, but the state is deleted after 30s (getState will return null afterwards)
         await this.setStateAsync('testVariable', { val: true, ack: true, expire: 30 });
 
-        // examples for the checkPassword/checkGroup functions
-        let result = await this.checkPasswordAsync('admin', 'iobroker');
-        this.log.info('check user admin pw iobroker: ' + result);
 
-        result = await this.checkGroupAsync('admin', 'admin');
-        this.log.info('check group user admin group admin: ' + result);
     }
 
     /**
@@ -87,6 +235,7 @@ class Template extends utils.Adapter {
      */
     onUnload(callback) {
         try {
+            ctx.connection.disconnectd();
             this.log.info('cleaned everything up...');
             callback();
         } catch (e) {
@@ -149,8 +298,8 @@ if (module.parent) {
     /**
      * @param {Partial<ioBroker.AdapterOptions>} [options={}]
      */
-    module.exports = (options) => new Template(options);
+    module.exports = (options) => new myvbus(options);
 } else {
     // otherwise start the instance directly
-    new Template();
+    new myvbus();
 }
