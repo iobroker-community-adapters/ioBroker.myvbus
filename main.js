@@ -16,7 +16,7 @@ const _ = require('lodash');
 //var i18n = new vbus.I18N('en');
 const spec = vbus.Specification.getDefaultSpecification();
 
-var ctx = {
+const ctx = {
     headerSet: null,
     hsc: null,
     connection: null,
@@ -60,160 +60,158 @@ class MyVbus extends utils.Adapter {
         this.subscribeStates('*');
 
            
-    function initResol() {
-
-        ctx.headerSet = new vbus.HeaderSet();
-        var forceReInit = self.config.forceReInit;
-        ctx.hsc = new vbus.HeaderSetConsolidator({
-            interval: self.config.vbusInterval * 1000,
-            timeToLive: (self.config.vbusInterval * 1000) + 1000,
-        });
-        if (self.config.connectionType == 'TCP') {
-            const ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-            if (self.config.connectionIdentifier.match(ipformat)) {
-                var ConnectionClass = vbus['TcpConnection'];
-                ctx.connection = new ConnectionClass({
-                   host: self.config.connectionIdentifier,
-                   password: self.config.vbusPassword
-                });
-            } else { 
-                self.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
-            }
-            
-        } else if ( self.config.connectionType == 'Serial' ) {
-            const serialformat = self.config.connectionIdentifier;
-            if (self.config.connectionIdentifier.match(serialformat)) {
-                var ConnectionClass = vbus['SerialConnection'];
-                ctx.connection = new ConnectionClass({
-                   path: self.config.connectionIdentifier,
-                   //password: self.config.vbusPassword
-                });
-            } else { 
-                self.log.warn('Serial port ID not valid. Should be like /dev/tty.usbserial or COM9');
-            }
-        }
-
-        ctx.connection.on('packet', function (packet) {
-            ctx.headerSet.removeAllHeaders();
-            ctx.headerSet.addHeader(packet);
-            ctx.hsc.addHeader(packet);
-
-            if (forceReInit) {
-                ctx.hsc.emit('headerSet', ctx.hsc);
-            }
-        });
-
-        ctx.hsc.on('headerSet', function (headerSet) {
-            var packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
-            var data = _.map(packetFields, function (pf) {
-                return {
-                    id: pf.id,
-                    name: pf.name,
-                    value: pf.rawValue,
-                    deviceName: pf.packetSpec.sourceDevice.fullName,
-                    deviceId: pf.packetSpec.sourceDevice.deviceId,
-                    addressId: pf.packetSpec.sourceDevice.selfAddress,
-                    unit: pf.packetFieldSpec.type.unit.unitId,
-                    typeId: pf.packetFieldSpec.type.typeId,
-                    rootTypeId: pf.packetFieldSpec.type.rootTypeId
-                };
+        function initResol() {
+            ctx.headerSet = new vbus.HeaderSet();
+            let forceReInit = self.config.forceReInit;
+            ctx.hsc = new vbus.HeaderSetConsolidator({
+                interval: self.config.vbusInterval * 1000,
+                timeToLive: (self.config.vbusInterval * 1000) + 1000,
             });
+            if (self.config.connectionType == 'TCP') {
+                const ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+                if (self.config.connectionIdentifier.match(ipformat)) {
+                    var ConnectionClass = vbus['TcpConnection'];
+                    ctx.connection = new ConnectionClass({
+                        host: self.config.connectionIdentifier,
+                        password: self.config.vbusPassword
+                    });
+                } else { 
+                    self.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
+                }
+            
+            } else if ( self.config.connectionType == 'Serial' ) {
+                const serialformat = self.config.connectionIdentifier;
+                if (self.config.connectionIdentifier.match(serialformat)) {
+                    var ConnectionClass = vbus['SerialConnection'];
+                    ctx.connection = new ConnectionClass({
+                        path: self.config.connectionIdentifier,
+                        //password: self.config.vbusPassword
+                    });
+                } else { 
+                    self.log.warn('Serial port ID not valid. Should be like /dev/tty.usbserial or COM9');
+                }
+            }
 
-            _.each(data, function (item) {
-                var deviceId = item.deviceId.replace(/_/g, '');
-                var channelId = deviceId + '.' + item.addressId;
-                var objectId = channelId + '.' + item.id.replace(/_/g, '');
+            ctx.connection.on('packet', function (packet) {
+                ctx.headerSet.removeAllHeaders();
+                ctx.headerSet.addHeader(packet);
+                ctx.hsc.addHeader(packet);
 
                 if (forceReInit) {
-                    initDevice(deviceId, channelId, objectId, item);
+                    ctx.hsc.emit('headerSet', ctx.hsc);
                 }
-                self.setState(objectId, item.value, true);
             });
 
-            if (forceReInit) {
-                self.extendForeignObject('system.adapter.' + self.namespace, {
-                    native: {
-                        forceReInit: false
-                    }
+            ctx.hsc.on('headerSet', function (headerSet) {
+                let packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
+                let data = _.map(packetFields, function (pf) {
+                    return {
+                        id: pf.id,
+                        name: pf.name,
+                        value: pf.rawValue,
+                        deviceName: pf.packetSpec.sourceDevice.fullName,
+                        deviceId: pf.packetSpec.sourceDevice.deviceId,
+                        addressId: pf.packetSpec.sourceDevice.selfAddress,
+                        unit: pf.packetFieldSpec.type.unit.unitId,
+                        typeId: pf.packetFieldSpec.type.typeId,
+                        rootTypeId: pf.packetFieldSpec.type.rootTypeId
+                    };
                 });
-                forceReInit = false;
-            }
-        });
 
-        ctx.connection.connect();
-        ctx.hsc.startTimer();
-    }
+                _.each(data, function (item) {
+                    let deviceId = item.deviceId.replace(/_/g, '');
+                    let channelId = deviceId + '.' + item.addressId;
+                    let objectId = channelId + '.' + item.id.replace(/_/g, '');
 
-    function initDevice(deviceId, channelId, objectId, item) {
-        self.setObjectNotExists(deviceId, {
-            type: 'device',
-            common: {
-                name: item.deviceName
-            },
-            native: {}
-        });
-        self.setObjectNotExists(channelId, {
-            type: 'channel',
-            common: {
-                name: channelId
-            },
-            native: {}
-        });
+                    if (forceReInit) {
+                        initDevice(deviceId, channelId, objectId, item);
+                    }
+                    self.setState(objectId, item.value, true);
+                });
 
-        var common = {
-            name: item.name,
-            type: 'number',
-            write: false
-        };
-        switch (item.unit) {
-            case 'DegreesCelsius':
-                var name = 'Unknown';
-                switch (item.name) {
-                    case 'Temperature S1':
-                        name = 'Kollektor';
-                        break;
-                    case 'Temperature S2':
-                        name = 'Boiler';
-                        break;
-                    case 'Temperature S3':
-                        name = 'Puffer';
-                        break;
-                };
-                common.name = name;
-                common.min = -100;
-                common.max = +300;
-                common.role = 'value.temperature';
-                break;
-            case 'Percent':
-                common.min = 0;
-                common.max = 100;
-                common.role = 'value.volume';
-                break;
-            case 'Hours':
-                break;
-            case 'WattHours':
-                break;
-            case 'None':
-                break;
-            default:
-                break;
+                if (forceReInit) {
+                    self.extendForeignObject('system.adapter.' + self.namespace, {
+                        native: {
+                            forceReInit: false
+                        }
+                    });
+                    forceReInit = false;
+                }
+            });
+
+            ctx.connection.connect();
+            ctx.hsc.startTimer();
         }
 
-        self.setObjectNotExists(objectId, {
-            type: 'state',
-            common: common,
-            native: {}
-        });
-    }
-    initResol();
-}
+        function initDevice(deviceId, channelId, objectId, item) {
+            self.setObjectNotExists(deviceId, {
+                type: 'device',
+                common: {
+                    name: item.deviceName
+                },
+                native: {}
+            });
+            self.setObjectNotExists(channelId, {
+                type: 'channel',
+                common: {
+                    name: channelId
+                },
+                native: {}
+            });
 
-        /*
+            const common = {
+                name: item.name,
+                type: 'number',
+                write: false
+            };
+            switch (item.unit) {
+                case 'DegreesCelsius':
+                    var name = 'Unknown';
+                    switch (item.name) {
+                        case 'Temperature S1':
+                            name = 'Kollektor';
+                            break;
+                        case 'Temperature S2':
+                            name = 'Boiler';
+                            break;
+                        case 'Temperature S3':
+                            name = 'Puffer';
+                            break;
+                    };
+                    common.name = name;
+                    common.min = -100;
+                    common.max = +300;
+                    common.role = 'value.temperature';
+                    break;
+                case 'Percent':
+                    common.min = 0;
+                    common.max = 100;
+                    common.role = 'value.volume';
+                    break;
+                case 'Hours':
+                    break;
+                case 'WattHours':
+                    break;
+                case 'None':
+                    break;
+                default:
+                    break;
+            }
+
+            self.setObjectNotExists(objectId, {
+                type: 'state',
+                common: common,
+                native: {}
+            });
+        }
+        initResol();
+    }
+    /*
         For every state in the system there has to be also an object of type state
         Here a simple template for a boolean variable named "testVariable"
         Because every adapter instance uses its own unique namespace variable names can't collide with other adapters variables
         */
-       /*
+    /*
         await this.setObjectAsync('testVariable', {
             type: 'state',
             common: {
@@ -226,31 +224,31 @@ class MyVbus extends utils.Adapter {
             native: {},
         });
         */
-        // in this template all states changes inside the adapters namespace are subscribed
+    // in this template all states changes inside the adapters namespace are subscribed
         
 
-        /*
+    /*
         setState examples
         you will notice that each setState will cause the stateChange event to fire (because of above subscribeStates cmd)
         */
-        // the variable testVariable is set to true as command (ack=false)
-        //await this.setStateAsync('testVariable', true);
+    // the variable testVariable is set to true as command (ack=false)
+    //await this.setStateAsync('testVariable', true);
 
-        // same thing, but the value is flagged "ack"
-        // ack should be always set to true if the value is received from or acknowledged from the target system
-        //await this.setStateAsync('testVariable', { val: true, ack: true });
+    // same thing, but the value is flagged "ack"
+    // ack should be always set to true if the value is received from or acknowledged from the target system
+    //await this.setStateAsync('testVariable', { val: true, ack: true });
 
-        // same thing, but the state is deleted after 30s (getState will return null afterwards)
-        //await this.setStateAsync('testVariable', { val: true, ack: true, expire: 30 });
+    // same thing, but the state is deleted after 30s (getState will return null afterwards)
+    //await this.setStateAsync('testVariable', { val: true, ack: true, expire: 30 });
 
 
-    }
+
 
     /* *
      * Is called when adapter shuts down - callback has to be called under any circumstances!
      * @param {() => void} callback
      */
-    onUnload(callback) {
+    onUnload (callback) {
         try {
             ctx.connection.disconnect();
             this.log.info('cleaned everything up...');
