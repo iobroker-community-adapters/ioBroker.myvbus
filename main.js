@@ -12,6 +12,10 @@ const utils = require('@iobroker/adapter-core');
 // const fs = require("fs");
 const vbus = require('resol-vbus');
 const _ = require('lodash');
+
+//var i18n = new vbus.I18N('en');
+const spec = vbus.Specification.getDefaultSpecification();
+
 var ctx = {
     headerSet: null,
     hsc: null,
@@ -19,7 +23,8 @@ var ctx = {
 };
 
 
-class myvbus extends utils.Adapter {
+
+class MyVbus extends utils.Adapter {
 
     /**
      * @param {Partial<ioBroker.AdapterOptions>} [options={}]
@@ -41,7 +46,7 @@ class myvbus extends utils.Adapter {
      */
     async onReady() {
         // Initialize your adapter here
-
+        const self = this;
 
         // The adapters config (in the instance object everything under the attribute "native") is accessible via
         // this.config:
@@ -54,16 +59,8 @@ class myvbus extends utils.Adapter {
         // in this vbus adapter all states changes inside the adapters namespace are subscribed
         this.subscribeStates('*');
 
-        // examples for the checkPassword/checkGroup functions
-        let result = await this.checkPasswordAsync('admin', 'iobroker');
-        this.log.info('check user admin pw iobroker: ' + result);
-
-        result = await this.checkGroupAsync('admin', 'admin');
-        this.log.info('check group user admin group admin: ' + result);
-
-  
-        var self = myvbus
-    function initResol(self) {
+           
+    function initResol() {
 
         ctx.headerSet = new vbus.HeaderSet();
         var forceReInit = self.config.forceReInit;
@@ -71,11 +68,30 @@ class myvbus extends utils.Adapter {
             interval: self.config.vbusInterval * 1000,
             timeToLive: (self.config.vbusInterval * 1000) + 1000,
         });
-        var ConnectionClass = vbus['TcpConnection'];
-        ctx.connection = new ConnectionClass({
-            host: adapter.config.ipAddress,
-            password: adapter.config.password
-        });
+        if (self.config.connectionType == 'TCP') {
+            const ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+            if (self.config.connectionIdentifier.match(ipformat)) {
+                var ConnectionClass = vbus['TcpConnection'];
+                ctx.connection = new ConnectionClass({
+                   host: self.config.connectionIdentifier,
+                   password: self.config.vbusPassword
+                });
+            } else { 
+                self.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
+            }
+            
+        } else if ( self.config.connectionType == 'Serial' ) {
+            const serialformat = self.config.connectionIdentifier;
+            if (self.config.connectionIdentifier.match(serialformat)) {
+                var ConnectionClass = vbus['SerialConnection'];
+                ctx.connection = new ConnectionClass({
+                   path: self.config.connectionIdentifier,
+                   //password: self.config.vbusPassword
+                });
+            } else { 
+                self.log.warn('Serial port ID not valid. Should be like /dev/tty.usbserial or COM9');
+            }
+        }
 
         ctx.connection.on('packet', function (packet) {
             ctx.headerSet.removeAllHeaders();
@@ -111,11 +127,11 @@ class myvbus extends utils.Adapter {
                 if (forceReInit) {
                     initDevice(deviceId, channelId, objectId, item);
                 }
-                adapter.setState(objectId, item.value, true);
+                self.setState(objectId, item.value, true);
             });
 
             if (forceReInit) {
-                adapter.extendForeignObject('system.adapter.' + adapter.namespace, {
+                self.extendForeignObject('system.adapter.' + self.namespace, {
                     native: {
                         forceReInit: false
                     }
@@ -129,14 +145,14 @@ class myvbus extends utils.Adapter {
     }
 
     function initDevice(deviceId, channelId, objectId, item) {
-        adapter.setObjectNotExists(deviceId, {
+        self.setObjectNotExists(deviceId, {
             type: 'device',
             common: {
                 name: item.deviceName
             },
             native: {}
         });
-        adapter.setObjectNotExists(channelId, {
+        self.setObjectNotExists(channelId, {
             type: 'channel',
             common: {
                 name: channelId
@@ -183,7 +199,7 @@ class myvbus extends utils.Adapter {
                 break;
         }
 
-        adapter.setObjectNotExists(objectId, {
+        self.setObjectNotExists(objectId, {
             type: 'state',
             common: common,
             native: {}
@@ -192,11 +208,12 @@ class myvbus extends utils.Adapter {
     initResol();
 }
 
-/*
+        /*
         For every state in the system there has to be also an object of type state
         Here a simple template for a boolean variable named "testVariable"
         Because every adapter instance uses its own unique namespace variable names can't collide with other adapters variables
         */
+       /*
         await this.setObjectAsync('testVariable', {
             type: 'state',
             common: {
@@ -208,7 +225,7 @@ class myvbus extends utils.Adapter {
             },
             native: {},
         });
-
+        */
         // in this template all states changes inside the adapters namespace are subscribed
         
 
@@ -229,13 +246,13 @@ class myvbus extends utils.Adapter {
 
     }
 
-    /**
+    /* *
      * Is called when adapter shuts down - callback has to be called under any circumstances!
      * @param {() => void} callback
      */
     onUnload(callback) {
         try {
-            ctx.connection.disconnectd();
+            ctx.connection.disconnect();
             this.log.info('cleaned everything up...');
             callback();
         } catch (e) {
@@ -243,12 +260,13 @@ class myvbus extends utils.Adapter {
         }
     }
 
-    /**
+    /* *
      * Is called if a subscribed object changes
      * @param {string} id
      * @param {ioBroker.Object | null | undefined} obj
      */
-    onObjectChange(id, obj) {
+    /*
+     onObjectChange(id, obj) {
         if (obj) {
             // The object was changed
             this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
@@ -257,12 +275,13 @@ class myvbus extends utils.Adapter {
             this.log.info(`object ${id} deleted`);
         }
     }
-
-    /**
+    */
+    /* *
      * Is called if a subscribed state changes
      * @param {string} id
      * @param {ioBroker.State | null | undefined} state
      */
+    /*
     onStateChange(id, state) {
         if (state) {
             // The state was changed
@@ -272,7 +291,7 @@ class myvbus extends utils.Adapter {
             this.log.info(`state ${id} deleted`);
         }
     }
-
+     */
     // /**
     //  * Some message was sent to this instance over message box. Used by email, pushover, text2speech, ...
     //  * Using this method requires "common.message" property to be set to true in io-package.json
@@ -298,8 +317,8 @@ if (module.parent) {
     /**
      * @param {Partial<ioBroker.AdapterOptions>} [options={}]
      */
-    module.exports = (options) => new myvbus(options);
+    module.exports = (options) => new MyVbus(options);
 } else {
     // otherwise start the instance directly
-    new myvbus();
+    new MyVbus();
 }
