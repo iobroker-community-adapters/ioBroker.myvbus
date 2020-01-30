@@ -21,7 +21,7 @@
     "url": "https://github.com/pdbjjens/ioBroker.myvbus"
   },
   "dependencies": {
-    "@iobroker/adapter-core": "^2.1.0"
+    "@iobroker/adapter-core": "^2.1.0",
     "resol-vbus": "^0.20.0"
   },
   "devDependencies": {
