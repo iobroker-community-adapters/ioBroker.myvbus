@@ -180,7 +180,7 @@ class MyVbus extends utils.Adapter {
                             name = 'Puffer';
                             break;
                     };*/
-                    common.name = name;
+                   // common.name = name;
                     common.min = -100;
                     common.max = +300;
                     common.role = 'value.temperature';
