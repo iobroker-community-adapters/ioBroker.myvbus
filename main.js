@@ -98,7 +98,7 @@ class MyVbus extends utils.Adapter {
                 ctx.headerSet.removeAllHeaders();
                 ctx.headerSet.addHeader(packet);
                 ctx.hsc.addHeader(packet);
-                self.log.info('Connection established');
+                self.log.debug('Packet received');
                 if (forceReInit) {
                     ctx.hsc.emit('headerSet', ctx.hsc);
                 }
@@ -119,7 +119,7 @@ class MyVbus extends utils.Adapter {
                         rootTypeId: pf.packetFieldSpec.type.rootTypeId
                     };
                 });
-                self.log.info('Packet received');
+                self.log.debug('Headerset Event');
                 _.each(data, function (item) {
                     let deviceId = item.deviceId.replace(/_/g, '');
                     let channelId = deviceId + '.' + item.addressId;
