@@ -164,35 +164,28 @@ class MyVbus extends utils.Adapter {
             const common = {
                 name: item.name,
                 type: 'number',
+                read: true,
                 write: false
             };
             switch (item.unit) {
                 case 'DegreesCelsius':
-                    //var name = 'Unknown';
-                   /* switch (item.name) {
-                        case 'Temperature S1':
-                            name = 'Kollektor';
-                            break;
-                        case 'Temperature S2':
-                            name = 'Boiler';
-                            break;
-                        case 'Temperature S3':
-                            name = 'Puffer';
-                            break;
-                    };*/
-                   // common.name = name;
                     common.min = -100;
                     common.max = +300;
                     common.role = 'value.temperature';
+                    common.unit = '°C';
                     break;
                 case 'Percent':
                     common.min = 0;
                     common.max = 100;
                     common.role = 'value.volume';
+                    common.unit = '%';
                     break;
                 case 'Hours':
+                    common.unit = 'h';
                     break;
                 case 'WattHours':
+                    common.role = 'value.power.consumption';
+                    common.unit = 'Wh';
                     break;
                 case 'None':
                     break;

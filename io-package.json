@@ -90,11 +90,11 @@
         ]
     },
     "native": {
-        "IP": "10.0.0.150",
-        "Port": 7053,
-		"vbusPassword":"vbus",
-		"vbusInterval":60,
-		"forceReInit":true
+        "connectionType": "Serial",
+        "connectionIdentifier": "COM5",
+		"vbusPassword": "vbus",
+		"vbusInterval": 20,
+		"forceReInit": true
     },
     "objects": [],
     "instanceObjects": []
