@@ -41,12 +41,14 @@ class MyVbus extends utils.Adapter {
         this.on('unload', this.onUnload.bind(this));
     }
 
+    const self = this;
+    
     /**
      * Is called when databases are connected and adapter received configuration.
      */
     async onReady() {
         // Initialize your adapter here
-        const self = this;
+        
 
         // The adapters config (in the instance object everything under the attribute "native") is accessible via
         // this.config:
