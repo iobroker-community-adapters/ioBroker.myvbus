@@ -75,6 +75,7 @@ class MyVbus extends utils.Adapter {
                         host: self.config.connectionIdentifier,
                         password: self.config.vbusPassword
                     });
+                    self.log.info('TCP Connection established');
                 } else { 
                     self.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
                 }
@@ -87,6 +88,7 @@ class MyVbus extends utils.Adapter {
                         path: self.config.connectionIdentifier,
                         //password: self.config.vbusPassword
                     });
+                    self.log.info('Serial Connection established');
                 } else { 
                     self.log.warn('Serial port ID not valid. Should be like /dev/tty.usbserial or COM9');
                 }
@@ -96,7 +98,7 @@ class MyVbus extends utils.Adapter {
                 ctx.headerSet.removeAllHeaders();
                 ctx.headerSet.addHeader(packet);
                 ctx.hsc.addHeader(packet);
-
+                self.log.info('Connection established');
                 if (forceReInit) {
                     ctx.hsc.emit('headerSet', ctx.hsc);
                 }
@@ -117,7 +119,7 @@ class MyVbus extends utils.Adapter {
                         rootTypeId: pf.packetFieldSpec.type.rootTypeId
                     };
                 });
-
+                self.log.info('Packet received');
                 _.each(data, function (item) {
                     let deviceId = item.deviceId.replace(/_/g, '');
                     let channelId = deviceId + '.' + item.addressId;
