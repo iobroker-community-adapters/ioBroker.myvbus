@@ -168,8 +168,8 @@ class MyVbus extends utils.Adapter {
             };
             switch (item.unit) {
                 case 'DegreesCelsius':
-                    var name = 'Unknown';
-                    switch (item.name) {
+                    //var name = 'Unknown';
+                   /* switch (item.name) {
                         case 'Temperature S1':
                             name = 'Kollektor';
                             break;
@@ -179,7 +179,7 @@ class MyVbus extends utils.Adapter {
                         case 'Temperature S3':
                             name = 'Puffer';
                             break;
-                    };
+                    };*/
                     common.name = name;
                     common.min = -100;
                     common.max = +300;

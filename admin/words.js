@@ -30,7 +30,7 @@ systemDictionary = {
         "en": "Default: vbus",
         "de": "Standard: vbus"
     },
-    "On save adapter restarts with new configuration immediately": {
+    "If Force Adapter Reinitialzation is set, the adapter restarts with new configuration immediately on save": {
         "en": "If Force Adapter Reinitialzation is set, the adapter restarts with new configuration immediately on save",
         "de": "Wenn Adapter Neustart gesetzt ist, startet der Adapter beim Speichern sofort neu"
     },
