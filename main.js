@@ -187,6 +187,7 @@ class MyVbus extends utils.Adapter {
                     common.role = 'value.volume';
                     break;
                 case 'Hours':
+                    common.role = 'value';
                     break;
                 case 'WattHours':
                     common.role = 'value.power.consumption';
@@ -195,7 +196,6 @@ class MyVbus extends utils.Adapter {
                     common.role = 'value';
                     break;
                 default:
-                    common.role = 'value';
                     break;
             }
 
