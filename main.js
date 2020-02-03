@@ -114,7 +114,8 @@ class MyVbus extends utils.Adapter {
                         deviceName: pf.packetSpec.sourceDevice.fullName,
                         deviceId: pf.packetSpec.sourceDevice.deviceId,
                         addressId: pf.packetSpec.sourceDevice.selfAddress,
-                        unit: pf.packetFieldSpec.type.unit.unitId,
+                        unitId: pf.packetFieldSpec.type.unit.unitId,
+                        unitText: pf.packetFieldSpec.type.unit.unitText,
                         typeId: pf.packetFieldSpec.type.typeId,
                         rootTypeId: pf.packetFieldSpec.type.rootTypeId
                     };
@@ -164,28 +165,29 @@ class MyVbus extends utils.Adapter {
             const common = {
                 name: item.name,
                 type: 'number',
+                unit: item.unitText,
                 read: true,
                 write: false
             };
-            switch (item.unit) {
+            switch (item.unitId) {
                 case 'DegreesCelsius':
                     common.min = -100;
                     common.max = +300;
                     common.role = 'value.temperature';
-                    common.unit = '°C';
+                    //common.unit = '°C';
                     break;
                 case 'Percent':
                     common.min = 0;
                     common.max = 100;
                     common.role = 'value.volume';
-                    common.unit = '%';
+                    //common.unit = '%';
                     break;
                 case 'Hours':
-                    common.unit = 'h';
+                    //common.unit = 'h';
                     break;
                 case 'WattHours':
                     common.role = 'value.power.consumption';
-                    common.unit = 'Wh';
+                    //common.unit = 'Wh';
                     break;
                 case 'None':
                     break;
