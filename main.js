@@ -81,7 +81,7 @@ class MyVbus extends utils.Adapter {
                 }
             
             } else if ( self.config.connectionType == 'Serial' ) {
-                const serialformat = self.config.connectionIdentifier;
+                const serialformat = /^(COM|com)[0-9][0-9]?$|^\/dev\/tty.*$/;
                 if (self.config.connectionIdentifier.match(serialformat)) {
                     var ConnectionClass = vbus['SerialConnection'];
                     ctx.connection = new ConnectionClass({
