@@ -13,7 +13,7 @@ const utils = require('@iobroker/adapter-core');
 const vbus = require('resol-vbus');
 const _ = require('lodash');
 
-//var i18n = new vbus.I18N('en');
+const i18n = new vbus.I18N('de');
 const spec = vbus.Specification.getDefaultSpecification();
 
 const ctx = {
@@ -67,7 +67,7 @@ class MyVbus extends utils.Adapter {
                 interval: self.config.vbusInterval * 1000,
                 timeToLive: (self.config.vbusInterval * 1000) + 1000,
             });
-            if (self.config.connectionType == 'TCP') {
+            if (self.config.connectionType == 'LAN') {
                 const ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
                 if (self.config.connectionIdentifier.match(ipformat)) {
                     var ConnectionClass = vbus['TcpConnection'];
@@ -91,6 +91,12 @@ class MyVbus extends utils.Adapter {
                     self.log.info('Serial Connection established');
                 } else { 
                     self.log.warn('Serial port ID not valid. Should be like /dev/tty.usbserial or COM9');
+                }
+            } else if ( self.config.connectionType == 'DLx' ) {
+                if (self.config.connectionIdentifier.match(ipformat)) {
+                    self.log.warn('DLx Connection not implemented');
+                } else { 
+                    self.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
                 }
             }
 
@@ -174,24 +180,22 @@ class MyVbus extends utils.Adapter {
                     common.min = -100;
                     common.max = +300;
                     common.role = 'value.temperature';
-                    //common.unit = '°C';
                     break;
                 case 'Percent':
                     common.min = 0;
                     common.max = 100;
                     common.role = 'value.volume';
-                    //common.unit = '%';
                     break;
                 case 'Hours':
-                    //common.unit = 'h';
                     break;
                 case 'WattHours':
                     common.role = 'value.power.consumption';
-                    //common.unit = 'Wh';
                     break;
                 case 'None':
+                    common.role = 'value';
                     break;
                 default:
+                    common.role = 'value';
                     break;
             }
 

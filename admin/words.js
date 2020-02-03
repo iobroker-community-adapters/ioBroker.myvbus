@@ -6,9 +6,13 @@ systemDictionary = {
         "en": "Connection Type",
         "de": "Verbindungstyp"
     },
-    "TCP": {
-        "en": "TCP",
-        "de": "TCP"
+    "LAN": {
+        "en": "LAN",
+        "de": "LAN"
+    },
+    "DLx": {
+        "en": "DLx",
+        "de": "DLx"
     },
     "Serial": {
         "en": "Serial",
@@ -18,17 +22,17 @@ systemDictionary = {
         "en": "Connection Identifier",
         "de": "Verbindungskennung"
     },
-    "IP (when TCP) or  Port (when Serial)": {
-        "en": "IP (when TCP) or  Port (when Serial)",
-        "de": "IP (wenn TCP) oder Port (wenn Seriell)"
+    "IP address (when LAN or DLx) or  Port (when Serial)": {
+        "en": "IP address (when LAN or DLx) or  Port (when Serial)",
+        "de": "IP Adresse (wenn LAN oder DLx) oder Port (wenn Seriell)"
     },
     "VBus Password": {
         "en": "VBus Password",
         "de": "VBus Passwort"
     },
-    "Default: vbus": {
-        "en": "Default: vbus",
-        "de": "Standard: vbus"
+    "Default: vbus  for LAN or admin for DLx": {
+        "en": "Default: vbus  for LAN or admin for DLxlt: vbus",
+        "de": "Standard: vbus für LAN, admin für DLx"
     },
     "If Force Adapter Reinitialzation is set, the adapter restarts with new configuration immediately on save": {
         "en": "If Force Adapter Reinitialzation is set, the adapter restarts with new configuration immediately on save",

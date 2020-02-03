@@ -77,7 +77,8 @@
         <div class="row">
             <div class="input-field col s12 m4">
                 <select class="value" id="connectionType">
-                    <option value="TCP" class="translate">TCP</option>
+                    <option value="LAN" class="translate">LAN</option>
+                    <option value="DLx" class="translate">DLx</option>
                     <option value="Serial" class="translate">Serial</option>
                 </select>
                 <label for="connectionType" class="translate">Connection Type</label>
@@ -85,12 +86,12 @@
             <div class="input-field col s12 m4">
                 <input class="value" id="connectionIdentifier" type="text">
                 <label for="connectionIdentifier" class="translate">Connection Identifier</label>
-                <span class="translate">IP (when TCP) or  Port (when Serial)</span>
+                <span class="translate">IP address (when LAN or DLx) or  Port (when Serial)</span>
             </div>
             <div class="input-field col s12 m4">
                 <input class="value" id="vbusPassword" type="text">
                 <label for="vbusPassword" class="translate">VBus Password</label>
-                <span class="translate">Default: vbus</span>
+                <span class="translate">Default: vbus  for LAN or admin for DLx</span>
             </div>
         </div>
         <div class="row">
