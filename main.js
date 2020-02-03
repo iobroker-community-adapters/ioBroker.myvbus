@@ -63,14 +63,16 @@ class MyVbus extends utils.Adapter {
         function initResol() {
             ctx.headerSet = new vbus.HeaderSet();
             let forceReInit = self.config.forceReInit;
+            let ConnectionClass;
+            const ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+            const serialformat = /^(COM|com)[0-9][0-9]?$|^\/dev\/tty.*$/;
             ctx.hsc = new vbus.HeaderSetConsolidator({
                 interval: self.config.vbusInterval * 1000,
                 timeToLive: (self.config.vbusInterval * 1000) + 1000,
             });
             if (self.config.connectionType == 'LAN') {
-                const ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
                 if (self.config.connectionIdentifier.match(ipformat)) {
-                    var ConnectionClass = vbus['TcpConnection'];
+                    ConnectionClass = vbus['TcpConnection'];
                     ctx.connection = new ConnectionClass({
                         host: self.config.connectionIdentifier,
                         password: self.config.vbusPassword
@@ -81,9 +83,8 @@ class MyVbus extends utils.Adapter {
                 }
             
             } else if ( self.config.connectionType == 'Serial' ) {
-                const serialformat = /^(COM|com)[0-9][0-9]?$|^\/dev\/tty.*$/;
                 if (self.config.connectionIdentifier.match(serialformat)) {
-                    var ConnectionClass = vbus['SerialConnection'];
+                    ConnectionClass = vbus['SerialConnection'];
                     ctx.connection = new ConnectionClass({
                         path: self.config.connectionIdentifier,
                         //password: self.config.vbusPassword
