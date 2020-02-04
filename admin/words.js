@@ -42,8 +42,8 @@ systemDictionary = {
         "en": "VBus Interval (in seconds)",
         "de": "VBus Intervall (in Sekunden)"
     },
-    "Force Adapter Reinitialzation": {
-        "en": "Force Adapter Reinitialzation",
+    "Force Adapter Reinitialization": {
+        "en": "Force Adapter Reinitialization",
         "de": "Erzwinge Adapter Neustart"
     }
 };
