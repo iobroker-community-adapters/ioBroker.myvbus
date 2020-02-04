@@ -127,8 +127,8 @@ class MyVbus extends utils.Adapter {
                         rootTypeId: pf.packetFieldSpec.type.rootTypeId
                     };
                 });
-                self.log.info('Headerset Event occurred');
-                _.each(data, function (item) {
+                self.log.info('Headerset Event occurred ${JSON.stringify(data)}');
+                _.forEach(data, function (item) {
                     const deviceId = item.deviceId.replace(/_/g, '');
                     const channelId = deviceId + '.' + item.addressId;
                     const objectId = channelId + '.' + item.id.replace(/_/g, '');
