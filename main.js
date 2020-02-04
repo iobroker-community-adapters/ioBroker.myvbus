@@ -13,7 +13,7 @@ const utils = require('@iobroker/adapter-core');
 const vbus = require('resol-vbus');
 const _ = require('lodash');
 
-const i18n = new vbus.I18N('de');
+//const i18n = new vbus.I18N('de');
 const spec = vbus.Specification.getDefaultSpecification();
 
 const ctx = {
@@ -41,9 +41,9 @@ class MyVbus extends utils.Adapter {
         this.on('unload', this.onUnload.bind(this));
     }
 
-        /**
-     * Is called when databases are connected and adapter received configuration.
-     */
+    /**
+    * Is called when databases are connected and adapter received configuration.
+    */
     async onReady() {
         // Initialize your adapter here
         const self = this;  
@@ -105,15 +105,15 @@ class MyVbus extends utils.Adapter {
                 ctx.headerSet.removeAllHeaders();
                 ctx.headerSet.addHeader(packet);
                 ctx.hsc.addHeader(packet);
-                self.log.debug('Packet received');
+                self.log.info('Packet received');
                 if (forceReInit) {
                     ctx.hsc.emit('headerSet', ctx.hsc);
                 }
             });
 
-            ctx.hsc.on('headerSet', function (headerSet) {
-                let packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
-                let data = _.map(packetFields, function (pf) {
+            ctx.hsc.on('headerSet', function () {
+                const packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
+                const data = _.map(packetFields, function (pf) {
                     return {
                         id: pf.id,
                         name: pf.name,
@@ -127,11 +127,11 @@ class MyVbus extends utils.Adapter {
                         rootTypeId: pf.packetFieldSpec.type.rootTypeId
                     };
                 });
-                self.log.debug('Headerset Event');
+                self.log.info('Headerset Event occurred');
                 _.each(data, function (item) {
-                    let deviceId = item.deviceId.replace(/_/g, '');
-                    let channelId = deviceId + '.' + item.addressId;
-                    let objectId = channelId + '.' + item.id.replace(/_/g, '');
+                    const deviceId = item.deviceId.replace(/_/g, '');
+                    const channelId = deviceId + '.' + item.addressId;
+                    const objectId = channelId + '.' + item.id.replace(/_/g, '');
 
                     if (forceReInit) {
                         initDevice(deviceId, channelId, objectId, item);
