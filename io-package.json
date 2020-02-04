@@ -92,9 +92,9 @@
     "native": {
         "connectionType": "Serial",
         "connectionIdentifier": "COM5",
-		"vbusPassword": "vbus",
-		"vbusInterval": 30,
-		"forceReInit": true
+        "vbusPassword": "vbus",
+        "forceReInit": true,
+		"vbusInterval": 20		
     },
     "objects": [],
     "instanceObjects": []
