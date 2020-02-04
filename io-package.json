@@ -93,7 +93,7 @@
         "connectionType": "Serial",
         "connectionIdentifier": "COM5",
 		"vbusPassword": "vbus",
-		"vbusInterval": 20,
+		"vbusInterval": 30,
 		"forceReInit": true
     },
     "objects": [],

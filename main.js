@@ -8,21 +8,16 @@
 // you need to create an adapter
 const utils = require('@iobroker/adapter-core');
 
-// Load your modules here, e.g.:
-// const fs = require("fs");
+// Load modules here, e.g.:
 const vbus = require('resol-vbus');
 const _ = require('lodash');
-
-//const i18n = new vbus.I18N('de');
+// Variable definitions
 const spec = vbus.Specification.getDefaultSpecification();
-
 const ctx = {
     headerSet: null,
     hsc: null,
     connection: null,
 };
-
-
 
 class MyVbus extends utils.Adapter {
 
@@ -41,11 +36,9 @@ class MyVbus extends utils.Adapter {
         this.on('unload', this.onUnload.bind(this));
     }
 
-    /**
-    * Is called when databases are connected and adapter received configuration.
-    */
+    // Is called when databases are connected and adapter received configuration.
     async onReady() {
-        // Initialize your adapter here
+        // Initialize adapter here
         const self = this;  
 
         // The adapters config (in the instance object everything under the attribute "native") is accessible via
@@ -58,7 +51,6 @@ class MyVbus extends utils.Adapter {
 
         // in this vbus adapter all states changes inside the adapters namespace are subscribed
         this.subscribeStates('*');
-
            
         function initResol() {
             ctx.headerSet = new vbus.HeaderSet();
@@ -81,13 +73,11 @@ class MyVbus extends utils.Adapter {
                 } else { 
                     self.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
                 }
-            
             } else if ( self.config.connectionType == 'Serial' ) {
                 if (self.config.connectionIdentifier.match(serialformat)) {
                     ConnectionClass = vbus['SerialConnection'];
                     ctx.connection = new ConnectionClass({
-                        path: self.config.connectionIdentifier,
-                        //password: self.config.vbusPassword
+                        path: self.config.connectionIdentifier
                     });
                     self.log.info('Serial Connection established');
                 } else { 
@@ -105,7 +95,7 @@ class MyVbus extends utils.Adapter {
                 ctx.headerSet.removeAllHeaders();
                 ctx.headerSet.addHeader(packet);
                 ctx.hsc.addHeader(packet);
-                self.log.info('Packet received');
+                self.log.debug('Packet received');
                 if (forceReInit) {
                     ctx.hsc.emit('headerSet', ctx.hsc);
                 }
@@ -127,7 +117,7 @@ class MyVbus extends utils.Adapter {
                         rootTypeId: pf.packetFieldSpec.type.rootTypeId
                     };
                 });
-                self.log.info('Headerset Event occurred ${JSON.stringify(data)}');
+                self.log.debug('Headerset Event occurred');
                 _.forEach(data, function (item) {
                     const deviceId = item.deviceId.replace(/_/g, '');
                     const channelId = deviceId + '.' + item.addressId;
@@ -168,7 +158,6 @@ class MyVbus extends utils.Adapter {
                 },
                 native: {}
             });
-
             const common = {
                 name: item.name,
                 type: 'number',
@@ -199,7 +188,6 @@ class MyVbus extends utils.Adapter {
                 default:
                     break;
             }
-
             self.setObjectNotExists(objectId, {
                 type: 'state',
                 common: common,
@@ -208,48 +196,7 @@ class MyVbus extends utils.Adapter {
         }
         initResol();
     }
-    /*
-        For every state in the system there has to be also an object of type state
-        Here a simple template for a boolean variable named "testVariable"
-        Because every adapter instance uses its own unique namespace variable names can't collide with other adapters variables
-        */
-    /*
-        await this.setObjectAsync('testVariable', {
-            type: 'state',
-            common: {
-                name: 'testVariable',
-                type: 'boolean',
-                role: 'indicator',
-                read: true,
-                write: true,
-            },
-            native: {},
-        });
-        */
-    // in this template all states changes inside the adapters namespace are subscribed
-        
-
-    /*
-        setState examples
-        you will notice that each setState will cause the stateChange event to fire (because of above subscribeStates cmd)
-        */
-    // the variable testVariable is set to true as command (ack=false)
-    //await this.setStateAsync('testVariable', true);
-
-    // same thing, but the value is flagged "ack"
-    // ack should be always set to true if the value is received from or acknowledged from the target system
-    //await this.setStateAsync('testVariable', { val: true, ack: true });
-
-    // same thing, but the state is deleted after 30s (getState will return null afterwards)
-    //await this.setStateAsync('testVariable', { val: true, ack: true, expire: 30 });
-
-
-
-
-    /* *
-     * Is called when adapter shuts down - callback has to be called under any circumstances!
-     * @param {() => void} callback
-     */
+  
     onUnload (callback) {
         try {
             ctx.connection.disconnect();
@@ -259,55 +206,6 @@ class MyVbus extends utils.Adapter {
             callback();
         }
     }
-
-    /* *
-     * Is called if a subscribed object changes
-     * @param {string} id
-     * @param {ioBroker.Object | null | undefined} obj
-     */
-    /*
-     onObjectChange(id, obj) {
-        if (obj) {
-            // The object was changed
-            this.log.info(`object ${id} changed: ${JSON.stringify(obj)}`);
-        } else {
-            // The object was deleted
-            this.log.info(`object ${id} deleted`);
-        }
-    }
-    */
-    /* *
-     * Is called if a subscribed state changes
-     * @param {string} id
-     * @param {ioBroker.State | null | undefined} state
-     */
-    /*
-    onStateChange(id, state) {
-        if (state) {
-            // The state was changed
-            this.log.info(`state ${id} changed: ${state.val} (ack = ${state.ack})`);
-        } else {
-            // The state was deleted
-            this.log.info(`state ${id} deleted`);
-        }
-    }
-     */
-    // /**
-    //  * Some message was sent to this instance over message box. Used by email, pushover, text2speech, ...
-    //  * Using this method requires "common.message" property to be set to true in io-package.json
-    //  * @param {ioBroker.Message} obj
-    //  */
-    // onMessage(obj) {
-    // 	if (typeof obj === 'object' && obj.message) {
-    // 		if (obj.command === 'send') {
-    // 			// e.g. send email or pushover or whatever
-    // 			this.log.info('send command');
-
-    // 			// Send response in callback if required
-    // 			if (obj.callback) this.sendTo(obj.from, obj.command, 'Message received', obj.callback);
-    // 		}
-    // 	}
-    // }
 
 }
 
