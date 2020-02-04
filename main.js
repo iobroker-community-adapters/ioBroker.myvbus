@@ -52,7 +52,7 @@ class MyVbus extends utils.Adapter {
         // in this vbus adapter all states changes inside the adapters namespace are subscribed
         this.subscribeStates('*');
            
-        async function initResol() {
+        function initResol() {
             ctx.headerSet = new vbus.HeaderSet();
             let forceReInit = self.config.forceReInit;
             let ConnectionClass;
@@ -139,7 +139,7 @@ class MyVbus extends utils.Adapter {
                 }
             });
 
-            await ctx.connection.connect();
+            ctx.connection.connect();
             ctx.hsc.startTimer();
         }
 
