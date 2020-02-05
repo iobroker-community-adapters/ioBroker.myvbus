@@ -14,9 +14,9 @@ const _ = require('lodash');
 // Variable definitions
 const spec = vbus.Specification.getDefaultSpecification();
 const ctx = {
-    headerSet: null,
-    hsc: null,
-    connection: null,
+    headerSet: vbus.headerSet,
+    hsc: vbus.HeaderSetConsolidator,
+    connection: vbus.connection,
 };
 
 class MyVbus extends utils.Adapter {
@@ -39,52 +39,57 @@ class MyVbus extends utils.Adapter {
     // Is called when databases are connected and adapter received configuration.
     async onReady() {
         // Initialize adapter here
-        const self = this;  
+        const self = this; 
+        const connectionType = this.config.connectionType;
+        const connectionIdentifier = this.config.connectionIdentifier;
+        const vbusPassword = this.config.vbusPassword;
+        const vbusInterval = this.config.vbusInterval;
+        let forceReInit = this.config.forceReInit; 
 
         // The adapters config (in the instance object everything under the attribute "native") is accessible via
         // this.config:
-        this.log.info('Connection Type: ' + this.config.connectionType);
-        this.log.info('Connection Identifier: ' + this.config.connectionIdentifier);
-        this.log.info('VBus Password: ' + this.config.vbusPassword);
-        this.log.info('VBus Interval: ' + this.config.vbusInterval);
-        this.log.info('Force ReInit: ' + this.config.forceReInit);
+        this.log.info('Connection Type: ' + connectionType);
+        this.log.info('Connection Identifier: ' + connectionIdentifier);
+        this.log.info('VBus Password: ' + vbusPassword);
+        this.log.info('VBus Interval: ' + vbusInterval);
+        this.log.info('Force ReInit: ' + forceReInit);
 
         // in this vbus adapter all states changes inside the adapters namespace are subscribed
         this.subscribeStates('*');
            
         function initResol() {
             ctx.headerSet = new vbus.HeaderSet();
-            let forceReInit = self.config.forceReInit;
+            //let forceReInit = self.config.forceReInit;
             let ConnectionClass;
             const ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
             const serialformat = /^(COM|com)[0-9][0-9]?$|^\/dev\/tty.*$/;
             ctx.hsc = new vbus.HeaderSetConsolidator({
-                interval: self.config.vbusInterval * 1000,
-                timeToLive: (self.config.vbusInterval * 1000) + 1000,
+                interval: vbusInterval * 1000,
+                timeToLive: (vbusInterval * 1000) + 1000,
             });
-            if (self.config.connectionType == 'LAN') {
-                if (self.config.connectionIdentifier.match(ipformat)) {
+            if (connectionType == 'LAN') {
+                if (connectionIdentifier.match(ipformat)) {
                     ConnectionClass = vbus['TcpConnection'];
                     ctx.connection = new ConnectionClass({
-                        host: self.config.connectionIdentifier,
-                        password: self.config.vbusPassword
+                        host: connectionIdentifier,
+                        password: vbusPassword
                     });
                     self.log.info('TCP Connection established');
                 } else { 
                     self.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
                 }
-            } else if ( self.config.connectionType == 'Serial' ) {
-                if (self.config.connectionIdentifier.match(serialformat)) {
+            } else if (connectionType == 'Serial' ) {
+                if (connectionIdentifier.match(serialformat)) {
                     ConnectionClass = vbus['SerialConnection'];
                     ctx.connection = new ConnectionClass({
-                        path: self.config.connectionIdentifier
+                        path: connectionIdentifier
                     });
                     self.log.info('Serial Connection established');
                 } else { 
                     self.log.warn('Serial port ID not valid. Should be like /dev/tty.usbserial or COM9');
                 }
-            } else if ( self.config.connectionType == 'DLx' ) {
-                if (self.config.connectionIdentifier.match(ipformat)) {
+            } else if (connectionType == 'DLx' ) {
+                if (connectionIdentifier.match(ipformat)) {
                     self.log.warn('DLx Connection not implemented');
                 } else { 
                     self.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
@@ -126,7 +131,7 @@ class MyVbus extends utils.Adapter {
                     if (forceReInit) {
                         initDevice(deviceId, channelId, objectId, item);
                     }
-                    self.setState(objectId, item.value, true);
+                    self.setStateAsync(objectId, item.value, true);
                 });
 
                 if (forceReInit) {
