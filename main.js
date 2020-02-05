@@ -39,6 +39,8 @@ class MyVbus extends utils.Adapter {
     // Is called when databases are connected and adapter received configuration.
     async onReady() {
         // Initialize adapter here
+        // Reset the connection indicator during startup
+        this.setState('info.connection', false, true);
         const self = this; 
         const connectionType = this.config.connectionType;
         const connectionIdentifier = this.config.connectionIdentifier;
@@ -98,7 +100,9 @@ class MyVbus extends utils.Adapter {
             ctx.headerSet.removeAllHeaders();
             ctx.headerSet.addHeader(packet);
             ctx.hsc.addHeader(packet);
+            // Packet received
             self.log.debug('Packet received');
+            self.setState('info.connection', true, true);
             if (forceReInit) {
                 ctx.hsc.emit('headerSet', ctx.hsc);
             }
