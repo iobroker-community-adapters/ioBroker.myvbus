@@ -57,10 +57,9 @@ class MyVbus extends utils.Adapter {
         // in this vbus adapter all states changes inside the adapters namespace are subscribed
         this.subscribeStates('*');
            
-        function initResol() {
+        //function initResol() {
             ctx.headerSet = new vbus.HeaderSet();
-            //let forceReInit = self.config.forceReInit;
-            let ConnectionClass;
+            let ConnectionClass = vbus.ConnectionClass;
             const ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
             const serialformat = /^(COM|com)[0-9][0-9]?$|^\/dev\/tty.*$/;
             ctx.hsc = new vbus.HeaderSetConsolidator({
@@ -131,7 +130,7 @@ class MyVbus extends utils.Adapter {
                     if (forceReInit) {
                         initDevice(deviceId, channelId, objectId, item);
                     }
-                    self.setStateAsync(objectId, item.value, true);
+                    self.setState(objectId, item.value, true);
                 });
 
                 if (forceReInit) {
@@ -146,7 +145,7 @@ class MyVbus extends utils.Adapter {
 
             ctx.connection.connect();
             ctx.hsc.startTimer();
-        }
+        //}
 
         function initDevice(deviceId, channelId, objectId, item) {
             self.setObjectNotExists(deviceId, {
@@ -199,7 +198,7 @@ class MyVbus extends utils.Adapter {
                 native: {}
             });
         }
-        initResol();
+        //initResol();
     }
   
     onUnload (callback) {
