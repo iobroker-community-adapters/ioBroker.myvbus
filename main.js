@@ -57,95 +57,93 @@ class MyVbus extends utils.Adapter {
         // in this vbus adapter all states changes inside the adapters namespace are subscribed
         this.subscribeStates('*');
            
-        //function initResol() {
-            ctx.headerSet = new vbus.HeaderSet();
-            let ConnectionClass = vbus.ConnectionClass;
-            const ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
-            const serialformat = /^(COM|com)[0-9][0-9]?$|^\/dev\/tty.*$/;
-            ctx.hsc = new vbus.HeaderSetConsolidator({
-                interval: vbusInterval * 1000,
-                timeToLive: (vbusInterval * 1000) + 1000,
-            });
-            if (connectionType == 'LAN') {
-                if (connectionIdentifier.match(ipformat)) {
-                    ConnectionClass = vbus['TcpConnection'];
-                    ctx.connection = new ConnectionClass({
-                        host: connectionIdentifier,
-                        password: vbusPassword
-                    });
-                    self.log.info('TCP Connection established');
-                } else { 
-                    self.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
-                }
-            } else if (connectionType == 'Serial' ) {
-                if (connectionIdentifier.match(serialformat)) {
-                    ConnectionClass = vbus['SerialConnection'];
-                    ctx.connection = new ConnectionClass({
-                        path: connectionIdentifier
-                    });
-                    self.log.info('Serial Connection established');
-                } else { 
-                    self.log.warn('Serial port ID not valid. Should be like /dev/tty.usbserial or COM9');
-                }
-            } else if (connectionType == 'DLx' ) {
-                if (connectionIdentifier.match(ipformat)) {
-                    self.log.warn('DLx Connection not implemented');
-                } else { 
-                    self.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
-                }
+        ctx.headerSet = new vbus.HeaderSet();
+        let ConnectionClass = vbus.ConnectionClass;
+        const ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+        const serialformat = /^(COM|com)[0-9][0-9]?$|^\/dev\/tty.*$/;
+        ctx.hsc = new vbus.HeaderSetConsolidator({
+            interval: vbusInterval * 1000,
+            timeToLive: (vbusInterval * 1000) + 1000,
+        });
+        if (connectionType == 'LAN') {
+            if (connectionIdentifier.match(ipformat)) {
+                ConnectionClass = vbus['TcpConnection'];
+                ctx.connection = new ConnectionClass({
+                    host: connectionIdentifier,
+                    password: vbusPassword
+                });
+                self.log.info('TCP Connection established');
+            } else { 
+                self.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
             }
+        } else if (connectionType == 'Serial' ) {
+            if (connectionIdentifier.match(serialformat)) {
+                ConnectionClass = vbus['SerialConnection'];
+                ctx.connection = new ConnectionClass({
+                    path: connectionIdentifier
+                });
+                self.log.info('Serial Connection established');
+            } else { 
+                self.log.warn('Serial port ID not valid. Should be like /dev/tty.usbserial or COM9');
+            }
+        } else if (connectionType == 'DLx' ) {
+            if (connectionIdentifier.match(ipformat)) {
+                self.log.warn('DLx Connection not implemented');
+            } else { 
+                self.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
+            }
+        }
 
-            ctx.connection.on('packet', function (packet) {
-                ctx.headerSet.removeAllHeaders();
-                ctx.headerSet.addHeader(packet);
-                ctx.hsc.addHeader(packet);
-                self.log.debug('Packet received');
+        ctx.connection.on('packet', function (packet) {
+            ctx.headerSet.removeAllHeaders();
+            ctx.headerSet.addHeader(packet);
+            ctx.hsc.addHeader(packet);
+            self.log.debug('Packet received');
+            if (forceReInit) {
+                ctx.hsc.emit('headerSet', ctx.hsc);
+            }
+        });
+
+        ctx.hsc.on('headerSet', function () {
+            const packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
+            const data = _.map(packetFields, function (pf) {
+                return {
+                    id: pf.id,
+                    name: pf.name,
+                    value: pf.rawValue,
+                    deviceName: pf.packetSpec.sourceDevice.fullName,
+                    deviceId: pf.packetSpec.sourceDevice.deviceId,
+                    addressId: pf.packetSpec.sourceDevice.selfAddress,
+                    unitId: pf.packetFieldSpec.type.unit.unitId,
+                    unitText: pf.packetFieldSpec.type.unit.unitText,
+                    typeId: pf.packetFieldSpec.type.typeId,
+                    rootTypeId: pf.packetFieldSpec.type.rootTypeId
+                };
+            });
+            self.log.debug('Headerset Event occurred');
+            _.forEach(data, function (item) {
+                const deviceId = item.deviceId.replace(/_/g, '');
+                const channelId = deviceId + '.' + item.addressId;
+                const objectId = channelId + '.' + item.id.replace(/_/g, '');
+
                 if (forceReInit) {
-                    ctx.hsc.emit('headerSet', ctx.hsc);
+                    initDevice(deviceId, channelId, objectId, item);
                 }
+                self.setState(objectId, item.value, true);
             });
 
-            ctx.hsc.on('headerSet', function () {
-                const packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
-                const data = _.map(packetFields, function (pf) {
-                    return {
-                        id: pf.id,
-                        name: pf.name,
-                        value: pf.rawValue,
-                        deviceName: pf.packetSpec.sourceDevice.fullName,
-                        deviceId: pf.packetSpec.sourceDevice.deviceId,
-                        addressId: pf.packetSpec.sourceDevice.selfAddress,
-                        unitId: pf.packetFieldSpec.type.unit.unitId,
-                        unitText: pf.packetFieldSpec.type.unit.unitText,
-                        typeId: pf.packetFieldSpec.type.typeId,
-                        rootTypeId: pf.packetFieldSpec.type.rootTypeId
-                    };
-                });
-                self.log.debug('Headerset Event occurred');
-                _.forEach(data, function (item) {
-                    const deviceId = item.deviceId.replace(/_/g, '');
-                    const channelId = deviceId + '.' + item.addressId;
-                    const objectId = channelId + '.' + item.id.replace(/_/g, '');
-
-                    if (forceReInit) {
-                        initDevice(deviceId, channelId, objectId, item);
+            if (forceReInit) {
+                self.extendForeignObject('system.adapter.' + self.namespace, {
+                    native: {
+                        forceReInit: false
                     }
-                    self.setState(objectId, item.value, true);
                 });
+                forceReInit = false;
+            }
+        });
 
-                if (forceReInit) {
-                    self.extendForeignObject('system.adapter.' + self.namespace, {
-                        native: {
-                            forceReInit: false
-                        }
-                    });
-                    forceReInit = false;
-                }
-            });
-
-            ctx.connection.connect();
-            ctx.hsc.startTimer();
-        //}
+        ctx.connection.connect();
+        ctx.hsc.startTimer();
 
         function initDevice(deviceId, channelId, objectId, item) {
             self.setObjectNotExists(deviceId, {
@@ -198,7 +196,7 @@ class MyVbus extends utils.Adapter {
                 native: {}
             });
         }
-        //initResol();
+
     }
   
     onUnload (callback) {
