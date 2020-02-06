@@ -108,7 +108,7 @@ class MyVbus extends utils.Adapter {
             }
         });
 
-        ctx.hsc.on('headerSet', function () {
+        ctx.hsc.on('headerSet', function (headerSet) {
             const packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
             const data = _.map(packetFields, function (pf) {
                 return {
