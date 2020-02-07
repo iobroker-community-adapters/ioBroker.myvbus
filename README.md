@@ -1,19 +1,26 @@
-![Logo](admin/myvbus.png)
 # ioBroker.myvbus
 
-## myvbus adapter for ioBroker
-
-myvbus adapter
+![Logo](admin/myvbus.png)
 
 ## ioBroker Adapter for Resol VBus
 
+This ioBroker Adapter connects to various VBus-based devices via resol-vbus, a JavaScript library for processing RESOL VBus data.
+<https://github.com/danielwippermann/resol-vbus>
+
+## Features
+
+Connects to various RESOL(R) VBus(R) devices via VBus/LAN (TCP/IP) or VBus/USB (Serial).
+Processes live VBus data streams and makes them available as ioBroker states.
+Values are updated with a configurable cycle time.
 
 ## Changelog
 
 ### 0.0.1
-* (pdbjjens) initial release
+
+* (pdbjjens) initial release tested only with VBus/USB (Serial) and DeltaSol BS2009 (0x427B)
 
 ## License
+
 MIT License
 
 Copyright (c) 2020 Jens-Peter Jensen <jjensen@t-online.de>
