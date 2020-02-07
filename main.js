@@ -37,7 +37,7 @@ class MyVbus extends utils.Adapter {
     }
 
     // Is called when databases are connected and adapter received configuration.
-    async onReady() {
+    onReady() {
         // Initialize adapter here
         // Reset the connection indicator during startup
         this.setState('info.connection', false, true);
