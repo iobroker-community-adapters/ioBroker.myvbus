@@ -78,6 +78,14 @@ systemDictionary = {
         'en': 'Required for DL3 only',
         'de': 'Nur für DL3 nötig'
     },
+    'Via tag': {
+        'en': 'VBus Update Interval (in seconds)',
+        'de': 'Via-Kennung'
+    },
+    'Required only for VBus.net access via DLx/KMx': {
+        'en': 'Required only for VBus.net access via DLx/KMx',
+        'de': 'Nur für VBus.net Zugang über DLx/KMx nötig'
+    },
     'VBus Interval': {
         'en': 'VBus Update Interval (in seconds)',
         'de': 'VBus Update Intervall (in Sekunden)'
