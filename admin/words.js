@@ -90,8 +90,8 @@ systemDictionary = {
         'en': 'VBus Update Interval (in seconds)',
         'de': 'VBus Update Intervall (in Sekunden)'
     },
-    'If Force Adapter Reinitialzation is set, the adapter restarts with new configuration immediately on save': {
-        'en': 'If Force Adapter Reinitialzation is set, the adapter restarts with new configuration immediately on save',
+    'If Force Adapter Reinitialization is set, the adapter restarts with new configuration immediately on save': {
+        'en': 'If Force Adapter Reinitialization is set, the adapter restarts with new configuration immediately on save',
         'de': 'Wenn Adapter Neustart gesetzt ist, startet der Adapter beim Speichern sofort neu'
     },
     'Force Adapter Reinitialization': {
