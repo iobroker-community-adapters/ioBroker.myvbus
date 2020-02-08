@@ -90,11 +90,15 @@
         ]
     },
     "native": {
-        "connectionType": "Serial",
+        "connectionType": "serial",
         "connectionIdentifier": "COM5",
+        "connectionPort": 7053,
         "vbusPassword": "vbus",
-        "forceReInit": true,
-		"vbusInterval": 20		
+        "vbusChannel": 1,
+        "vbusDataOnly": false,
+        "vbusViaTag": "",
+        "vbusInterval": 20,
+        "forceReInit": true		
     },
     "objects": [],
     "instanceObjects": []

@@ -77,21 +77,44 @@
         <div class="row">
             <div class="input-field col s12 m4">
                 <select class="value" id="connectionType">
-                    <option value="LAN" class="translate">LAN</option>
-                    <option value="DLx" class="translate">DLx</option>
-                    <option value="Serial" class="translate">Serial</option>
+                    <option value="serial" class="translate">VBus/USB</option>
+                    <option value="langw" class="translate">Serial/LANGW</option>
+                    <option value="lan" class="translate">VBus/LAN</option>
+                    <option value="dl2" class="translate">DL2/KM2</option>
+                    <option value="dl3" class="translate">DL3</option>
                 </select>
                 <label for="connectionType" class="translate">Connection Type</label>
+                <span class="translate">Select VBus Connection Device Type</span>
             </div>
             <div class="input-field col s12 m4">
                 <input class="value" id="connectionIdentifier" type="text">
                 <label for="connectionIdentifier" class="translate">Connection Identifier</label>
-                <span class="translate">IP address (when LAN or DLx) or  Port (when Serial)</span>
+                <span class="translate">IP address for local LAN or URL for VBus.net or Port for VBus/USB access</span>
             </div>
             <div class="input-field col s12 m4">
                 <input class="value" id="vbusPassword" type="text">
                 <label for="vbusPassword" class="translate">VBus Password</label>
                 <span class="translate">Default: vbus  for LAN or admin for DLx</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12 m4">
+                <select class="value" id="vbusChannel">
+                    <option value=1 class="translate">DL3 Channel 1</option>
+                    <option value=2 class="translate">DL3 Channel 2</option>
+                    <option value=3 class="translate">DL3 Channel 3</option>
+                    <option value=4 class="translate">DL3 Channel 4</option>
+                    <option value=5 class="translate">DL3 Channel 5</option>
+                    <option value=6 class="translate">DL3 Channel 6</option>
+                    <option value=0 class="translate">DL3 Channel 0</option>
+                </select>
+                <label for="vbusChannel" class="translate">DL3 Channel</label>
+                <span class="translate">Required for DL3 only</span>
+            </div>
+            <div class="input-field col s12 m4">
+                <input class="value" id="vbusViaTag" type="text">
+                <label for="vbusViaTag" class="translate">Via tag</label>
+                <span class="translate">Required only for VBus.net access via DLx/KMx</span>
             </div>
         </div>
         <div class="row">

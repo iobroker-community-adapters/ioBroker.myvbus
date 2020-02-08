@@ -2,48 +2,92 @@
 'use strict';
 
 systemDictionary = {
-    "Connection Type": {
-        "en": "Connection Type",
-        "de": "Verbindungstyp"
+    'Connection Type': {
+        'en': 'Connection Type',
+        'de': 'Verbindungstyp'
     },
-    "LAN": {
-        "en": "LAN",
-        "de": "LAN"
+    'VBus/USB': {
+        'en': 'VBus/USB',
+        'de': 'VBus/USB'
     },
-    "DLx": {
-        "en": "DLx",
-        "de": "DLx"
+    'Serial/LANGW': {
+        'en': 'Serial/LANGW',
+        'de': 'Seriell/LANGW'
     },
-    "Serial": {
-        "en": "Serial",
-        "de": "Seriell"
+    'VBus/LAN': {
+        'en': 'VBus/LAN',
+        'de': 'VBus/LAN'
     },
-    "Connection Identifier": {
-        "en": "Connection Identifier",
-        "de": "Verbindungskennung"
+    'DL2/KM2': {
+        'en': 'DL2/KM2',
+        'de': 'DL2/KM2'
     },
-    "IP address (when LAN or DLx) or  Port (when Serial)": {
-        "en": "IP address (when LAN or DLx) or  Port (when Serial)",
-        "de": "IP Adresse (wenn LAN oder DLx) oder Port (wenn Seriell)"
+    'DL3': {
+        'en': 'DL3',
+        'de': 'DL3'
     },
-    "VBus Password": {
-        "en": "VBus Password",
-        "de": "VBus Passwort"
+    'Connection Identifier': {
+        'en': 'Connection Identifier',
+        'de': 'Verbindungskennung'
     },
-    "Default: vbus  for LAN or admin for DLx": {
-        "en": "Default: vbus  for LAN or admin for DLxlt: vbus",
-        "de": "Standard: vbus für LAN, admin für DLx"
+    'IP address for local LAN or URL for VBus.net or Port for VBus/USB access': {
+        'en': 'IP address for local LAN or URL for VBus.net or Port for VBus/USB access',
+        'de': 'IP Addresse für lokalen LAN Zugang oder URL für VBus.net oder Port für VBus/USB'
     },
-    "If Force Adapter Reinitialzation is set, the adapter restarts with new configuration immediately on save": {
-        "en": "If Force Adapter Reinitialzation is set, the adapter restarts with new configuration immediately on save",
-        "de": "Wenn Adapter Neustart gesetzt ist, startet der Adapter beim Speichern sofort neu"
+    'VBus Password': {
+        'en': 'VBus Password',
+        'de': 'VBus Passwort'
     },
-    "VBus Interval": {
-        "en": "VBus Interval (in seconds)",
-        "de": "VBus Intervall (in Sekunden)"
+    'Default: vbus  for LAN or admin for DLx': {
+        'en': 'Default: vbus  for LAN or admin for DLx',
+        'de': 'Standard: vbus für LAN, admin für DLx'
     },
-    "Force Adapter Reinitialization": {
-        "en": "Force Adapter Reinitialization",
-        "de": "Erzwinge Adapter Neustart"
+    'DL3 Channel 1': {
+        'en': 'DL3 Channel 1',
+        'de': 'DL3 Kanal 1'
+    },
+    'DL3 Channel 2': {
+        'en': 'DL3 Channel 2',
+        'de': 'DL3 Kanal 2'
+    },
+    'DL3 Channel 3': {
+        'en': 'DL3 Channel 3',
+        'de': 'DL3 Kanal 3'
+    },
+    'DL3 Channel 4': {
+        'en': 'DL3 Channel 4',
+        'de': 'DL3 Kanal 4'
+    },
+    'DL3 Channel 5': {
+        'en': 'DL3 Channel 5',
+        'de': 'DL3 Kanal 5'
+    },
+    'DL3 Channel 6': {
+        'en': 'DL3 Channel 6',
+        'de': 'DL3 Kanal 6'
+    },
+    'DL3 Channel 0': {
+        'en': 'DL3 Channel 0',
+        'de': 'DL3 Kanal 0'
+    },
+    'DL3 Channel': {
+        'en': 'DL3 Channel',
+        'de': 'DL3 Kanal'
+    },
+    'Required for DL3 only': {
+        'en': 'Required for DL3 only',
+        'de': 'Nur für DL3 nötig'
+    },
+    'VBus Interval': {
+        'en': 'VBus Update Interval (in seconds)',
+        'de': 'VBus Update Intervall (in Sekunden)'
+    },
+    'If Force Adapter Reinitialzation is set, the adapter restarts with new configuration immediately on save': {
+        'en': 'If Force Adapter Reinitialzation is set, the adapter restarts with new configuration immediately on save',
+        'de': 'Wenn Adapter Neustart gesetzt ist, startet der Adapter beim Speichern sofort neu'
+    },
+    'Force Adapter Reinitialization': {
+        'en': 'Force Adapter Reinitialization',
+        'de': 'Erzwinge Adapter Neustart'
     }
 };

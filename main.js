@@ -44,7 +44,11 @@ class MyVbus extends utils.Adapter {
         const self = this; 
         const connectionType = this.config.connectionType;
         const connectionIdentifier = this.config.connectionIdentifier;
+        const connectionPort = this.config.connectionPort;
         const vbusPassword = this.config.vbusPassword;
+        const vbusChannel = this.config.vbusChannel;
+        const vbusDataOnly = this.config.vbusDataOnly;
+        const vbusViaTag = this.config.vbusViaTag;
         const vbusInterval = this.config.vbusInterval;
         let forceReInit = this.config.forceReInit; 
 
@@ -53,6 +57,8 @@ class MyVbus extends utils.Adapter {
         this.log.info('Connection Type: ' + connectionType);
         this.log.info('Connection Identifier: ' + connectionIdentifier);
         this.log.info('VBus Password: ' + vbusPassword);
+        this.log.info('VBus Password: ' + vbusChannel);
+        this.log.info('VBus Password: ' + vbusViaTag);
         this.log.info('VBus Interval: ' + vbusInterval);
         this.log.info('Force ReInit: ' + forceReInit);
 
@@ -63,22 +69,25 @@ class MyVbus extends utils.Adapter {
         let ConnectionClass = vbus.ConnectionClass;
         const ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
         const serialformat = /^(COM|com)[0-9][0-9]?$|^\/dev\/tty.*$/;
+        const vbusioformat = /.vbus.io$/;
+        const urlformat = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
         ctx.hsc = new vbus.HeaderSetConsolidator({
             interval: vbusInterval * 1000,
             timeToLive: (vbusInterval * 1000) + 1000,
         });
-        if (connectionType == 'LAN') {
+        if (connectionType == 'lan') {
             if (connectionIdentifier.match(ipformat)) {
                 ConnectionClass = vbus['TcpConnection'];
                 ctx.connection = new ConnectionClass({
                     host: connectionIdentifier,
+                    port: connectionPort,
                     password: vbusPassword
                 });
                 self.log.info('TCP Connection established');
             } else { 
                 self.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
             }
-        } else if (connectionType == 'Serial' ) {
+        } else if (connectionType == 'serial' ) {
             if (connectionIdentifier.match(serialformat)) {
                 ConnectionClass = vbus['SerialConnection'];
                 ctx.connection = new ConnectionClass({
@@ -88,11 +97,58 @@ class MyVbus extends utils.Adapter {
             } else { 
                 self.log.warn('Serial port ID not valid. Should be like /dev/tty.usbserial or COM9');
             }
-        } else if (connectionType == 'DLx' ) {
+        } else if (connectionType == 'langw') {
             if (connectionIdentifier.match(ipformat)) {
-                self.log.warn('DLx Connection not implemented');
+                ConnectionClass = vbus['TcpConnection'];
+                ctx.connection = new ConnectionClass({
+                    host: connectionIdentifier,
+                    rawVBusDataOnly: vbusDataOnly            
+                });
+                self.log.info('TCP Connection established');
             } else { 
                 self.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
+            }
+        } else if (connectionType == 'dl2') {
+            if (connectionIdentifier.match(urlformat)) {
+                if (connectionIdentifier.match(vbusioformat)) {
+                    ConnectionClass = vbus['TcpConnection'];
+                    ctx.connection = new ConnectionClass({
+                        host: connectionIdentifier,
+                        password: vbusPassword
+                    });
+                    self.log.info('TCP Connection established');
+                } else { 
+                    ConnectionClass = vbus['TcpConnection'];
+                    ctx.connection = new ConnectionClass({
+                        host: connectionIdentifier,
+                        password: vbusPassword,
+                        viaTag: vbusViaTag
+                    });
+                }
+            } else {
+                self.log.warn('url not valid.');
+            }
+        } else if (connectionType == 'dl3') {
+            if (connectionIdentifier.match(urlformat)) {
+                if (connectionIdentifier.match(vbusioformat)) {
+                    ConnectionClass = vbus['TcpConnection'];
+                    ctx.connection = new ConnectionClass({
+                        host: connectionIdentifier,
+                        password: vbusPassword,
+                        channel: vbusChannel
+                    });
+                    self.log.info('TCP Connection established');
+                } else { 
+                    ConnectionClass = vbus['TcpConnection'];
+                    ctx.connection = new ConnectionClass({
+                        host: connectionIdentifier,
+                        password: vbusPassword,
+                        viaTag: vbusViaTag,
+                        channel: vbusChannel
+                    });
+                }
+            } else {
+                self.log.warn('url not valid.');
             }
         }
 
