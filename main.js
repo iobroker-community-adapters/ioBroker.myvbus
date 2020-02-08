@@ -57,8 +57,8 @@ class MyVbus extends utils.Adapter {
         this.log.info('Connection Type: ' + connectionType);
         this.log.info('Connection Identifier: ' + connectionIdentifier);
         this.log.info('VBus Password: ' + vbusPassword);
-        this.log.info('VBus Password: ' + vbusChannel);
-        this.log.info('VBus Password: ' + vbusViaTag);
+        this.log.info('VBus Channel: ' + vbusChannel);
+        this.log.info('VBus Via Tag: ' + vbusViaTag);
         this.log.info('VBus Interval: ' + vbusInterval);
         this.log.info('Force ReInit: ' + forceReInit);
 
