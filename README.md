@@ -9,15 +9,21 @@ This ioBroker Adapter connects to various VBus-based devices via resol-vbus, a J
 
 ## Features
 
-Connects to various RESOL(R) VBus(R) devices via VBus/LAN (TCP/IP) or VBus/USB (Serial).
-Processes live VBus data streams and makes them available as ioBroker states.
-Values are updated with a configurable cycle time.
+* Connects to various RESOL(R) VBus(R) devices via VBus/LAN (TCP/IP), VBus/USB (Serial) or Serial/LAN Gateways locally. Device access via VBus.net is also supported.
+* Processes live VBus data streams and makes them available as ioBroker states.
+* Values are updated with a configurable cycle time.
 
 ## Changelog
 
 ### 0.0.1
 
-* (pdbjjens) initial release tested only with VBus/USB (Serial) and DeltaSol BS2009 (0x427B)
+* (pdbjjens) initial release tested only with VBus/USB (Serial) and DeltaSol(R) BS2009 (0x427B)
+
+## Legal Notices
+
+RESOL, VBus, VBus.net DeltaSol and others are trademarks or registered trademarks of RESOL - Elektronische Regelungen GmbH.
+
+All other trademarks are the property of their respective owners.
 
 ## License
 

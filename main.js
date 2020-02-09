@@ -262,6 +262,7 @@ class MyVbus extends utils.Adapter {
     onUnload (callback) {
         try {
             ctx.connection.disconnect();
+            this.setState('info.connection', false, true);
             this.log.info('cleaned everything up...');
             callback();
         } catch (e) {
