@@ -202,7 +202,7 @@ class MyVbus extends utils.Adapter {
             }
         });
 
-        ctx.connection.connect();
+        await ctx.connection.connect();
         ctx.hsc.startTimer();
 
         function initDevice(deviceId, channelId, objectId, item) {
