@@ -151,13 +151,15 @@ class MyVbus extends utils.Adapter {
                 self.log.warn('url not valid.');
             }
         }
+        await ctx.connection.connect();
+        ctx.hsc.startTimer();
 
         ctx.connection.on('packet', function (packet) {
             ctx.headerSet.removeAllHeaders();
             ctx.headerSet.addHeader(packet);
             ctx.hsc.addHeader(packet);
             // Packet received
-            self.log.debug('Packet received');
+            //self.log.debug('Packet received');
             self.setState('info.connection', true, true);
             if (forceReInit) {
                 ctx.hsc.emit('headerSet', ctx.hsc);
@@ -202,18 +204,15 @@ class MyVbus extends utils.Adapter {
             }
         });
 
-        await ctx.connection.connect();
-        ctx.hsc.startTimer();
-
-        function initDevice(deviceId, channelId, objectId, item) {
-            self.setObjectNotExists(deviceId, {
+        async function initDevice(deviceId, channelId, objectId, item) {
+            await self.setObjectNotExistsAsync(deviceId, {
                 type: 'device',
                 common: {
                     name: item.deviceName
                 },
                 native: {}
             });
-            self.setObjectNotExists(channelId, {
+            await self.setObjectNotExistsAsync(channelId, {
                 type: 'channel',
                 common: {
                     name: channelId
@@ -250,7 +249,7 @@ class MyVbus extends utils.Adapter {
                 default:
                     break;
             }
-            self.setObjectNotExists(objectId, {
+            await self.setObjectNotExistsAsync(objectId, {
                 type: 'state',
                 common: common,
                 native: {}
