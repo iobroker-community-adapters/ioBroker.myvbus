@@ -72,8 +72,8 @@ class MyVbus extends utils.Adapter {
         const vbusioformat = /.vbus.io$/;
         const urlformat = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
         ctx.hsc = new vbus.HeaderSetConsolidator({
-            interval: vbusInterval * 1000,
-            timeToLive: (vbusInterval * 1000) + 1000,
+            interval: vbusInterval * 1000
+            //timeToLive: (vbusInterval * 1000) + 1000
         });
         if (connectionType == 'lan') {
             if (connectionIdentifier.match(ipformat)) {
