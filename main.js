@@ -156,7 +156,7 @@ class MyVbus extends utils.Adapter {
                     self.log.warn('url not valid.');
                 }
         }
-        ctx.connection.connect();
+        await ctx.connection.connect();
         ctx.hsc.startTimer();
 
         ctx.connection.on('packet', function (packet) {
