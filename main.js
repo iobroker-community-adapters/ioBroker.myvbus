@@ -191,11 +191,11 @@ class MyVbus extends utils.Adapter {
                 if (forceReInit) {
                     initDevice(deviceId, channelId, objectId, item);
                 }
-                await self.setStateAsync(objectId, item.value, true);
+                self.setState(objectId, item.value, true);
             });
 
             if (forceReInit) {
-/*                self.extendForeignObject('system.adapter.' + self.namespace, {
+                /* self.extendForeignObject('system.adapter.' + self.namespace, {
                     native: {
                         forceReInit: false
                     }
