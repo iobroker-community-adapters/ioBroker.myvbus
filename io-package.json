@@ -90,7 +90,7 @@
         ]
     },
     "native": {
-        "connectionType": "serial",
+        //"connectionType": "serial",
         "connectionIdentifier": "COM5",
         "connectionPort": 7053,
         "vbusPassword": "vbus",
