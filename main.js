@@ -14,9 +14,9 @@ const _ = require('lodash');
 // Variable definitions
 const spec = vbus.Specification.getDefaultSpecification();
 const ctx = {
-    headerSet: vbus.headerSet,
+    headerSet: vbus.HeaderSet,
     hsc: vbus.HeaderSetConsolidator,
-    connection: vbus.connection
+    connection: vbus.Connection
 };
 
 class MyVbus extends utils.Adapter {
