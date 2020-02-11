@@ -100,5 +100,17 @@
         "forceReInit": true		
     },
     "objects": [],
-    "instanceObjects": []
+    "instanceObjects": [{
+        "_id": "info.connection",
+        "type": "state",
+        "common": {
+            "role": "indicator.connected",
+            "name": "connected to vbus device",
+            "type": "boolean",
+            "read": true,
+            "write": false,
+            "def": false
+        },
+        "native": {}
+    }]
 }
