@@ -65,23 +65,6 @@
         "compact": true,
         "materialize": true,
         "materializeTab": true,
-        "adminTab": {
-            "singleton": true,
-            "name": {
-                "en": "ioBroker VBus Adapter",
-                "de": "ioBroker VBus Adapter",
-                "ru": "ioBroker VBus Adapter",
-                "pt": "ioBroker VBus Adapter",
-                "nl": "ioBroker VBus Adapter",
-                "fr": "ioBroker VBus Adapter",
-                "it": "ioBroker VBus Adapter",
-                "es": "ioBroker VBus Adapter",
-                "pl": "ioBroker VBus Adapter",
-                "zh-cn": "ioBroker VBus Adapter"
-            },
-            "link": "",
-            "fa-icon": "info"
-        },
         "supportCustoms": false,
         "dependencies": [
             {
@@ -101,17 +84,26 @@
     },
     "objects": [],
     "instanceObjects": [
-    {
-        "_id": "info.connection",
-        "type": "state",
-        "common": {
-            "role": "indicator.connected",
-            "name": "connected to vbus device",
-            "type": "boolean",
-            "read": true,
-            "write": false,
-            "def": false
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": "Information"
+            },
+            "native": {}
         },
-        "native": {}
-    }]
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": "VBus device connected",
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        }
+    ]
 }
