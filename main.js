@@ -16,7 +16,7 @@ const spec = vbus.Specification.getDefaultSpecification();
 const ctx = {
     headerSet: vbus.headerSet,
     hsc: vbus.HeaderSetConsolidator,
-    connection: vbus.connection,
+    connection: vbus.connection
 };
 
 class MyVbus extends utils.Adapter {
@@ -72,8 +72,8 @@ class MyVbus extends utils.Adapter {
         const vbusioformat = /.vbus.io$/;
         const urlformat = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
         ctx.hsc = new vbus.HeaderSetConsolidator({
-            interval: vbusInterval * 1000
-            //timeToLive: (vbusInterval * 1000) + 1000
+            interval: vbusInterval * 1000,
+            timeToLive: (vbusInterval * 1000) + 1000
         });
         if (connectionType == 'lan') {
             if (connectionIdentifier.match(ipformat)) {
@@ -166,7 +166,7 @@ class MyVbus extends utils.Adapter {
             }
         });
 
-        ctx.hsc.on('headerSet', function (headerSet) {
+        ctx.hsc.on('headerSet', function () {
             const packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
             const data = _.map(packetFields, function (pf) {
                 return {
@@ -182,7 +182,7 @@ class MyVbus extends utils.Adapter {
                     rootTypeId: pf.packetFieldSpec.type.rootTypeId
                 };
             });
-            self.log.debug('Headerset Event occurred');
+            //self.log.debug('Headerset Event occurred');
             _.forEach(data, function (item) {
                 const deviceId = item.deviceId.replace(/_/g, '');
                 const channelId = deviceId + '.' + item.addressId;
@@ -195,11 +195,11 @@ class MyVbus extends utils.Adapter {
             });
 
             if (forceReInit) {
-                self.extendForeignObject('system.adapter.' + self.namespace, {
+/*                self.extendForeignObject('system.adapter.' + self.namespace, {
                     native: {
                         forceReInit: false
                     }
-                });
+                }); */
                 forceReInit = false;
             }
         });
