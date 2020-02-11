@@ -96,7 +96,7 @@
         "vbusChannel": 1,
         "vbusDataOnly": false,
         "vbusViaTag": "",
-        "vbusInterval": 20,
+        "vbusInterval": 30,
         "forceReInit": true		
     },
     "objects": [],

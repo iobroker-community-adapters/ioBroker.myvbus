@@ -6,6 +6,10 @@ systemDictionary = {
         'en': 'Connection Type',
         'de': 'Verbindungstyp'
     },
+    'Select VBus Connection Device Type': {
+        'en': 'Select VBus Connection Device Type (VBus/LAN, DL3 etc.)',
+        'de': 'VBus Verbindungsgerätetyp auswählen (VBus/LAN, DL3 usw.)'
+    }
     'VBus/USB': {
         'en': 'VBus/USB',
         'de': 'VBus/USB'
