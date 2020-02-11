@@ -100,14 +100,7 @@
         "forceReInit": true		
     },
     "objects": [],
-    "instanceObjects": [{
-        "_id": "info",
-        "type": "channel",
-        "common": {
-            "name": "Information"
-        },
-        "native": {}
-    },
+    "instanceObjects": [
     {
         "_id": "info.connection",
         "type": "state",
