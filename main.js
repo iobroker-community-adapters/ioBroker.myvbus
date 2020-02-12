@@ -12,10 +12,10 @@ const utils = require('@iobroker/adapter-core');
 const vbus = require('resol-vbus');
 const _ = require('lodash');
 // Variable definitions
-const specification = new vbus.Specification({
-    language: 'en'
-});
-const spec = specification.getDefaultSpecification();
+//const specification = new vbus.Specification({
+//    language: 'en'
+//});
+const spec = vbus.Specification.getDefaultSpecification();
 const ctx = {
     headerSet: vbus.HeaderSet(),
     hsc: vbus.HeaderSetConsolidator(),
