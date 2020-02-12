@@ -13,7 +13,7 @@ const vbus = require('resol-vbus');
 const _ = require('lodash');
 // Variable definitions
 const specification = new vbus.Specification({
-    language: 'de'
+    language: 'en'
 });
 const spec = specification.getDefaultSpecification();
 const ctx = {
@@ -67,13 +67,14 @@ class MyVbus extends utils.Adapter {
 
         // in this vbus adapter all states changes inside the adapters namespace are subscribed
         this.subscribeStates('*');
-           
+
         ctx.headerSet = new vbus.HeaderSet();
-        let ConnectionClass = vbus.ConnectionClass;
+
         const ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
         const serialformat = /^(COM|com)[0-9][0-9]?$|^\/dev\/tty.*$/;
         const vbusioformat = /.vbus.io$/;
         const urlformat = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+
         ctx.hsc = new vbus.HeaderSetConsolidator({
             interval: vbusInterval * 1000,
             timeToLive: (vbusInterval * 1000) + 1000
@@ -81,8 +82,7 @@ class MyVbus extends utils.Adapter {
         switch (connectionType) {
             case 'lan':
                 if (connectionIdentifier.match(ipformat)) {
-                    ConnectionClass = vbus['TcpConnection'];
-                    ctx.connection = new ConnectionClass({
+                    ctx.connection = new vbus.TcpConnection({
                         host: connectionIdentifier,
                         port: connectionPort,
                         password: vbusPassword
@@ -94,8 +94,7 @@ class MyVbus extends utils.Adapter {
                 break;
             case 'serial':
                 if (connectionIdentifier.match(serialformat)) {
-                    ConnectionClass = vbus['SerialConnection'];
-                    ctx.connection = new ConnectionClass({
+                    ctx.connection = new vbus.SerialConnection({
                         path: connectionIdentifier
                     });
                     self.log.info('Serial Connection established');
@@ -105,8 +104,7 @@ class MyVbus extends utils.Adapter {
                 break;
             case 'langw':
                 if (connectionIdentifier.match(ipformat)) {
-                    ConnectionClass = vbus['TcpConnection'];
-                    ctx.connection = new ConnectionClass({
+                    ctx.connection = new vbus.TcpConnection({
                         host: connectionIdentifier,
                         rawVBusDataOnly: vbusDataOnly            
                     });
@@ -118,15 +116,13 @@ class MyVbus extends utils.Adapter {
             case 'dl2':
                 if (connectionIdentifier.match(urlformat)) {
                     if (connectionIdentifier.match(vbusioformat)) {
-                        ConnectionClass = vbus['TcpConnection'];
-                        ctx.connection = new ConnectionClass({
+                        ctx.connection = new vbus.TcpConnection({
                             host: connectionIdentifier,
                             password: vbusPassword
                         });
                         self.log.info('TCP Connection established');
                     } else { 
-                        ConnectionClass = vbus['TcpConnection'];
-                        ctx.connection = new ConnectionClass({
+                        ctx.connection = new vbus.TcpConnection({
                             host: connectionIdentifier,
                             password: vbusPassword,
                             viaTag: vbusViaTag
@@ -139,16 +135,14 @@ class MyVbus extends utils.Adapter {
             case 'dl3':
                 if (connectionIdentifier.match(urlformat)) {
                     if (connectionIdentifier.match(vbusioformat)) {
-                        ConnectionClass = vbus['TcpConnection'];
-                        ctx.connection = new ConnectionClass({
+                        ctx.connection = new vbus.TcpConnection({
                             host: connectionIdentifier,
                             password: vbusPassword,
                             channel: vbusChannel
                         });
                         self.log.info('TCP Connection established');
                     } else { 
-                        ConnectionClass = vbus['TcpConnection'];
-                        ctx.connection = new ConnectionClass({
+                        ctx.connection = new vbus.TcpConnection({
                             host: connectionIdentifier,
                             password: vbusPassword,
                             viaTag: vbusViaTag,
