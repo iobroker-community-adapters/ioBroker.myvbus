@@ -15,7 +15,7 @@ const _ = require('lodash');
 //const specification = new vbus.Specification({
 //    language: 'en'
 //});
-const specification = new vbus.Specification('de');
+const specification = new vbus.Specification({language:'de'});
 const spec = specification.getDefaultSpecification();
 const ctx = {
     headerSet: vbus.HeaderSet(),
