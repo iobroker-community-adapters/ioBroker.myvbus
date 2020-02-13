@@ -222,7 +222,7 @@ class MyVbus extends utils.Adapter {
                 native: {}
             });
             const common = {
-                name: item.name,
+                name: item.name.de,
                 type: 'number',
                 unit: item.unitText,
                 read: true,
