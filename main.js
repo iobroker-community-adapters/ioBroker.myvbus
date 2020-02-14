@@ -31,6 +31,7 @@ class MyVbus extends utils.Adapter {
         super({
             ...options,
             name: 'myvbus',
+            systemConfig:  true            // load ioBroker configuration into systemConfig
         });
         this.on('ready', this.onReady.bind(this));
         //this.on('objectChange', this.onObjectChange.bind(this));
@@ -46,6 +47,7 @@ class MyVbus extends utils.Adapter {
         this.setState('info.connection', false, true);
         const self = this; 
         const connectionType = this.config.connectionType;
+        const language = this.systemConfig.common.language;
         const connectionIdentifier = this.config.connectionIdentifier;
         const connectionPort = this.config.connectionPort;
         const vbusPassword = this.config.vbusPassword;
@@ -57,7 +59,8 @@ class MyVbus extends utils.Adapter {
 
         // The adapters config (in the instance object everything under the attribute "native") is accessible via
         // this.config:
-        this.log.info('Connection Type: ' + connectionType);
+        //this.log.info('Connection Type: ' + connectionType);
+        this.log.info('System Language: ' + language);
         this.log.info('Connection Identifier: ' + connectionIdentifier);
         this.log.info('VBus Password: ' + vbusPassword);
         this.log.info('VBus Channel: ' + vbusChannel);
@@ -185,7 +188,7 @@ class MyVbus extends utils.Adapter {
                     rootTypeId: pf.packetFieldSpec.type.rootTypeId
                 };
             });
-            self.log.info('received data (' + JSON.stringify(data));
+            //self.log.info('received data (' + JSON.stringify(data));
             _.forEach(data, function (item) {
                 const deviceId = item.deviceId.replace(/_/g, '');
                 const channelId = deviceId + '.' + item.addressId;

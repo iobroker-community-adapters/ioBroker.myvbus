@@ -73,6 +73,7 @@
         ]
     },
     "native": {
+        "connectionType": "",
         "connectionIdentifier": "COM5",
         "connectionPort": 7053,
         "vbusPassword": "vbus",
