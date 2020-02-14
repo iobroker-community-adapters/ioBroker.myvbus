@@ -48,12 +48,12 @@ class MyVbus extends utils.Adapter {
             if (err) {
                 self.log.info(err);
             } else {
-                //self.log.info(JSON.stringify(obj));
+                self.log.info(JSON.stringify(obj));
                 return obj; // return system config
             }
         });
-        self.log.info(JSON.stringify(systemConfig));
-        const language = systemConfig.common.language;
+        //self.log.info(JSON.stringify(systemConfig));
+        //const language = systemConfig.common.language;
         const connectionDevice = this.config.connectionDevice;
         const connectionIdentifier = this.config.connectionIdentifier;
         const connectionPort = this.config.connectionPort;
