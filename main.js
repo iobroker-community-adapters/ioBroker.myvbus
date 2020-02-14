@@ -170,11 +170,11 @@ class MyVbus extends utils.Adapter {
 
         ctx.hsc.on('headerSet', function () {
             const packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
-            self.log.info('received data (' + JSON.stringify(packetFields));
+            //self.log.info('received data (' + JSON.stringify(packetFields));
             const data = _.map(packetFields, function (pf) {
                 return {
                     id: pf.id,
-                    name: pf.name,
+                    name: pf.packetFieldSpec.name.de,
                     value: pf.rawValue,
                     deviceName: pf.packetSpec.sourceDevice.fullName,
                     deviceId: pf.packetSpec.sourceDevice.deviceId,
@@ -185,7 +185,7 @@ class MyVbus extends utils.Adapter {
                     rootTypeId: pf.packetFieldSpec.type.rootTypeId
                 };
             });
-            
+            self.log.info('received data (' + JSON.stringify(data));
             _.forEach(data, function (item) {
                 const deviceId = item.deviceId.replace(/_/g, '');
                 const channelId = deviceId + '.' + item.addressId;
