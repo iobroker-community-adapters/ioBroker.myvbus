@@ -51,7 +51,7 @@ class MyVbus extends utils.Adapter {
                 return obj; // return system config
             }
         });
-        const language = systemConfig.common.language;
+        const language = this.systemConfig.common.language;
         const connectionDevice = this.config.connectionDevice;
         const connectionIdentifier = this.config.connectionIdentifier;
         const connectionPort = this.config.connectionPort;
