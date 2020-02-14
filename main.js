@@ -12,9 +12,7 @@ const utils = require('@iobroker/adapter-core');
 const vbus = require('resol-vbus');
 const _ = require('lodash');
 // Variable definitions
-//const specification = new vbus.Specification({
-//    language: 'en'
-//});
+
 const spec = vbus.Specification.getDefaultSpecification();
 const ctx = {
     headerSet: vbus.HeaderSet(),
@@ -30,8 +28,7 @@ class MyVbus extends utils.Adapter {
     constructor(options) {
         super({
             ...options,
-            name: 'myvbus',
-            systemConfig:  true            // load ioBroker configuration into systemConfig
+            name: 'myvbus'
         });
         this.on('ready', this.onReady.bind(this));
         //this.on('objectChange', this.onObjectChange.bind(this));
@@ -46,7 +43,15 @@ class MyVbus extends utils.Adapter {
         // Reset the connection indicator during startup
         this.setState('info.connection', false, true);
         const self = this;
-        const language = this.systemConfig.common.language;
+        const language = this.getForeignObject('system.config', function (err, obj) {
+            if (err) {
+                this.log.info(err);
+            } else {
+                this.log.info(JSON.stringify(obj));
+                return obj.common.language; // return language
+            }
+        });
+
         const connectionDevice = this.config.connectionDevice;
         const connectionIdentifier = this.config.connectionIdentifier;
         const connectionPort = this.config.connectionPort;
