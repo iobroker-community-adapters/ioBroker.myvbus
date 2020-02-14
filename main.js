@@ -46,7 +46,7 @@ class MyVbus extends utils.Adapter {
         // Reset the connection indicator during startup
         this.setState('info.connection', false, true);
         const self = this;
-        const language = this.systemConfig.language;
+        const language = this.systemConfig.common.language;
         const connectionDevice = this.config.connectionDevice;
         const connectionIdentifier = this.config.connectionIdentifier;
         const connectionPort = this.config.connectionPort;
