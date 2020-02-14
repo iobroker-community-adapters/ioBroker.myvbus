@@ -45,9 +45,9 @@ class MyVbus extends utils.Adapter {
         // Initialize adapter here
         // Reset the connection indicator during startup
         this.setState('info.connection', false, true);
-        const self = this; 
-        const connectionType = this.config.connectionType;
-        const language = this.systemConfig.common.language;
+        const self = this;
+        const language = this.systemConfig.language;
+        const connectionDevice = this.config.connectionDevice;
         const connectionIdentifier = this.config.connectionIdentifier;
         const connectionPort = this.config.connectionPort;
         const vbusPassword = this.config.vbusPassword;
@@ -59,8 +59,8 @@ class MyVbus extends utils.Adapter {
 
         // The adapters config (in the instance object everything under the attribute "native") is accessible via
         // this.config:
-        //this.log.info('Connection Type: ' + connectionType);
         this.log.info('System Language: ' + language);
+        this.log.info('Connection Type: ' + connectionDevice);
         this.log.info('Connection Identifier: ' + connectionIdentifier);
         this.log.info('VBus Password: ' + vbusPassword);
         this.log.info('VBus Channel: ' + vbusChannel);
@@ -82,7 +82,7 @@ class MyVbus extends utils.Adapter {
             interval: vbusInterval * 1000,
             timeToLive: (vbusInterval * 1000) + 1000
         });
-        switch (connectionType) {
+        switch (connectionDevice) {
             case 'lan':
                 if (connectionIdentifier.match(ipformat)) {
                     ctx.connection = new vbus.TcpConnection({
