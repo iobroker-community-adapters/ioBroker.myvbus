@@ -28,7 +28,8 @@ class MyVbus extends utils.Adapter {
     constructor(options) {
         super({
             ...options,
-            name: 'myvbus'
+            name: 'myvbus',
+            systemConfig:  true            // load ioBroker configuration into systemConfig
         });
         this.on('ready', this.onReady.bind(this));
         //this.on('objectChange', this.onObjectChange.bind(this));
@@ -43,14 +44,15 @@ class MyVbus extends utils.Adapter {
         // Reset the connection indicator during startup
         this.setState('info.connection', false, true);
         const self = this;
-        const systemConfig = this.getForeignObject('system.config', function (err, obj) {
+       /* const systemConfig = this.getForeignObject('system.config', function (err, obj) {
             if (err) {
                 self.log.info(err);
             } else {
                 self.log.info(JSON.stringify(obj));
                 return obj; // return system config
             }
-        });
+        }); */
+        self.log.info(JSON.stringify(this.systemConfig));
         const language = this.systemConfig.common.language;
         const connectionDevice = this.config.connectionDevice;
         const connectionIdentifier = this.config.connectionIdentifier;
