@@ -185,7 +185,7 @@ class MyVbus extends utils.Adapter {
             const data = _.map(packetFields, function (pf) {
                 return {
                     id: pf.id,
-                    name: ('pf.packetFieldSpec.name.' + language),
+                    name: pf + ('.packetFieldSpec.name.' + language),
                     value: pf.rawValue,
                     deviceName: pf.packetSpec.sourceDevice.fullName,
                     deviceId: pf.packetSpec.sourceDevice.deviceId,
