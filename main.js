@@ -28,8 +28,7 @@ class MyVbus extends utils.Adapter {
     constructor(options) {
         super({
             ...options,
-            name: 'myvbus'
-            //systemConfig:  true            // load ioBroker configuration into systemConfig
+            name: 'myvbus',
         });
         this.on('ready', this.onReady.bind(this));
         //this.on('objectChange', this.onObjectChange.bind(this));
@@ -46,7 +45,7 @@ class MyVbus extends utils.Adapter {
         this.setState('info.connection', false, true);
         let language = '';
         await this.getForeignObjectAsync('system.config').then(sysConf => {
-            self.log.info(JSON.stringify(sysConf));
+            //self.log.info(JSON.stringify(sysConf));
             language = sysConf.common.language;
             if  (!(language == 'en' || language == 'de' || language == 'fr')) {
                 language = 'en';
