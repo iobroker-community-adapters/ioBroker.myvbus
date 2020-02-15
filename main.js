@@ -45,7 +45,7 @@ class MyVbus extends utils.Adapter {
         // Reset the connection indicator during startup
         this.setState('info.connection', false, true);
         let language = '';
-        self.getForeignObjectAsync('system.config').then(sysConf => {
+        await this.getForeignObjectAsync('system.config').then(sysConf => {
             self.log.info(JSON.stringify(sysConf));
             language = sysConf.common.language;
             self.log.info('System Language = ' + language);
