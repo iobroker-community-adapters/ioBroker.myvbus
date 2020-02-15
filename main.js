@@ -45,17 +45,14 @@ class MyVbus extends utils.Adapter {
         this.setState('info.connection', false, true);
         const self = this;
         let language;
-        this.getForeignObject('system.config', (err, systemConfig) => {
-            language = systemConfig.common.language;
-        });
-        /*const systemConfig = this.getForeignObject('system.config', function (err, obj) {
+        this.getForeignObjectAsync('system.config', function (err, sysConf) {
             if (err) {
-                self.log.warn(err);
+                self.log.warn('Error' + err);
             } else {
-                self.log.info(JSON.stringify(obj));
-                return obj; // return system config
+                self.log.info(JSON.stringify(sysConf));
+                language = sysConf.common.language;
             }
-        });*/
+        });
         //self.log.info(JSON.stringify(systemConfig));
         //const language = systemConfig.common.language;
         const connectionDevice = this.config.connectionDevice;
