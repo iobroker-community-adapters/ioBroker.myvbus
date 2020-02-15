@@ -41,11 +41,11 @@ class MyVbus extends utils.Adapter {
     // Is called when databases are connected and adapter received configuration.
     async onReady() {
         // Initialize adapter here
+        const self = this;
         // Reset the connection indicator during startup
         this.setState('info.connection', false, true);
-        const self = this;
-        var language = '';
-        this.getForeignObjectAsync('system.config').then(sysConf => {
+        let language = '';
+        self.getForeignObjectAsync('system.config').then(sysConf => {
             self.log.info(JSON.stringify(sysConf));
             language = sysConf.common.language;
             self.log.info('System Language = ' + language);
@@ -62,7 +62,6 @@ class MyVbus extends utils.Adapter {
             }
         });*/
         //
-        //const language = systemConfig.common.language;
         const connectionDevice = this.config.connectionDevice;
         const connectionIdentifier = this.config.connectionIdentifier;
         const connectionPort = this.config.connectionPort;
@@ -75,7 +74,7 @@ class MyVbus extends utils.Adapter {
 
         // The adapters config (in the instance object everything under the attribute "native") is accessible via
         // this.config:
-        this.log.info('System Language: ' + language);
+        self.log.info('System Language: ' + language);
         this.log.info('Connection Type: ' + connectionDevice);
         this.log.info('Connection Identifier: ' + connectionIdentifier);
         this.log.info('VBus Password: ' + vbusPassword);
