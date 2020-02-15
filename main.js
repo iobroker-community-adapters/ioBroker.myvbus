@@ -44,14 +44,18 @@ class MyVbus extends utils.Adapter {
         // Reset the connection indicator during startup
         this.setState('info.connection', false, true);
         const self = this;
-        const systemConfig = this.getForeignObject('system.config', function (err, obj) {
+        let language;
+        this.getForeignObject('system.config', (err, systemConfig) => {
+            language = systemConfig.common.language;
+        });
+        /*const systemConfig = this.getForeignObject('system.config', function (err, obj) {
             if (err) {
-                self.log.info(err);
+                self.log.warn(err);
             } else {
                 self.log.info(JSON.stringify(obj));
                 return obj; // return system config
             }
-        });
+        });*/
         //self.log.info(JSON.stringify(systemConfig));
         //const language = systemConfig.common.language;
         const connectionDevice = this.config.connectionDevice;
