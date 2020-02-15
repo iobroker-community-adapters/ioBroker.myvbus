@@ -48,20 +48,13 @@ class MyVbus extends utils.Adapter {
         await this.getForeignObjectAsync('system.config').then(sysConf => {
             self.log.info(JSON.stringify(sysConf));
             language = sysConf.common.language;
-            self.log.info('System Language = ' + language);
+            if  (!(language == 'en' || language == 'de' || language == 'fr')) {
+                language = 'en';
+            }
+            //self.log.info('System Language = ' + language);
         }).catch(err => {
             self.log.info(JSON.stringify(err));
         });
-        /*this.getForeignObjectAsync('system.config', function (err, sysConf) {
-            if (err) {
-                self.log.warn('Error: ' + err);
-            } else {
-                self.log.info(JSON.stringify(sysConf));
-                language = sysConf.common.language;
-                self.log.info('System Language = ' + language);
-            }
-        });*/
-        //
         const connectionDevice = this.config.connectionDevice;
         const connectionIdentifier = this.config.connectionIdentifier;
         const connectionPort = this.config.connectionPort;
@@ -74,7 +67,7 @@ class MyVbus extends utils.Adapter {
 
         // The adapters config (in the instance object everything under the attribute "native") is accessible via
         // this.config:
-        self.log.info('System Language: ' + language);
+        this.log.info('Language: ' + language);
         this.log.info('Connection Type: ' + connectionDevice);
         this.log.info('Connection Identifier: ' + connectionIdentifier);
         this.log.info('VBus Password: ' + vbusPassword);
@@ -192,7 +185,7 @@ class MyVbus extends utils.Adapter {
             const data = _.map(packetFields, function (pf) {
                 return {
                     id: pf.id,
-                    name: pf.packetFieldSpec.name.de,
+                    name: ('pf.packetFieldSpec.name.' + language),
                     value: pf.rawValue,
                     deviceName: pf.packetSpec.sourceDevice.fullName,
                     deviceId: pf.packetSpec.sourceDevice.deviceId,
