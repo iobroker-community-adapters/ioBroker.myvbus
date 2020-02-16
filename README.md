@@ -4,12 +4,13 @@
 
 ## ioBroker Adapter for Resol VBus
 
-This ioBroker Adapter connects to various VBus-based devices via resol-vbus, a JavaScript library for processing RESOL VBus data.
+This ioBroker Adapter connects to various VBus-based devices via resol-vbus, a JavaScript library for processing RESOL VBus data provided by Daniel Wippermann.
 <https://github.com/danielwippermann/resol-vbus>
+<https://www.npmjs.com/package/resol-vbus>
 
 ## Features
 
-* Connects to various RESOL(R) VBus(R) devices via VBus/LAN (TCP/IP), VBus/USB (Serial) or Serial/LAN Gateways locally. Device access via VBus.net is also supported.
+* Provides access to various RESOL(R) VBus(R) devices using DL3 or DL2 dataloggers, KM2 communication module, VBus/LAN interface adapter or Serial/LAN Gateways locally over TCP/IP. Device access using VBus/USB interface adapter or DLx/KMx via VBus.net(R) is also supported.
 * Processes live VBus data streams and makes them available as ioBroker states.
 * Values are updated with a configurable cycle time.
 
