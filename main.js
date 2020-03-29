@@ -232,7 +232,7 @@ class MyVbus extends utils.Adapter {
                 }
             });
         } catch (error) {
-            this.log.error(`[localCreateState] error: ${error.message}, stack: ${error.stack}`);
+            this.log.error(`[OnReady] error: ${error.message}, stack: ${error.stack}`);
         }
     }
 
