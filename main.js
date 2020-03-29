@@ -40,20 +40,28 @@ class MyVbus extends utils.Adapter {
     // Is called when databases are connected and adapter received configuration.
     async onReady() {
         // Initialize adapter here
-        const self = this;
+
         // Reset the connection indicator during startup
         this.setState('info.connection', false, true);
+
         let language = '';
+
         await this.getForeignObjectAsync('system.config').then(sysConf => {
-            //self.log.info(JSON.stringify(sysConf));
-            language = sysConf.common.language;
-            if  (!(language == 'en' || language == 'de' || language == 'fr')) {
+            //this.log.info(JSON.stringify(sysConf));
+            if (sysConf) {
+                // Get propper file of system language to avoid errors
+                language = sysConf.common.language;
+                if (!(language == 'en' || language == 'de' || language == 'fr')) {
+                    language = 'en';
+                }
+            } else {
                 language = 'en';
             }
-            //self.log.info('System Language = ' + language);
+            //this.log.info('System Language = ' + language);
         }).catch(err => {
-            self.log.info(JSON.stringify(err));
+            this.log.info(JSON.stringify(err));
         });
+
         const connectionDevice = this.config.connectionDevice;
         const connectionIdentifier = this.config.connectionIdentifier;
         const connectionPort = this.config.connectionPort;
@@ -62,21 +70,22 @@ class MyVbus extends utils.Adapter {
         const vbusDataOnly = this.config.vbusDataOnly;
         const vbusViaTag = this.config.vbusViaTag;
         const vbusInterval = this.config.vbusInterval;
-        let forceReInit = this.config.forceReInit; 
+        let forceReInit = this.config.forceReInit;
 
         // The adapters config (in the instance object everything under the attribute "native") is accessible via
         // this.config:
-        this.log.info('Language: ' + language);
-        this.log.info('Connection Type: ' + connectionDevice);
-        this.log.info('Connection Identifier: ' + connectionIdentifier);
-        this.log.info('VBus Password: ' + vbusPassword);
-        this.log.info('VBus Channel: ' + vbusChannel);
-        this.log.info('VBus Via Tag: ' + vbusViaTag);
-        this.log.info('VBus Interval: ' + vbusInterval);
-        this.log.info('Force ReInit: ' + forceReInit);
+
+        this.log.info(`Language: ${language}`);
+        this.log.info(`Connection Type: ${connectionDevice}`);
+        this.log.info(`Connection Identifier: ${connectionIdentifier}`);
+        this.log.info(`VBus Password: ${vbusPassword}`);
+        this.log.info(`VBus Channel: ${vbusChannel}`);
+        this.log.info(`VBus Via Tag: ${vbusViaTag}`);
+        this.log.info(`VBus Interval: ${vbusInterval}`);
+        this.log.info(`Force ReInit: ${forceReInit}`);
 
         // in this vbus adapter all states changes inside the adapters namespace are subscribed
-        this.subscribeStates('*');
+        // this.subscribeStates('*'); // Not needed now, in current version adapter only receives data
 
         ctx.headerSet = new vbus.HeaderSet();
 
@@ -89,6 +98,7 @@ class MyVbus extends utils.Adapter {
             interval: vbusInterval * 1000,
             timeToLive: (vbusInterval * 1000) + 1000
         });
+
         switch (connectionDevice) {
             case 'lan':
                 if (connectionIdentifier.match(ipformat)) {
@@ -97,32 +107,35 @@ class MyVbus extends utils.Adapter {
                         port: connectionPort,
                         password: vbusPassword
                     });
-                    self.log.info('TCP Connection established');
-                } else { 
-                    self.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
+                    this.log.info('TCP Connection established');
+                } else {
+                    this.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
                 }
                 break;
+
             case 'serial':
                 if (connectionIdentifier.match(serialformat)) {
                     ctx.connection = new vbus.SerialConnection({
                         path: connectionIdentifier
                     });
-                    self.log.info('Serial Connection established');
-                } else { 
-                    self.log.warn('Serial port ID not valid. Should be like /dev/tty.usbserial or COM9');
+                    this.log.info('Serial Connection established');
+                } else {
+                    this.log.warn('Serial port ID not valid. Should be like /dev/tty.usbserial or COM9');
                 }
                 break;
+
             case 'langw':
                 if (connectionIdentifier.match(ipformat)) {
                     ctx.connection = new vbus.TcpConnection({
                         host: connectionIdentifier,
-                        rawVBusDataOnly: vbusDataOnly            
+                        rawVBusDataOnly: vbusDataOnly
                     });
-                    self.log.info('TCP Connection established');
-                } else { 
-                    self.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
+                    this.log.info('TCP Connection established');
+                } else {
+                    this.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
                 }
                 break;
+
             case 'dl2':
                 if (connectionIdentifier.match(urlformat)) {
                     if (connectionIdentifier.match(vbusioformat)) {
@@ -130,8 +143,8 @@ class MyVbus extends utils.Adapter {
                             host: connectionIdentifier,
                             password: vbusPassword
                         });
-                        self.log.info('TCP Connection established');
-                    } else { 
+                        this.log.info('TCP Connection established');
+                    } else {
                         ctx.connection = new vbus.TcpConnection({
                             host: connectionIdentifier,
                             password: vbusPassword,
@@ -139,9 +152,10 @@ class MyVbus extends utils.Adapter {
                         });
                     }
                 } else {
-                    self.log.warn('url not valid.');
+                    this.log.warn('url not valid.');
                 }
                 break;
+
             case 'dl3':
                 if (connectionIdentifier.match(urlformat)) {
                     if (connectionIdentifier.match(vbusioformat)) {
@@ -150,8 +164,8 @@ class MyVbus extends utils.Adapter {
                             password: vbusPassword,
                             channel: vbusChannel
                         });
-                        self.log.info('TCP Connection established');
-                    } else { 
+                        this.log.info('TCP Connection established');
+                    } else {
                         ctx.connection = new vbus.TcpConnection({
                             host: connectionIdentifier,
                             password: vbusPassword,
@@ -160,31 +174,31 @@ class MyVbus extends utils.Adapter {
                         });
                     }
                 } else {
-                    self.log.warn('url not valid.');
+                    this.log.warn('url not valid.');
                 }
         }
         await ctx.connection.connect();
         ctx.hsc.startTimer();
 
-        ctx.connection.on('packet', function (packet) {
+        ctx.connection.on('packet', (packet) => {
             ctx.headerSet.removeAllHeaders();
             ctx.headerSet.addHeader(packet);
             ctx.hsc.addHeader(packet);
             // Packet received
-            //self.log.debug('Packet received');
-            self.setState('info.connection', true, true);
+            //this.log.debug('Packet received');
+            this.setState('info.connection', true, true);
             if (forceReInit) {
                 ctx.hsc.emit('headerSet', ctx.hsc);
             }
         });
 
-        ctx.hsc.on('headerSet', function () {
+        ctx.hsc.on('headerSet', () => {
             const packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
-            //self.log.info('received data (' + JSON.stringify(packetFields));
+            //this.log.info('received data (' + JSON.stringify(packetFields));
             const data = _.map(packetFields, function (pf) {
                 return {
                     id: pf.id,
-                    name: _.get(pf,['packetFieldSpec','name', language]),
+                    name: _.get(pf, ['packetFieldSpec', 'name', language]),
                     value: pf.rawValue,
                     deviceName: pf.packetSpec.sourceDevice.fullName,
                     deviceId: pf.packetSpec.sourceDevice.deviceId,
@@ -195,20 +209,20 @@ class MyVbus extends utils.Adapter {
                     rootTypeId: pf.packetFieldSpec.type.rootTypeId
                 };
             });
-            //self.log.info('received data (' + JSON.stringify(data));
-            _.forEach(data, function (item) {
+            //this.log.info('received data (' + JSON.stringify(data));
+            _.forEach(data, (item) => {
                 const deviceId = item.deviceId.replace(/_/g, '');
                 const channelId = deviceId + '.' + item.addressId;
                 const objectId = channelId + '.' + item.id.replace(/_/g, '');
 
                 if (forceReInit) {
-                    initDevice(deviceId, channelId, objectId, item);
+                    this.initDevice(deviceId, channelId, objectId, item);
                 }
-                self.setState(objectId, item.value, true);
+                this.setState(objectId, item.value, true);
             });
 
             if (forceReInit) {
-                /* self.extendForeignObject('system.adapter.' + self.namespace, {
+                /* this.extendForeignObject('system.adapter.' + this.namespace, {
                     native: {
                         forceReInit: false
                     }
@@ -216,63 +230,68 @@ class MyVbus extends utils.Adapter {
                 forceReInit = false;
             }
         });
+    }
 
-        async function initDevice(deviceId, channelId, objectId, item) {
-            await self.setObjectNotExistsAsync(deviceId, {
-                type: 'device',
-                common: {
-                    name: item.deviceName
-                },
-                native: {}
-            });
-            await self.setObjectNotExistsAsync(channelId, {
-                type: 'channel',
-                common: {
-                    name: channelId
-                },
-                native: {}
-            });
-            const common = {
-                name: item.name,
-                type: 'number',
-                unit: item.unitText,
-                read: true,
-                write: false
-            };
-            switch (item.unitId) {
-                case 'DegreesCelsius':
-                    common.min = -100;
-                    common.max = +300;
-                    common.role = 'value.temperature';
-                    break;
-                case 'Percent':
-                    common.min = 0;
-                    common.max = 100;
-                    common.role = 'value.volume';
-                    break;
-                case 'Hours':
-                    common.role = 'value';
-                    break;
-                case 'WattHours':
-                    common.role = 'value.power.consumption';
-                    break;
-                case 'None':
-                    common.role = 'value';
-                    break;
-                default:
-                    common.role = 'value';
-                    break;
-            }
-            await self.setObjectNotExistsAsync(objectId, {
-                type: 'state',
-                common: common,
-                native: {}
-            });
+    async initDevice(deviceId, channelId, objectId, item) {
+        
+        await this.setObjectNotExistsAsync(deviceId, {
+            type: 'device',
+            common: {
+                name: item.deviceName
+            },
+            native: {}
+        });
+
+        await this.setObjectNotExistsAsync(channelId, {
+            type: 'channel',
+            common: {
+                name: channelId
+            },
+            native: {}
+        });
+
+        const common = {
+            name: item.name,
+            type: 'number',
+            unit: item.unitText,
+            read: true,
+            write: false
+        };
+
+        switch (item.unitId) {
+            case 'DegreesCelsius':
+                common.min = -100;
+                common.max = +300;
+                common.role = 'value.temperature';
+                break;
+            case 'Percent':
+                common.min = 0;
+                common.max = 100;
+                common.role = 'value.volume';
+                break;
+            case 'Hours':
+                common.role = 'value';
+                break;
+            case 'WattHours':
+                common.role = 'value.power.consumption';
+                break;
+            case 'None':
+                common.role = 'value';
+                break;
+            default:
+                common.role = 'value';
+                break;
         }
 
+        await this.setObjectNotExistsAsync(objectId, {
+            type: 'state',
+            common: common,
+            native: {}
+        });
+        
     }
-  
-    onUnload (callback) {
+
+    onUnload(callback) {
         try {
             ctx.connection.disconnect();
             this.setState('info.connection', false, true);
