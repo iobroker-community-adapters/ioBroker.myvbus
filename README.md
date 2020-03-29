@@ -23,7 +23,7 @@ This ioBroker Adapter connects to various VBus-based devices via resol-vbus, a J
 ## Legal Notices
 
 RESOL, VBus, VBus.net DeltaSol and others are trademarks or registered trademarks of RESOL - Elektronische Regelungen GmbH.
-
+<https://www.resol.de/en>
 All other trademarks are the property of their respective owners.
 
 ## License
