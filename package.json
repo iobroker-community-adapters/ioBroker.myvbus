@@ -6,7 +6,7 @@
     "name": "Jens-Peter Jensen",
     "email": "jjensen@t-online.de"
   },
-  "homepage": "https://github.com/pdbjjens/ioBroker.myvbus",
+  "homepage": "https://github.com/iobroker-community-adapters/ioBroker.myvbus",
   "license": "MIT",
   "keywords": [
     "ioBroker",
@@ -18,7 +18,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/pdbjjens/ioBroker.myvbus"
+    "url": "https://github.com/iobroker-community-adapters/ioBroker.myvbus"
   },
   "dependencies": {
     "@iobroker/adapter-core": "^2.1.0",
