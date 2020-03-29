@@ -44,6 +44,9 @@
         "authors": [
             "Author <jjensen@t-online.de>"
         ],
+        "contributors": [
+			"DutchmanNL"
+		  ],
         "keywords": [
             "ioBroker",
             "myvbus",
@@ -57,8 +60,8 @@
         "main": "main.js",
         "icon": "myvbus.png",
         "enabled": true,
-        "extIcon": "https://raw.githubusercontent.com/pdbjjens/ioBroker.myvbus/master/admin/myvbus.png",
-        "readme": "https://github.com/pdbjjens/ioBroker.myvbus/blob/master/README.md",
+        "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.myvbus/master/admin/myvbus.png",
+        "readme": "https://github.com/iobroker-community-adapters/ioBroker.myvbus/blob/master/README.md",
         "loglevel": "info",
         "mode": "daemon",
         "type": "climate-control",
@@ -66,6 +69,8 @@
         "materialize": true,
         "materializeTab": true,
         "supportCustoms": false,
+        "connectionType": "local",
+        "dataSource":"push",
         "dependencies": [
             {
                 "js-controller": ">=1.4.2"
