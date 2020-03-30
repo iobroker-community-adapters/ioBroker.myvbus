@@ -178,8 +178,8 @@ class MyVbus extends utils.Adapter {
                         this.log.warn('url not valid.');
                     }
             }
-            ctx.connection.connect();
-            ctx.hsc.startTimer();
+            await ctx.connection.connect();
+            await ctx.hsc.startTimer();
 
             ctx.connection.on('packet', (packet) => {
                 ctx.headerSet.removeAllHeaders();
