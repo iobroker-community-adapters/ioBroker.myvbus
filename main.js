@@ -17,7 +17,7 @@ const spec = vbus.Specification.getDefaultSpecification();
 const ctx = {
     headerSet: vbus.HeaderSet(),
     hsc: vbus.HeaderSetConsolidator(),
-    connection: vbus.Connection()
+    connection: null //vbus.Connection()
 };
 
 class MyVbus extends utils.Adapter {
