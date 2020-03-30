@@ -17,7 +17,7 @@ const spec = vbus.Specification.getDefaultSpecification();
 const ctx = {
     headerSet: vbus.HeaderSet(),
     hsc: vbus.HeaderSetConsolidator(),
-    connection: null //vbus.Connection()
+    connection: vbus.Connection()
 };
 
 class MyVbus extends utils.Adapter {
@@ -178,7 +178,7 @@ class MyVbus extends utils.Adapter {
                         this.log.warn('url not valid.');
                     }
             }
-            await ctx.connection.connect();
+            ctx.connection.connect();
             ctx.hsc.startTimer();
 
             ctx.connection.on('packet', (packet) => {
