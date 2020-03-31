@@ -41,7 +41,7 @@ class MyVbus extends utils.Adapter {
     async onReady() {
         try {
             // Initialize adapter here
-            this.log.info("ctx connect content : " + JSON.stringify(ctx));
+            // this.log.info("ctx connect content : " + JSON.stringify(ctx));
             // Reset the connection indicator during startup
             this.setState('info.connection', false, true);
 
