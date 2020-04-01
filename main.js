@@ -79,6 +79,7 @@ class MyVbus extends utils.Adapter {
             this.log.info(`Language: ${language}`);
             this.log.info(`Connection Type: ${connectionDevice}`);
             this.log.info(`Connection Identifier: ${connectionIdentifier}`);
+            this.log.info(`Connection Port: ${connectionPort}`);
             this.log.info(`VBus Password: ${vbusPassword}`);
             this.log.info(`VBus Channel: ${vbusChannel}`);
             this.log.info(`VBus Via Tag: ${vbusViaTag}`);
@@ -105,7 +106,7 @@ class MyVbus extends utils.Adapter {
                     if (connectionIdentifier.match(ipformat)) {
                         ctx.connection = new vbus.TcpConnection({
                             host: connectionIdentifier,
-                            port: connectionPort,
+                            //port: connectionPort,
                             password: vbusPassword
                         });
                         this.log.info('TCP Connection established');
@@ -271,13 +272,13 @@ class MyVbus extends utils.Adapter {
             case 'Percent':
                 common.min = 0;
                 common.max = 100;
-                common.role = 'value.volume';
+                common.role = 'level.volume';
                 break;
             case 'Hours':
-                common.role = 'value';
+                common.role = 'value.time';
                 break;
             case 'WattHours':
-                common.role = 'value.power.consumption';
+                common.role = 'value.power.generation';
                 break;
             case 'None':
                 common.role = 'value';
