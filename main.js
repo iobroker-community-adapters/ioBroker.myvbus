@@ -106,7 +106,7 @@ class MyVbus extends utils.Adapter {
                     if (connectionIdentifier.match(ipformat)) {
                         ctx.connection = new vbus.TcpConnection({
                             host: connectionIdentifier,
-                            //port: connectionPort,
+                            port: connectionPort,
                             password: vbusPassword
                         });
                         this.log.info('TCP Connection established');
@@ -211,7 +211,7 @@ class MyVbus extends utils.Adapter {
                         rootTypeId: pf.packetFieldSpec.type.rootTypeId
                     };
                 });
-                //this.log.info('received data (' + JSON.stringify(data));
+                this.log.info('received data: ' + JSON.stringify(data));
                 _.forEach(data, (item) => {
                     const deviceId = item.deviceId.replace(/_/g, '');
                     const channelId = deviceId + '.' + item.addressId;
