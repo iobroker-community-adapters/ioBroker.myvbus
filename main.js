@@ -66,7 +66,26 @@ class MyVbus extends utils.Adapter {
             const connectionDevice = this.config.connectionDevice;
             const connectionIdentifier = this.config.connectionIdentifier;
             const connectionPort = this.config.connectionPort;
-            const vbusPassword = this.config.vbusPassword;
+
+            let vbusPassword = this.config.vbusPassword;
+
+            // Check if credentials are not empty and decrypt stored password
+            if (vbusPassword && vbusPassword !== '') {
+                this.getForeignObject('system.config', (err, obj) => {
+                    if (obj && obj.native && obj.native.secret) {
+                        //noinspection JSUnresolvedVariable
+                        vbusPassword = this.decrypt(obj.native.secret, vbusPassword);
+                    } else {
+                        //noinspection JSUnresolvedVariable
+                        vbusPassword = this.decrypt('Zgfr56gFe87jJOM', vbusPassword);
+                    }
+                });
+
+            } else {
+                this.log.error('*** Adapter deactivated, credentials missing in Adaptper Settings !!!  ***');
+                this.setForeignState('system.adapter.' + this.namespace + '.alive', false);
+            }
+
             const vbusChannel = this.config.vbusChannel;
             const vbusDataOnly = this.config.vbusDataOnly;
             const vbusViaTag = this.config.vbusViaTag;
@@ -296,7 +315,17 @@ class MyVbus extends utils.Adapter {
             common: common,
             native: {}
         });
-        
+
+    }
+
+    // Function to decrypt passwords
+    decrypt(key, value) {
+        let result = '';
+        for (let i = 0; i < value.length; ++i) {
+            result += String.fromCharCode(key[i % key.length].charCodeAt(0) ^ value.charCodeAt(i));
+        }
+        this.log.debug('client_secret decrypt ready');
+        return result;
     }
 
     onUnload(callback) {
