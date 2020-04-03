@@ -95,6 +95,7 @@ class MyVbus extends utils.Adapter {
             const serialformat = /^(COM|com)[0-9][0-9]?$|^\/dev\/tty.*$/;
             const vbusioformat = /.vbus.io$/;
             const urlformat = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+            const fqdnformat = /^(?!:\/\/)(?=.{1,255}$)((.{1,63}\.){1,127}(?![0-9]*$)[a-z0-9-]+\.?)$/;
 
             ctx.hsc = new vbus.HeaderSetConsolidator({
                 interval: vbusInterval * 1000,
@@ -103,7 +104,7 @@ class MyVbus extends utils.Adapter {
 
             switch (connectionDevice) {
                 case 'lan':
-                    if (connectionIdentifier.match(ipformat)) {
+                    if (connectionIdentifier.match(ipformat) || connectionIdentifier.match(fqdnformat)) {
                         ctx.connection = new vbus.TcpConnection({
                             host: connectionIdentifier,
                             port: connectionPort,
@@ -111,7 +112,7 @@ class MyVbus extends utils.Adapter {
                         });
                         this.log.info('TCP Connection established');
                     } else {
-                        this.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
+                        this.log.warn('host-address not valid. Should be IP-address or FQDN');
                     }
                     break;
 
@@ -127,14 +128,14 @@ class MyVbus extends utils.Adapter {
                     break;
 
                 case 'langw':
-                    if (connectionIdentifier.match(ipformat)) {
+                    if (connectionIdentifier.match(ipformat) || connectionIdentifier.match(fqdnformat)) {
                         ctx.connection = new vbus.TcpConnection({
                             host: connectionIdentifier,
                             rawVBusDataOnly: vbusDataOnly
                         });
                         this.log.info('TCP Connection established');
                     } else {
-                        this.log.warn('IP-address not valid. Should be xxx.xxx.xxx.xxx.');
+                        this.log.warn('host-address not valid. Should be IP-address or FQDN');
                     }
                     break;
 
@@ -196,7 +197,7 @@ class MyVbus extends utils.Adapter {
 
             ctx.hsc.on('headerSet', () => {
                 const packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
-                this.log.info('received packetFields' + JSON.stringify(packetFields));
+                
                 const data = _.map(packetFields, function (pf) {
                     return {
                         id: pf.id,
@@ -211,13 +212,15 @@ class MyVbus extends utils.Adapter {
                         rootTypeId: pf.packetFieldSpec.type.rootTypeId
                     };
                 });
-                this.log.info('received data: ' + JSON.stringify(data));
+                
                 _.forEach(data, (item) => {
                     const deviceId = item.deviceId.replace(/_/g, '');
                     const channelId = deviceId + '.' + item.addressId;
                     const objectId = channelId + '.' + item.id.replace(/_/g, '');
 
                     if (forceReInit) {
+                        this.log.info('received packetFields' + JSON.stringify(packetFields));
+                        this.log.info('received data: ' + JSON.stringify(data));
                         this.initDevice(deviceId, channelId, objectId, item);
                     }
                     this.setState(objectId, item.value, true);
