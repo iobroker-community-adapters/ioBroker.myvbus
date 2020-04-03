@@ -197,7 +197,9 @@ class MyVbus extends utils.Adapter {
 
             ctx.hsc.on('headerSet', () => {
                 const packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
-                
+                if (forceReInit) {
+                    this.log.info('received packetFields' + JSON.stringify(packetFields));
+                }
                 const data = _.map(packetFields, function (pf) {
                     return {
                         id: pf.id,
@@ -219,7 +221,6 @@ class MyVbus extends utils.Adapter {
                     const objectId = channelId + '.' + item.id.replace(/_/g, '');
 
                     if (forceReInit) {
-                        this.log.info('received packetFields' + JSON.stringify(packetFields));
                         this.log.info('received data: ' + JSON.stringify(data));
                         this.initDevice(deviceId, channelId, objectId, item);
                     }
