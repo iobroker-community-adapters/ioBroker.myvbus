@@ -98,17 +98,41 @@ systemDictionary = {
         'pl': 'Identyfikator połączenia',
         'zh-cn': '连接标识符'
     },
-    'IP address for local LAN or URL for VBus.net or Port for VBus/USB access': {
-        'en': 'IP address for local LAN or URL for VBus.net or Port for VBus/USB access',
-        'de': 'IP-Adresse für lokales LAN oder URL für VBus.net oder Port für VBus / USB-Zugriff',
-        'ru': 'IP-адрес для локальной сети или URL-адрес для VBus.net или порт для доступа к VBus / USB',
-        'pt': 'Endereço IP para LAN local ou URL para VBus.net ou Porta para acesso VBus / USB',
-        'nl': 'IP-adres voor lokaal LAN of URL voor VBus.net of poort voor VBus / USB-toegang',
-        'fr': 'Adresse IP pour LAN local ou URL pour VBus.net ou port pour accès VBus / USB',
-        'it': 'Indirizzo IP per LAN locale o URL per VBus.net o Porta per accesso VBus / USB',
-        'es': 'Dirección IP para LAN local o URL para VBus.net o Puerto para acceso VBus / USB',
-        'pl': 'Adres IP dla lokalnej sieci LAN lub URL dla VBus.net lub Port dla dostępu VBus / USB',
-        'zh-cn': '本地LAN的IP地址或VBus.net的URL或VBus / USB访问的端口'
+    'Connection Port': {
+        'en': 'Connection Port',
+        'de': 'Verbindungs-Port',
+        'ru': 'Порт подключения',
+        'pt': 'Porta de conexão',
+        'nl': 'Verbindingspoort',
+        'fr': 'Port de connexion',
+        'it': 'Porta di connessione',
+        'es': 'Puerto de conexión',
+        'pl': 'Port połączenia',
+        'zh-cn': '连接口'
+    },
+    'Default: 7053 for VBus/LAN': {
+        'en': 'Default: 7053 for VBus/LAN',
+        'de': 'Standard: 7053 für VBus / LAN',
+        'ru': 'По умолчанию: 7053 для VBus / LAN',
+        'pt': 'Padrão: 7053 para VBus / LAN',
+        'nl': 'Standaard: 7053 voor VBus / LAN',
+        'fr': 'Par défaut: 7053 pour VBus / LAN',
+        'it': 'Impostazione predefinita: 7053 per VBus / LAN',
+        'es': 'Valor predeterminado: 7053 para VBus / LAN',
+        'pl': 'Domyślnie: 7053 dla VBus / LAN',
+        'zh-cn': '默认值：对于VBus / LAN为7053'
+    },
+    'Host address (IP or FQDN) for local LAN or URL for VBus.net or Serial Port for VBus/USB access': {
+        'en': 'Host address (IP or FQDN) for local LAN or URL for VBus.net or Serial Port for VBus/USB access',
+        'de': 'Hostadresse (IP oder FQDN) für lokales LAN oder URL für VBus.net oder serielle Schnittstelle für VBus / USB-Zugriff',
+        'ru': 'Адрес хоста (IP или FQDN) для локальной сети или URL для VBus.net или последовательный порт для доступа VBus / USB',
+        'pt': 'Endereço do host (IP ou FQDN) para LAN local ou URL para VBus.net ou Porta serial para acesso VBus / USB',
+        'nl': 'Hostadres (IP of FQDN) voor lokaal LAN of URL voor VBus.net of seriële poort voor VBus / USB-toegang',
+        'fr': "Adresse d'hôte (IP ou FQDN) pour le LAN local ou URL pour VBus.net ou port série pour l'accès VBus / USB",
+        'it': 'Indirizzo host (IP o FQDN) per LAN locale o URL per VBus.net o porta seriale per accesso VBus / USB',
+        'es': 'Dirección de host (IP o FQDN) para LAN local o URL para VBus.net o puerto serie para acceso VBus / USB',
+        'pl': 'Adres hosta (IP lub FQDN) dla lokalnej sieci LAN lub URL dla VBus.net lub port szeregowy dla dostępu VBus / USB',
+        'zh-cn': '本地LAN的主机地址（IP或FQDN）或VBus.net的URL，或VBus / USB访问的串行端口'
     },
     'VBus Password': {
         'en': 'VBus Password',
