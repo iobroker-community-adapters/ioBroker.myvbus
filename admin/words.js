@@ -110,17 +110,17 @@ systemDictionary = {
         'pl': 'Port połączenia',
         'zh-cn': '连接口'
     },
-    'Default: 7053 for VBus/LAN': {
-        'en': 'Default: 7053 for VBus/LAN',
-        'de': 'Standard: 7053 für VBus / LAN',
-        'ru': 'По умолчанию: 7053 для VBus / LAN',
-        'pt': 'Padrão: 7053 para VBus / LAN',
-        'nl': 'Standaard: 7053 voor VBus / LAN',
-        'fr': 'Par défaut: 7053 pour VBus / LAN',
-        'it': 'Impostazione predefinita: 7053 per VBus / LAN',
-        'es': 'Valor predeterminado: 7053 para VBus / LAN',
-        'pl': 'Domyślnie: 7053 dla VBus / LAN',
-        'zh-cn': '默认值：对于VBus / LAN为7053'
+    'Default: 7053': {
+        'en': 'Default: 7053',
+        'de': 'Standard: 7053',
+        'ru': 'По умолчанию: 7053',
+        'pt': 'Padrão: 7053',
+        'nl': 'Standaard: 7053',
+        'fr': 'Par défaut: 7053',
+        'it': 'Predefinito: 7053',
+        'es': 'Predeterminado: 7053',
+        'pl': 'Domyślnie: 7053',
+        'zh-cn': '默认值：7053'
     },
     'Host address (IP or FQDN) for local LAN or URL for VBus.net or Serial Port for VBus/USB access': {
         'en': 'Host address (IP or FQDN) for local LAN or URL for VBus.net or Serial Port for VBus/USB access',
@@ -146,17 +146,17 @@ systemDictionary = {
         'pl': 'Hasło VBus',
         'zh-cn': 'VBus密码'
     },
-    'Default: vbus  for LAN or admin for DLx': {
-        'en': 'Default: vbus  for LAN or admin for DLx',
-        'de': 'Standard: vbus für LAN oder admin für DLx',
-        'ru': 'По умолчанию: vbus для локальной сети или администратор для DLx',
-        'pt': 'Padrão: vbus para LAN ou admin para DLx',
-        'nl': 'Standaard: vbus voor LAN of admin voor DLx',
-        'fr': 'Par défaut: vbus pour LAN ou admin pour DLx',
-        'it': 'Predefinito: vbus per LAN o admin per DLx',
-        'es': 'Valor predeterminado: vbus para LAN o administrador para DLx',
-        'pl': 'Domyślnie: vbus dla LAN lub admin dla DLx',
-        'zh-cn': '默认值：用于局域网的vbus或用于DLx的管理员'
+    'Default: vbus': {
+        'en': 'Default: vbus',
+        'de': 'Standard: vbus',
+        'ru': 'По умолчанию: vbus',
+        'pt': 'Padrão: vbus',
+        'nl': 'Standaard: vbus',
+        'fr': 'Par défaut: vbus',
+        'it': 'Predefinito: vbus',
+        'es': 'Predeterminado: vbus',
+        'pl': 'Domyślnie: vbus',
+        'zh-cn': '默认值：vbus'S
     },
     'DL3 Channel 1': {
         'en': 'DL3 Channel 1',
