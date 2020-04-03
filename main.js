@@ -188,7 +188,7 @@ class MyVbus extends utils.Adapter {
                 ctx.headerSet.addHeader(packet);
                 ctx.hsc.addHeader(packet);
                 // Packet received
-                //this.log.debug('Packet received');
+                this.log.info('Packet received' + JSON.stringify(packet));
                 this.setState('info.connection', true, true);
                 if (forceReInit) {
                     ctx.hsc.emit('headerSet', ctx.hsc);
@@ -197,9 +197,9 @@ class MyVbus extends utils.Adapter {
 
             ctx.hsc.on('headerSet', () => {
                 const packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
-                if (forceReInit) {
-                    this.log.info('received packetFields' + JSON.stringify(packetFields));
-                }
+                //if (forceReInit) {
+                this.log.info('received packetFields: ' + JSON.stringify(packetFields));
+                //}
                 const data = _.map(packetFields, function (pf) {
                     return {
                         id: pf.id,
@@ -214,14 +214,13 @@ class MyVbus extends utils.Adapter {
                         rootTypeId: pf.packetFieldSpec.type.rootTypeId
                     };
                 });
-                
+                this.log.info('received data: ' + JSON.stringify(data));
                 _.forEach(data, (item) => {
                     const deviceId = item.deviceId.replace(/_/g, '');
                     const channelId = deviceId + '.' + item.addressId;
                     const objectId = channelId + '.' + item.id.replace(/_/g, '');
 
                     if (forceReInit) {
-                        this.log.info('received data: ' + JSON.stringify(data));
                         this.initDevice(deviceId, channelId, objectId, item);
                     }
                     this.setState(objectId, item.value, true);
@@ -279,7 +278,7 @@ class MyVbus extends utils.Adapter {
                 common.role = 'level.volume';
                 break;
             case 'Hours':
-                common.role = 'value.time';
+                common.role = 'value';
                 break;
             case 'WattHours':
                 common.role = 'value.power.generation';
