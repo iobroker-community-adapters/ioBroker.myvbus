@@ -93,9 +93,9 @@
              } else {
                  var value = $this.val();
                  if (id === 'vbusPassword') {
-                    this.log.info('Password: ' + JSON.stringify(value));
+                    //this.log.info('Password: ' + JSON.stringify(value));
                      value = encrypt(secret, value);
-                     this.log.info('Encrypted: ' + JSON.stringify(value));
+                     //this.log.info('Encrypted: ' + JSON.stringify(value));
                  }
                  obj[id] = value;
              }
