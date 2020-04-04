@@ -66,26 +66,7 @@ class MyVbus extends utils.Adapter {
             const connectionDevice = this.config.connectionDevice;
             const connectionIdentifier = this.config.connectionIdentifier;
             const connectionPort = this.config.connectionPort;
-
             let vbusPassword = this.config.vbusPassword;
-
-            // Check if credentials are not empty and decrypt stored password
-            if (vbusPassword && vbusPassword !== '') {
-                this.getForeignObject('system.config', (err, obj) => {
-                    if (obj && obj.native && obj.native.secret) {
-                        //noinspection JSUnresolvedVariable
-                        vbusPassword = this.decrypt(obj.native.secret, vbusPassword);
-                    } else {
-                        //noinspection JSUnresolvedVariable
-                        vbusPassword = this.decrypt('Zgfr56gFe87jJOM', vbusPassword);
-                    }
-                });
-
-            } else {
-                this.log.error('*** Adapter deactivated, credentials missing in Adaptper Settings !!!  ***');
-                this.setForeignState('system.adapter.' + this.namespace + '.alive', false);
-            }
-
             const vbusChannel = this.config.vbusChannel;
             const vbusDataOnly = this.config.vbusDataOnly;
             const vbusViaTag = this.config.vbusViaTag;
@@ -104,6 +85,23 @@ class MyVbus extends utils.Adapter {
             this.log.info(`VBus Via Tag: ${vbusViaTag}`);
             this.log.info(`VBus Interval: ${vbusInterval}`);
             this.log.info(`Force ReInit: ${forceReInit}`);
+
+            // Check if credentials are not empty and decrypt stored password
+            if (vbusPassword && vbusPassword !== '') {
+                this.getForeignObject('system.config', (err, obj) => {
+                    if (obj && obj.native && obj.native.secret) {
+                        //noinspection JSUnresolvedVariable
+                        vbusPassword = this.decrypt(obj.native.secret, vbusPassword);
+                    } else {
+                        //noinspection JSUnresolvedVariable
+                        vbusPassword = this.decrypt('Zgfr56gFe87jJOM', vbusPassword);
+                    }
+                });
+
+            } else {
+                this.log.error('*** Adapter deactivated, credentials missing in Adaptper Settings !!!  ***');
+                this.setForeignState('system.adapter.' + this.namespace + '.alive', false);
+            }
 
             // in this vbus adapter all states changes inside the adapters namespace are subscribed
             // this.subscribeStates('*'); // Not needed now, in current version adapter only receives data
