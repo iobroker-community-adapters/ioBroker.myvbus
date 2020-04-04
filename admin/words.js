@@ -156,7 +156,7 @@ systemDictionary = {
         'it': 'Predefinito: vbus',
         'es': 'Predeterminado: vbus',
         'pl': 'Domyślnie: vbus',
-        'zh-cn': '默认值：vbus'S
+        'zh-cn': '默认值：vbus'
     },
     'DL3 Channel 1': {
         'en': 'DL3 Channel 1',
