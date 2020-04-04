@@ -64,8 +64,6 @@
    			// function Materialize.updateTextFields(); to reinitialize all the Materialize labels on the page if you are dynamically adding inputs.
         	M.updateTextFields();
 		}
-
-		// This will be called by the admin adapter when the settings page loads
 		// This will be called by the admin adapter when the settings page loads
 		function load(settings, onChange) {
 			// example: select elements with id=key and class=value and insert value
@@ -74,7 +72,6 @@
              secret = (obj.native ? obj.native.secret : '') || 'Zgfr56gFe87jJOM';
              loadHelper(settings, onChange);
 		   });
-		   
 		   
 			onChange(false);
 			// reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
@@ -93,12 +90,10 @@
              } else {
                  var value = $this.val();
                  if (id === 'vbusPassword') {
-                    //this.log.info('Password: ' + JSON.stringify(value));
-                     value = encrypt(secret, value);
-                     //this.log.info('Encrypted: ' + JSON.stringify(value));
+                    value = encrypt(secret, value);
                  }
                  obj[id] = value;
-             }
+                }
          });
   
 		callback(obj);
