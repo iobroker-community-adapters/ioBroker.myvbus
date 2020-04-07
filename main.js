@@ -128,7 +128,7 @@ class MyVbus extends utils.Adapter {
             const headerSetHasSettled = (headerSet) => {
                 const packetFields = vbus.specification.getPacketFieldsForHeaders(headerSet.getHeaders());
 
-                this.log.debug(packetFields.map((packetField) => {
+                this.log.info(packetFields.map((packetField) => {
                     return packetField.id + ': ' + packetField.name;
                 }).join('\n'));
             };
@@ -244,7 +244,7 @@ class MyVbus extends utils.Adapter {
                         hasSettled = true;
 
                         headerSetHasSettled(ctx.headerSet);
-                        ctx.headerSet = null;
+                        //ctx.headerSet = null;
                     }
                 }
 
