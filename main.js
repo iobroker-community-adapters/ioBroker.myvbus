@@ -106,8 +106,7 @@ class MyVbus extends utils.Adapter {
             // in this vbus adapter all states changes inside the adapters namespace are subscribed
             // this.subscribeStates('*'); // Not needed now, in current version adapter only receives data
 
-            ctx.headerSet = new vbus.HeaderSet();
-
+ 
             const ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
             const serialformat = /^(COM|com)[0-9][0-9]?$|^\/dev\/tty.*$/;
             const vbusioformat = /.vbus.io$/;
@@ -119,6 +118,22 @@ class MyVbus extends utils.Adapter {
                 timeToLive: (vbusInterval * 1000) + 1000
             });
 
+            /**
+ * This function is called once the header set is considered "settled".
+ * That means that the amount of unique packets in the header set has
+ * been stable for a certain amount of time.
+ *
+ * @param {vbus.HeaderSet} headerSet
+ */
+            const headerSetHasSettled = (headerSet) => {
+                const packetFields = vbus.specification.getPacketFieldsForHeaders(headerSet.getHeaders());
+
+                this.log.debug(packetFields.map((packetField) => {
+                    return packetField.id + ': ' + packetField.name;
+                }).join('\n'));
+            };
+
+
             switch (connectionDevice) {
                 case 'lan':
                     if (connectionIdentifier.match(ipformat) || connectionIdentifier.match(fqdnformat)) {
@@ -127,7 +142,7 @@ class MyVbus extends utils.Adapter {
                             port: connectionPort,
                             password: vbusPassword
                         });
-                        this.log.info('TCP Connection established');
+                        this.log.info('TCP Connection selected');
                     } else {
                         this.log.warn('host-address not valid. Should be IP-address or FQDN');
                     }
@@ -138,7 +153,7 @@ class MyVbus extends utils.Adapter {
                         ctx.connection = new vbus.SerialConnection({
                             path: connectionIdentifier
                         });
-                        this.log.info('Serial Connection established');
+                        this.log.info('Serial Connection selected');
                     } else {
                         this.log.warn('Serial port ID not valid. Should be like /dev/tty.usbserial or COM9');
                     }
@@ -150,7 +165,7 @@ class MyVbus extends utils.Adapter {
                             host: connectionIdentifier,
                             rawVBusDataOnly: vbusDataOnly
                         });
-                        this.log.info('TCP Connection established');
+                        this.log.info('TCP Connection selected');
                     } else {
                         this.log.warn('host-address not valid. Should be IP-address or FQDN');
                     }
@@ -163,7 +178,7 @@ class MyVbus extends utils.Adapter {
                                 host: connectionIdentifier,
                                 password: vbusPassword
                             });
-                            this.log.info('TCP Connection established');
+                            this.log.info('TCP Connection selected');
                         } else {
                             ctx.connection = new vbus.TcpConnection({
                                 host: connectionIdentifier,
@@ -184,7 +199,7 @@ class MyVbus extends utils.Adapter {
                                 password: vbusPassword,
                                 channel: vbusChannel
                             });
-                            this.log.info('TCP Connection established');
+                            this.log.info('TCP Connection selected');
                         } else {
                             ctx.connection = new vbus.TcpConnection({
                                 host: connectionIdentifier,
@@ -197,15 +212,47 @@ class MyVbus extends utils.Adapter {
                         this.log.warn('url not valid.');
                     }
             }
+            this.log.info('Wait for Connection...');
             await ctx.connection.connect();
+            this.log.info('Connection established!');
             await ctx.hsc.startTimer();
 
+            ctx.connection.on('connectionState', (connectionState) => {
+                this.log.debug('Connection state changed to ' + connectionState);
+            });
+
+            ctx.headerSet = new vbus.HeaderSet();
+            let hasSettled = false;
+            let settledCountdown = 0;
+
             ctx.connection.on('packet', (packet) => {
-                ctx.headerSet.removeAllHeaders();
-                ctx.headerSet.addHeader(packet);
-                ctx.hsc.addHeader(packet);
                 // Packet received
-                //this.log.info('Packet received' + JSON.stringify(packet));
+                this.log.debug('Packet received' + JSON.stringify(packet));
+
+                //ctx.headerSet.removeAllHeaders();
+                
+                if (!hasSettled) {
+                    const headerCountBefore = ctx.headerSet.getHeaderCount();
+                    ctx.headerSet.addHeader(packet);
+                    const headerCountAfter = ctx.headerSet.getHeaderCount();
+
+                    if (headerCountBefore !== headerCountAfter) {
+                        settledCountdown = headerCountAfter * 2;
+                    } else if (settledCountdown > 0) {
+                        settledCountdown -= 1;
+                    } else {
+                        hasSettled = true;
+
+                        headerSetHasSettled(ctx.headerSet);
+                        ctx.headerSet = null;
+                    }
+                }
+
+                ctx.hsc.addHeader(packet);
+
+                //ctx.headerSet.addHeader(packet);
+                //ctx.hsc.addHeader(packet);
+
                 this.setState('info.connection', true, true);
                 if (forceReInit) {
                     ctx.hsc.emit('headerSet', ctx.hsc);
@@ -326,6 +373,7 @@ class MyVbus extends utils.Adapter {
         return result;
     }
 
+ 
     onUnload(callback) {
         try {
             ctx.connection.disconnect();
