@@ -218,7 +218,7 @@ class MyVbus extends utils.Adapter {
             await ctx.hsc.startTimer();
 
             ctx.connection.on('connectionState', (connectionState) => {
-                this.log.debug('Connection state changed to ' + connectionState);
+                this.log.info('Connection state changed to ' + connectionState);
             });
 
             ctx.headerSet = new vbus.HeaderSet();
@@ -229,7 +229,7 @@ class MyVbus extends utils.Adapter {
                 // Packet received
                 this.log.debug('Packet received' + JSON.stringify(packet));
 
-                //ctx.headerSet.removeAllHeaders();
+                ctx.headerSet.removeAllHeaders();
                 
                 if (!hasSettled) {
                     const headerCountBefore = ctx.headerSet.getHeaderCount();
