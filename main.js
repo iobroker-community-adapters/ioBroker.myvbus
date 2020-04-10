@@ -263,10 +263,11 @@ class MyVbus extends utils.Adapter {
                 //this.log.info('received packetFields: ' + JSON.stringify(packetFields));
                 //}
                 const data = _.map(packetFields, function (pf) {
+                    const precision = pf.packetFieldSpec.type.precision;
                     return {
                         id: pf.id,
                         name: _.get(pf, ['packetFieldSpec', 'name', language]),
-                        value: pf.rawValue,
+                        value: pf.rawValue.toFixed(precision),
                         deviceName: pf.packetSpec.sourceDevice.fullName,
                         deviceId: pf.packetSpec.sourceDevice.deviceId,
                         addressId: pf.packetSpec.sourceDevice.selfAddress,
