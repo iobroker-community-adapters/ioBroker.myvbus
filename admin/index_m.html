@@ -43,7 +43,7 @@
          		$('.value').each(function () {
 					var $key = $(this);
 					var id = $key.attr('id');
-					if (id === 'Password') {
+					if (id === 'vbusPassword') {
 						settings[id] = decrypt(secret, settings[id]);
 					}
 					if ($key.attr('type') === 'checkbox') {

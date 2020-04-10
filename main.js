@@ -193,21 +193,6 @@ class MyVbus extends utils.Adapter {
                     }
             }
 
-            /**
-            * This function is called once the header set is considered "settled".
-            * That means that the amount of unique packets in the header set has
-            * been stable for a certain amount of time.
-            *
-            * @param {vbus.HeaderSet} headerSet
-            */
-            const headerSetHasSettled = (headerSet) => {
-                const packetFields = vbus.specification.getPacketFieldsForHeaders(headerSet.getHeaders());
-
-                this.log.info(packetFields.map((packetField) => {
-                    return packetField.id + ': ' + packetField.name;
-                }).join('\n'));
-            };
-
             ctx.connection.on('connectionState', (connectionState) => {
                 this.log.info('Connection state changed to ' + connectionState);
             });
@@ -222,26 +207,6 @@ class MyVbus extends utils.Adapter {
             let settledCountdown = 0;
 
             ctx.connection.on('packet', (packet) => {
-                // Packet received
-                //this.log.info('Packet received:' + vbus.getId(packet));
-                /* 
-                if (!hasSettled) {
-                    const headerCountBefore = ctx.headerSet.getHeaderCount();
-                    ctx.headerSet.addHeader(packet);
-                    const headerCountAfter = ctx.headerSet.getHeaderCount();
-
-                    if (headerCountBefore !== headerCountAfter) {
-                        settledCountdown = headerCountAfter * 2;
-                    } else if (settledCountdown > 0) {
-                        settledCountdown -= 1;
-                    } else {
-                        hasSettled = true;
-                        headerSetHasSettled(ctx.headerSet);
-                        
-                        ctx.headerSet = null;
-                    }
-                }
-                */
                 ctx.headerSet.removeAllHeaders();
                 ctx.headerSet.addHeader(packet);
                 ctx.hsc.addHeader(packet);
@@ -259,9 +224,6 @@ class MyVbus extends utils.Adapter {
 
             ctx.hsc.on('headerSet', () => {
                 const packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
-                //if (forceReInit) {
-                //this.log.info('received packetFields: ' + JSON.stringify(packetFields));
-                //}
                 const data = _.map(packetFields, function (pf) {
                     const precision = pf.packetFieldSpec.type.precision;
                     return {
