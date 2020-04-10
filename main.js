@@ -223,8 +223,8 @@ class MyVbus extends utils.Adapter {
 
             ctx.connection.on('packet', (packet) => {
                 // Packet received
-                this.log.info('Packet received:' + vbus.getId(packet));
-                
+                //this.log.info('Packet received:' + vbus.getId(packet));
+               /* 
                 if (!hasSettled) {
                     const headerCountBefore = ctx.headerSet.getHeaderCount();
                     ctx.headerSet.addHeader(packet);
@@ -238,11 +238,12 @@ class MyVbus extends utils.Adapter {
                         hasSettled = true;
                         headerSetHasSettled(ctx.headerSet);
                         
-                        //ctx.headerSet = null;
+                        ctx.headerSet = null;
                     }
                 }
-                //ctx.headerSet.removeAllHeaders();
-                //ctx.headerSet.addHeader(packet);
+                */
+                ctx.headerSet.removeAllHeaders();
+                ctx.headerSet.addHeader(packet);
                 ctx.hsc.addHeader(packet);
 
                 if (forceReInit) {
