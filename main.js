@@ -113,26 +113,6 @@ class MyVbus extends utils.Adapter {
             const urlformat = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
             const fqdnformat = /^(?!:\/\/)(?=.{1,255}$)((.{1,63}\.){1,127}(?![0-9]*$)[a-z0-9-]+\.?)$/;
 
-            ctx.hsc = new vbus.HeaderSetConsolidator({
-                interval: vbusInterval * 1000,
-                timeToLive: (vbusInterval * 1000) + 1000
-            });
-
-            /**
- * This function is called once the header set is considered "settled".
- * That means that the amount of unique packets in the header set has
- * been stable for a certain amount of time.
- *
- * @param {vbus.HeaderSet} headerSet
- */
-            const headerSetHasSettled = (headerSet) => {
-                const packetFields = vbus.specification.getPacketFieldsForHeaders(headerSet.getHeaders());
-
-                this.log.info(packetFields.map((packetField) => {
-                    return packetField.id + ': ' + packetField.name;
-                }).join('\n'));
-            };
-
 
             switch (connectionDevice) {
                 case 'lan':
@@ -212,13 +192,29 @@ class MyVbus extends utils.Adapter {
                         this.log.warn('url not valid.');
                     }
             }
-            this.log.info('Wait for Connection...');
-            await ctx.connection.connect();
-            this.log.info('Connection established!');
-            await ctx.hsc.startTimer();
+
+            /**
+            * This function is called once the header set is considered "settled".
+            * That means that the amount of unique packets in the header set has
+            * been stable for a certain amount of time.
+            *
+            * @param {vbus.HeaderSet} headerSet
+            */
+            const headerSetHasSettled = (headerSet) => {
+                const packetFields = vbus.specification.getPacketFieldsForHeaders(headerSet.getHeaders());
+
+                this.log.info(packetFields.map((packetField) => {
+                    return packetField.id + ': ' + packetField.name;
+                }).join('\n'));
+            };
 
             ctx.connection.on('connectionState', (connectionState) => {
                 this.log.info('Connection state changed to ' + connectionState);
+            });
+
+            ctx.hsc = new vbus.HeaderSetConsolidator({
+                interval: vbusInterval * 1000,
+                timeToLive: (vbusInterval * 1000) + 1000
             });
 
             ctx.headerSet = new vbus.HeaderSet();
@@ -228,8 +224,6 @@ class MyVbus extends utils.Adapter {
             ctx.connection.on('packet', (packet) => {
                 // Packet received
                 //this.log.info('Packet received:' + JSON.stringify(packet));
-
-                //ctx.headerSet.removeAllHeaders();
                 
                 if (!hasSettled) {
                     const headerCountBefore = ctx.headerSet.getHeaderCount();
@@ -244,7 +238,8 @@ class MyVbus extends utils.Adapter {
                         hasSettled = true;
 
                         headerSetHasSettled(ctx.headerSet);
-                        ctx.headerSet = null;
+                        ctx.headerSet.removeAllHeaders();
+                        //ctx.headerSet = null;
                     }
                 }
 
@@ -258,6 +253,11 @@ class MyVbus extends utils.Adapter {
                     ctx.hsc.emit('headerSet', ctx.hsc);
                 }
             });
+
+            this.log.info('Wait for Connection...');
+            await ctx.connection.connect();
+            this.log.info('Connection established!');
+            await ctx.hsc.startTimer();
 
             ctx.hsc.on('headerSet', () => {
                 const packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
