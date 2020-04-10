@@ -227,7 +227,7 @@ class MyVbus extends utils.Adapter {
 
             ctx.connection.on('packet', (packet) => {
                 // Packet received
-                this.log.debug('Packet received' + JSON.stringify(packet));
+                this.log.info('Packet received:' + JSON.stringify(packet));
 
                 ctx.headerSet.removeAllHeaders();
                 
