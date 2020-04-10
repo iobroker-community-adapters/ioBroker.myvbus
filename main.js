@@ -227,9 +227,9 @@ class MyVbus extends utils.Adapter {
 
             ctx.connection.on('packet', (packet) => {
                 // Packet received
-                this.log.info('Packet received:' + JSON.stringify(packet));
+                //this.log.info('Packet received:' + JSON.stringify(packet));
 
-                ctx.headerSet.removeAllHeaders();
+                //ctx.headerSet.removeAllHeaders();
                 
                 if (!hasSettled) {
                     const headerCountBefore = ctx.headerSet.getHeaderCount();
@@ -244,7 +244,7 @@ class MyVbus extends utils.Adapter {
                         hasSettled = true;
 
                         headerSetHasSettled(ctx.headerSet);
-                        //ctx.headerSet = null;
+                        ctx.headerSet = null;
                     }
                 }
 
