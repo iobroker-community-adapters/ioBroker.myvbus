@@ -102,7 +102,7 @@ class MyVbus extends utils.Adapter {
                 this.log.error('*** Adapter deactivated, credentials missing in Adaptper Settings !!!  ***');
                 this.setForeignState('system.adapter.' + this.namespace + '.alive', false);
             }
-
+            this.log.info(`VBus Password: ${vbusPassword}`);
             // in this vbus adapter all states changes inside the adapters namespace are subscribed
             // this.subscribeStates('*'); // Not needed now, in current version adapter only receives data
 
