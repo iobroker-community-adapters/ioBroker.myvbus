@@ -99,7 +99,7 @@ class MyVbus extends utils.Adapter {
                 });
 
             } else {
-                this.log.error('*** Adapter deactivated, credentials missing in Adaptper Settings !!!  ***');
+                this.log.info('*** Adapter deactivated, credentials missing in Adaptper Settings !!!  ***');
                 this.setForeignState('system.adapter.' + this.namespace + '.alive', false);
             }
             this.log.info(`VBus Password: ${vbusPassword}`);
@@ -330,7 +330,7 @@ class MyVbus extends utils.Adapter {
         for (let i = 0; i < value.length; ++i) {
             result += String.fromCharCode(key[i % key.length].charCodeAt(0) ^ value.charCodeAt(i));
         }
-        this.log.debug('client_secret decrypt ready');
+        this.log.info('client_secret decrypt ready');
         return result;
     }
 
