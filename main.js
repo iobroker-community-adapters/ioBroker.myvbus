@@ -203,7 +203,7 @@ class MyVbus extends utils.Adapter {
 
             ctx.hsc = new vbus.HeaderSetConsolidator({
                 interval: vbusInterval * 1000,
-                timeToLive: (vbusInterval * 1000) + 1000
+                //timeToLive: (vbusInterval * 1000) + 1000
             });
 
             ctx.headerSet = new vbus.HeaderSet();
