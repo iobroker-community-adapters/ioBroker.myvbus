@@ -88,7 +88,7 @@ class MyVbus extends utils.Adapter {
 
             // Check if credentials are not empty and decrypt stored password
             if (vbusPassword && vbusPassword !== '') {
-                this.getForeignObject('system.config', (err, obj) => {
+                await this.getForeignObjectAsync('system.config', (err, obj) => {
                     if (obj && obj.native && obj.native.secret) {
                         //noinspection JSUnresolvedVariable
                         vbusPassword = this.decrypt(obj.native.secret, vbusPassword);
@@ -203,9 +203,7 @@ class MyVbus extends utils.Adapter {
             });
 
             ctx.headerSet = new vbus.HeaderSet();
-            let hasSettled = false;
-            let settledCountdown = 0;
-
+ 
             ctx.connection.on('packet', (packet) => {
                 ctx.headerSet.removeAllHeaders();
                 ctx.headerSet.addHeader(packet);
