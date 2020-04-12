@@ -92,7 +92,7 @@ class MyVbus extends utils.Adapter {
                     if (obj && obj.native && obj.native.secret) {
                         //noinspection JSUnresolvedVariable
                         vbusPassword = this.decrypt(obj.native.secret, vbusPassword);
-                        this.log.info(`VBus Password decrypted: ${vbusPassword}`);
+                        //this.log.info(`VBus Password decrypted: ${vbusPassword}`);
                     } else {
                         //noinspection JSUnresolvedVariable
                         vbusPassword = this.decrypt('Zgfr56gFe87jJOM', vbusPassword);
@@ -332,12 +332,11 @@ class MyVbus extends utils.Adapter {
         for (let i = 0; i < value.length; ++i) {
             result += String.fromCharCode(key[i % key.length].charCodeAt(0) ^ value.charCodeAt(i));
         }
-        this.log.info('client_secret decrypt ready: '+ result);
+        //this.log.info('client_secret decrypt ready: '+ result);
         return result;
     }
 
- 
-    onUnload(callback) {
+     onUnload(callback) {
         try {
             ctx.connection.disconnect();
             this.setState('info.connection', false, true);
