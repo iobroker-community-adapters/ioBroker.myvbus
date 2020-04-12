@@ -88,7 +88,7 @@ class MyVbus extends utils.Adapter {
 
             // Check if credentials are not empty and decrypt stored password
             if (vbusPassword && vbusPassword !== '') {
-                await this.getForeignObjectAsync('system.config', (err, obj) => {
+                await this.getForeignObjectAsync('system.config').then(obj => {
                     if (obj && obj.native && obj.native.secret) {
                         //noinspection JSUnresolvedVariable
                         vbusPassword = this.decrypt(obj.native.secret, vbusPassword);
@@ -96,8 +96,10 @@ class MyVbus extends utils.Adapter {
                     } else {
                         //noinspection JSUnresolvedVariable
                         vbusPassword = this.decrypt('Zgfr56gFe87jJOM', vbusPassword);
-                        this.log.info(`VBus Password decrypted: ${vbusPassword}`);
+                        //this.log.info(`VBus Password decrypted: ${vbusPassword}`);
                     }
+                }).catch(err => {
+                    this.log.info(JSON.stringify(err));
                 });
 
             } else {
