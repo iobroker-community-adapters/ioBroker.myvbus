@@ -203,26 +203,46 @@ class MyVbus extends utils.Adapter {
 
             ctx.hsc = new vbus.HeaderSetConsolidator({
                 interval: vbusInterval * 1000,
-                //timeToLive: (vbusInterval * 1000) + 1000
+                timeToLive: (vbusInterval * 1000) + 1000
             });
 
             ctx.headerSet = new vbus.HeaderSet();
+            let hasSettled = false;
+            let settledCountdown = 0;
  
             ctx.connection.on('packet', (packet) => {
-                ctx.headerSet.removeAllHeaders();
-                ctx.headerSet.addHeader(packet);
+                if (!hasSettled) {
+                    const headerCountBefore = ctx.headerSet.getHeaderCount();
+                    ctx.headerSet.addHeader(packet);
+                    const headerCountAfter = ctx.headerSet.getHeaderCount();
+        
+                    if (headerCountBefore !== headerCountAfter) {
+                        if (forceReInit) {
+                            ctx.hsc.emit('headerSet', ctx.hsc);
+                        }
+                        settledCountdown = headerCountAfter * 2;
+                    } else if (settledCountdown > 0) {
+                        settledCountdown -= 1;
+                    } else {
+                        hasSettled = true;
+        
+                        //headerSetHasSettled(ctx.headerSet);
+                        ctx.headerSet = null;
+                    }
+                }
+        
+                //ctx.headerSet.removeAllHeaders();
+                //ctx.headerSet.addHeader(packet);
                 ctx.hsc.addHeader(packet);
 
-                if (forceReInit) {
-                    ctx.hsc.emit('headerSet', ctx.hsc);
-                }
+                
             });
 
             this.log.info('Wait for Connection...');
             await ctx.connection.connect();
             this.log.info('Connection established!');
             this.setState('info.connection', true, true);
-            await ctx.hsc.startTimer();
+            ctx.hsc.startTimer();
 
             ctx.hsc.on('headerSet', () => {
                 const packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
@@ -336,7 +356,7 @@ class MyVbus extends utils.Adapter {
         return result;
     }
 
-     onUnload(callback) {
+    onUnload(callback) {
         try {
             ctx.connection.disconnect();
             this.setState('info.connection', false, true);
