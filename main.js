@@ -214,6 +214,7 @@ class MyVbus extends utils.Adapter {
                 if (!hasSettled) {
                     const headerCountBefore = ctx.headerSet.getHeaderCount();
                     ctx.headerSet.addHeader(packet);
+                    ctx.hsc.addHeader(packet);
                     const headerCountAfter = ctx.headerSet.getHeaderCount();
         
                     if (headerCountBefore !== headerCountAfter) {
@@ -225,16 +226,23 @@ class MyVbus extends utils.Adapter {
                         settledCountdown -= 1;
                     } else {
                         hasSettled = true;
-        
+                        if (forceReInit) {
+                            /* this.extendForeignObject('system.adapter.' + this.namespace, {
+                                native: {
+                                    forceReInit: false
+                                }
+                            }); */
+                            forceReInit = false;
+                        }
                         //headerSetHasSettled(ctx.headerSet);
-                        ctx.headerSet = null;
+                        //ctx.headerSet = null;
                     }
-                }
+                }  else {
         
-                //ctx.headerSet.removeAllHeaders();
-                //ctx.headerSet.addHeader(packet);
-                ctx.hsc.addHeader(packet);
-
+                    //ctx.headerSet.removeAllHeaders();
+                    ctx.headerSet.addHeader(packet);
+                    ctx.hsc.addHeader(packet);
+                }
                 
             });
 
@@ -273,14 +281,7 @@ class MyVbus extends utils.Adapter {
                     this.setState(objectId, item.value, true);
                 });
 
-                if (forceReInit) {
-                    /* this.extendForeignObject('system.adapter.' + this.namespace, {
-                        native: {
-                            forceReInit: false
-                        }
-                    }); */
-                    forceReInit = false;
-                }
+ 
             });
         } catch (error) {
             this.log.error(`[OnReady] error: ${error.message}, stack: ${error.stack}`);
