@@ -227,23 +227,18 @@ class MyVbus extends utils.Adapter {
                     } else {
                         hasSettled = true;
                         if (forceReInit) {
-                            /* this.extendForeignObject('system.adapter.' + this.namespace, {
+                            this.extendForeignObject('system.adapter.' + this.namespace, {
                                 native: {
                                     forceReInit: false
                                 }
-                            }); */
+                            }); 
                             forceReInit = false;
                         }
-                        //headerSetHasSettled(ctx.headerSet);
-                        //ctx.headerSet = null;
                     }
-                }  else {
-        
-                    //ctx.headerSet.removeAllHeaders();
+                } else {
                     ctx.headerSet.addHeader(packet);
                     ctx.hsc.addHeader(packet);
                 }
-                
             });
 
             this.log.info('Wait for Connection...');
@@ -280,8 +275,6 @@ class MyVbus extends utils.Adapter {
                     }
                     this.setState(objectId, item.value, true);
                 });
-
- 
             });
         } catch (error) {
             this.log.error(`[OnReady] error: ${error.message}, stack: ${error.stack}`);
