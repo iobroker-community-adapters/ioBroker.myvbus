@@ -122,17 +122,17 @@ systemDictionary = {
         'pl': 'Domyślnie: 7053',
         'zh-cn': '默认值：7053'
     },
-    'Host address (IP or FQDN) for local LAN or URL for VBus.net or Serial Port for VBus/USB access': {
-        'en': 'Host address (IP or FQDN) for local LAN or URL for VBus.net or Serial Port for VBus/USB access',
-        'de': 'Hostadresse (IP oder FQDN) für lokales LAN oder URL für VBus.net oder serielle Schnittstelle für VBus / USB-Zugriff',
-        'ru': 'Адрес хоста (IP или FQDN) для локальной сети или URL для VBus.net или последовательный порт для доступа VBus / USB',
-        'pt': 'Endereço do host (IP ou FQDN) para LAN local ou URL para VBus.net ou Porta serial para acesso VBus / USB',
-        'nl': 'Hostadres (IP of FQDN) voor lokaal LAN of URL voor VBus.net of seriële poort voor VBus / USB-toegang',
-        'fr': "Adresse d'hôte (IP ou FQDN) pour le LAN local ou URL pour VBus.net ou port série pour l'accès VBus / USB",
-        'it': 'Indirizzo host (IP o FQDN) per LAN locale o URL per VBus.net o porta seriale per accesso VBus / USB',
-        'es': 'Dirección de host (IP o FQDN) para LAN local o URL para VBus.net o puerto serie para acceso VBus / USB',
-        'pl': 'Adres hosta (IP lub FQDN) dla lokalnej sieci LAN lub URL dla VBus.net lub port szeregowy dla dostępu VBus / USB',
-        'zh-cn': '本地LAN的主机地址（IP或FQDN）或VBus.net的URL，或VBus / USB访问的串行端口'
+    'Host address (IP or FQDN) for local LAN and for VBus.net or Serial Port Id for VBus/USB access': {
+        "en": "Host address (IP or FQDN) for local LAN and for VBus.net or Serial Port Id for VBus/USB access",
+        "de": "Hostadresse (IP oder FQDN) für lokales LAN und für VBus.net oder serielle Port-ID für VBus / USB-Zugriff",
+        "ru": "Адрес хоста (IP или FQDN) для локальной сети и для VBus.net или Id последовательного порта для доступа к VBus / USB",
+        "pt": "Endereço de host (IP ou FQDN) para LAN local e para VBus.net ou ID de porta serial para acesso VBus / USB",
+        "nl": "Hostadres (IP of FQDN) voor lokaal LAN en voor VBus.net of seriële poort-ID voor VBus / USB-toegang",
+        "fr": "Adresse d'hôte (IP ou FQDN) pour le LAN local et pour VBus.net ou ID de port série pour l'accès VBus / USB",
+        "it": "Indirizzo host (IP o FQDN) per LAN locale e per VBus.net o ID porta seriale per accesso VBus / USB",
+        "es": "Dirección de host (IP o FQDN) para LAN local y para VBus.net o Id. De puerto serie para acceso VBus / USB",
+        "pl": "Adres hosta (IP lub FQDN) dla lokalnej sieci LAN i VBus.net lub identyfikator portu szeregowego dla dostępu VBus / USB",
+        "zh-cn": "本地LAN和VBus.net的主机地址（IP或FQDN）或VBus / USB访问的串行端口ID"
     },
     'VBus Password': {
         'en': 'VBus Password',

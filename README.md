@@ -15,17 +15,24 @@
 
 ## ioBroker Adapter for Resol VBus
 
-This ioBroker Adapter connects to various VBus-based devices via resol-vbus, a JavaScript library for processing RESOL VBus data provided by Daniel Wippermann.
+This adapter connects ioBroker to various VBus-based devices using resol-vbus, a JavaScript library for the acquisition of RESOL VBus data, provided by Daniel Wippermann.
+
 <https://github.com/danielwippermann/resol-vbus>
 <https://www.npmjs.com/package/resol-vbus>
 
 ## Features
 
-* Provides access to various RESOL(R) VBus(R) devices using DL3 or DL2 dataloggers, KM2 communication module, VBus/LAN interface adapter or Serial/LAN Gateways locally over TCP/IP. Device access using VBus/USB interface adapter or DLx/KMx via VBus.net(R) is also supported.
+* Enables reading of the measurement data from various RESOL(R) VBus(R) devices - preferably solar and system controllers from the DeltaSol(R) series including built-in heat quantity meters - using DL3 or DL2 data loggers, KM2 communication modules, VBus/LAN interface adapters or serial/LAN gateways locally via TCP/IP.
+* Device access using the VBus/USB serial interface adapter or via VBus.net(R) using DLx/KMx is also supported.
 * Processes live VBus data streams and makes them available as ioBroker states.
 * Values are updated with a configurable cycle time.
+* Reading or setting the VBus device configuration parameters is not supported. The tools provided by Resol should be used for this, e.g. via VBus.net or the parameterization tool RPT.
 
 ## Changelog
+
+### 0.0.2
+
+* (pdbjjens) alpha 2 release tested with VBus/LAN, KM2, VBus.net and DeltaSol E (0x7721 & 0x7722), DeltaSol M (0x7311 & 0x716), DeltaSol CS Plus (0x2211), Oventrop RQXXL (0x7541)
 
 ### 0.0.1
 

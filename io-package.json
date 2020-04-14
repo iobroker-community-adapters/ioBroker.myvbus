@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "myvbus",
-        "version": "0.0.1",
+        "version": "0.0.2",
         "news": {
+            "0.0.2": {
+                "en": "alpha 2 release",
+                "de": "Alpha 2 Release",
+                "ru": "альфа 2 релиз",
+                "pt": "liberação alfa 2",
+                "nl": "alpha 2 release",
+                "fr": "version alpha 2",
+                "it": "versione alpha 2",
+                "es": "lanzamiento alpha 2",
+                "pl": "wydanie alfa 2",
+                "zh-cn": "alpha 2发布"
+            },
             "0.0.1": {
                 "en": "initial release",
                 "de": "Erstveröffentlichung",
