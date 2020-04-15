@@ -128,7 +128,7 @@ class MyVbus extends utils.Adapter {
                         });
                         this.log.info('TCP Connection selected');
                     } else {
-                        this.log.warn('host-address not valid. Should be IP-address or FQDN');
+                        this.log.warn('Host-address not valid. Should be IP-address or FQDN');
                     }
                     break;
 
@@ -151,7 +151,7 @@ class MyVbus extends utils.Adapter {
                         });
                         this.log.info('TCP Connection selected');
                     } else {
-                        this.log.warn('host-address not valid. Should be IP-address or FQDN');
+                        this.log.warn('Host-address not valid. Should be IP-address or FQDN');
                     }
                     break;
 
@@ -172,29 +172,30 @@ class MyVbus extends utils.Adapter {
                             this.log.info('TCP Connection selected');
                         }
                     } else {
-                        this.log.warn('url not valid.');
+                        this.log.warn('Host-address not valid. Should be IP-address or FQDN');
                     }
                     break;
 
                 case 'dl3':
-                    if (connectionIdentifier.match(urlformat)) {
+                    if (connectionIdentifier.match(ipformat) || connectionIdentifier.match(fqdnformat)) {
                         if (connectionIdentifier.match(vbusioformat)) {
-                            ctx.connection = new vbus.TcpConnection({
-                                host: connectionIdentifier,
-                                password: vbusPassword,
-                                channel: vbusChannel
-                            });
-                            this.log.info('TCP Connection selected');
-                        } else {
                             ctx.connection = new vbus.TcpConnection({
                                 host: connectionIdentifier,
                                 password: vbusPassword,
                                 viaTag: vbusViaTag,
                                 channel: vbusChannel
                             });
+                            this.log.info('VBus.net Connection via ' + vbusViaTag + ' selected');
+                        } else {
+                            ctx.connection = new vbus.TcpConnection({
+                                host: connectionIdentifier,
+                                password: vbusPassword,
+                                channel: vbusChannel
+                            });
+                            this.log.info('TCP Connection selected');
                         }
                     } else {
-                        this.log.warn('url not valid.');
+                        this.log.warn('Host-address not valid. Should be IP-address or FQDN');
                     }
             }
 
