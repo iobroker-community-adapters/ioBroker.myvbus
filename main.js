@@ -113,7 +113,7 @@ class MyVbus extends utils.Adapter {
  
             const ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
             const serialformat = /^(COM|com)[0-9][0-9]?$|^\/dev\/tty.*$/;
-            const vbusioformat = /.vbus.io|.vbus.net$/;
+            const vbusioformat = /vbus.io|vbus.net$/;
             const urlformat = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
             const fqdnformat = /^(?!:\/\/)(?=.{1,255}$)((.{1,63}\.){1,127}(?![0-9]*$)[a-z0-9-]+\.?)$/;
 
@@ -156,19 +156,20 @@ class MyVbus extends utils.Adapter {
                     break;
 
                 case 'dl2':
-                    if (connectionIdentifier.match(urlformat)) {
+                    if (connectionIdentifier.match(ipformat) || connectionIdentifier.match(fqdnformat)) {
                         if (connectionIdentifier.match(vbusioformat)) {
-                            ctx.connection = new vbus.TcpConnection({
-                                host: connectionIdentifier,
-                                password: vbusPassword
-                            });
-                            this.log.info('TCP Connection selected');
-                        } else {
                             ctx.connection = new vbus.TcpConnection({
                                 host: connectionIdentifier,
                                 password: vbusPassword,
                                 viaTag: vbusViaTag
                             });
+                            this.log.info('VBus.net Connection via ' + vbusViaTag + ' selected');
+                        } else {
+                            ctx.connection = new vbus.TcpConnection({
+                                host: connectionIdentifier,
+                                password: vbusPassword
+                            });
+                            this.log.info('TCP Connection selected');
                         }
                     } else {
                         this.log.warn('url not valid.');
