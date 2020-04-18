@@ -50,7 +50,7 @@ class MyVbus extends utils.Adapter {
             await this.getForeignObjectAsync('system.config').then(sysConf => {
                 //this.log.info(JSON.stringify(sysConf));
                 if (sysConf) {
-                    // Get propper file of system language to avoid errors
+                    // Get proper file of system language to avoid errors
                     language = sysConf.common.language;
                     if (!(language == 'en' || language == 'de' || language == 'fr')) {
                         language = 'en';
@@ -63,6 +63,9 @@ class MyVbus extends utils.Adapter {
                 this.log.info(JSON.stringify(err));
             });
 
+            // The adapters config (in the instance object everything under the attribute "native") is accessible via
+            // this.config:
+
             const connectionDevice = this.config.connectionDevice;
             const connectionIdentifier = this.config.connectionIdentifier;
             const connectionPort = this.config.connectionPort;
@@ -72,9 +75,6 @@ class MyVbus extends utils.Adapter {
             const vbusViaTag = this.config.vbusViaTag;
             const vbusInterval = this.config.vbusInterval;
             let forceReInit = this.config.forceReInit;
-
-            // The adapters config (in the instance object everything under the attribute "native") is accessible via
-            // this.config:
 
             this.log.info(`Language: ${language}`);
             this.log.info(`Connection Type: ${connectionDevice}`);
@@ -229,11 +229,12 @@ class MyVbus extends utils.Adapter {
                     } else {
                         hasSettled = true;
                         if (forceReInit) {
+                            this.config.forceReInit = false; /*
                             this.extendForeignObject('system.adapter.' + this.namespace, {
                                 native: {
                                     forceReInit: false
                                 }
-                            }); 
+                            });*/ 
                             forceReInit = false;
                         }
                     }
