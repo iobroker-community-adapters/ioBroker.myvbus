@@ -138,7 +138,11 @@ class MyVbus extends utils.Adapter {
                             path: connectionIdentifier
                         });
                         this.log.info('Serial Connection selected');
-                        this.config.connectionDevice = 'lan';
+                        this.extendForeignObject('system.adapter.' + this.namespace, {
+                            native: {
+                                connectionDevice: 'lan'
+                            }
+                        }); 
                     } else {
                         this.log.warn('Serial port ID not valid. Should be like /dev/tty.usbserial or COM9');
                     }
@@ -230,7 +234,6 @@ class MyVbus extends utils.Adapter {
                     } else {
                         hasSettled = true;
                         if (forceReInit) {
-                            //this.config.forceReInit = false; 
                             this.extendForeignObject('system.adapter.' + this.namespace, {
                                 native: {
                                     forceReInit: false
