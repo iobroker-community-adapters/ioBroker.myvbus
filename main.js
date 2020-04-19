@@ -140,7 +140,7 @@ class MyVbus extends utils.Adapter {
                         this.log.info('Serial Connection selected');
                         this.extendForeignObject('system.adapter.' + this.namespace, {
                             native: {
-                                connectionDevice: 'lan'
+                                connectionDevice: 'serial'
                             }
                         }); 
                     } else {
