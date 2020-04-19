@@ -73,7 +73,7 @@ class MyVbus extends utils.Adapter {
             let vbusInterval;
             let forceReInit;
 
-            await this.getObjectAsync('system.adapter.' + this.namespace).then(conf => {
+            await this.getForeignObjectAsync('system.adapter.' + this.namespace).then(conf => {
                 if (conf && conf.native) {
                     // Get proper file of system language to avoid errors
                     connectionDevice = conf.native.connectionDevice;
