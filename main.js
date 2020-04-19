@@ -73,7 +73,7 @@ class MyVbus extends utils.Adapter {
             let vbusInterval;
             let forceReInit;
 
-            await this.getForeignObjectAsync('system.adapter.' + this.namespace).then(conf => {
+            await this.getObjectAsync('system.adapter.' + this.namespace).then(conf => {
                 if (conf && conf.native) {
                     // Get proper file of system language to avoid errors
                     connectionDevice = conf.native.connectionDevice;
@@ -85,7 +85,7 @@ class MyVbus extends utils.Adapter {
                     vbusViaTag = conf.native.vbusViaTag;
                     vbusInterval = conf.native.vbusInterval;
                     forceReInit = conf.native.forceReInit;
-                } else {
+                } /*else {
                     connectionDevice = this.config.connectionDevice;
                     connectionIdentifier = this.config.connectionIdentifier;
                     connectionPort = this.config.connectionPort;
@@ -95,7 +95,7 @@ class MyVbus extends utils.Adapter {
                     vbusViaTag = this.config.vbusViaTag;
                     vbusInterval = this.config.vbusInterval;
                     forceReInit = this.config.forceReInit;
-                }
+                }*/
             }).catch(err => {
                 this.log.info(JSON.stringify(err));
             });
