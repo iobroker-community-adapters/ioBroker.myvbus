@@ -41,14 +41,13 @@ class MyVbus extends utils.Adapter {
     async onReady() {
         try {
             // Initialize adapter here
-            // this.log.info("ctx connect content : " + JSON.stringify(ctx));
+
             // Reset the connection indicator during startup
             this.setState('info.connection', false, true);
 
+            // Get system language
             let language = '';
-
             await this.getForeignObjectAsync('system.config').then(sysConf => {
-                //this.log.info(JSON.stringify(sysConf));
                 if (sysConf) {
                     // Get proper file of system language to avoid errors
                     language = sysConf.common.language;
@@ -58,14 +57,49 @@ class MyVbus extends utils.Adapter {
                 } else {
                     language = 'en';
                 }
-                //this.log.info('System Language = ' + language);
             }).catch(err => {
                 this.log.info(JSON.stringify(err));
             });
 
             // The adapters config (in the instance object everything under the attribute "native") is accessible via
             // this.config:
+            let connectionDevice;
+            let connectionIdentifier;
+            let connectionPort;
+            let vbusPassword;
+            let vbusChannel;
+            let vbusDataOnly;
+            let vbusViaTag;
+            let vbusInterval;
+            let forceReInit;
 
+            await this.getForeignObjectAsync('system.adapter.' + this.namespace).then(conf => {
+                if (conf && conf.native) {
+                    // Get proper file of system language to avoid errors
+                    connectionDevice = conf.native.connectionDevice;
+                    connectionIdentifier = conf.native.connectionIdentifier;
+                    connectionPort = conf.native.connectionPort;
+                    vbusPassword = conf.native.vbusPassword;
+                    vbusChannel = conf.native.vbusChannel;
+                    vbusDataOnly = conf.native.vbusDataOnly;
+                    vbusViaTag = conf.native.vbusViaTag;
+                    vbusInterval = conf.native.vbusInterval;
+                    forceReInit = conf.native.forceReInit;
+                } else {
+                    connectionDevice = this.config.connectionDevice;
+                    connectionIdentifier = this.config.connectionIdentifier;
+                    connectionPort = this.config.connectionPort;
+                    vbusPassword = this.config.vbusPassword;
+                    vbusChannel = this.config.vbusChannel;
+                    vbusDataOnly = this.config.vbusDataOnly;
+                    vbusViaTag = this.config.vbusViaTag;
+                    vbusInterval = this.config.vbusInterval;
+                    forceReInit = this.config.forceReInit;
+                }
+            }).catch(err => {
+                this.log.info(JSON.stringify(err));
+            });
+/*
             const connectionDevice = this.config.connectionDevice;
             const connectionIdentifier = this.config.connectionIdentifier;
             const connectionPort = this.config.connectionPort;
@@ -75,7 +109,7 @@ class MyVbus extends utils.Adapter {
             const vbusViaTag = this.config.vbusViaTag;
             const vbusInterval = this.config.vbusInterval;
             let forceReInit = this.config.forceReInit;
-
+*/
             this.log.info(`Language: ${language}`);
             this.log.info(`Connection Type: ${connectionDevice}`);
             this.log.info(`Connection Identifier: ${connectionIdentifier}`);
