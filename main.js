@@ -43,7 +43,7 @@ class MyVbus extends utils.Adapter {
             // Initialize adapter here
 
             // Reset the connection indicator during startup
-            this.setState('info.connection', false, true);
+            await this.setStateAsync('info.connection', false, true);
 
             // Get system language
             let language = '';
@@ -102,7 +102,7 @@ class MyVbus extends utils.Adapter {
 
             } else {
                 this.log.info('*** Adapter deactivated, credentials missing in Adaptper Settings !!!  ***');
-                this.setForeignState('system.adapter.' + this.namespace + '.alive', false);
+                await this.setForeignStateAsync('system.adapter.' + this.namespace + '.alive', false);
             }
             
             // in this vbus adapter all states changes inside the adapters namespace are subscribed
@@ -244,7 +244,7 @@ class MyVbus extends utils.Adapter {
             this.log.info('Wait for Connection...');
             await ctx.connection.connect();
             this.log.info('Connection established!');
-            this.setState('info.connection', true, true);
+            await this.setStateAsync('info.connection', true, true);
             ctx.hsc.startTimer();
 
             ctx.hsc.on('headerSet', () => {
