@@ -124,7 +124,7 @@ class MyVbus extends utils.Adapter {
                             port: connectionPort,
                             password: vbusPassword
                         });
-                        this.log.info('TCP Connection selected');
+                        this.log.info('TCP Connection to ${connectionIdentifier} selected');
                     } else {
                         this.log.warn('Host-address not valid. Should be IP-address or FQDN');
                     }
@@ -147,7 +147,7 @@ class MyVbus extends utils.Adapter {
                             host: connectionIdentifier,
                             rawVBusDataOnly: vbusDataOnly
                         });
-                        this.log.info('TCP Connection selected');
+                        this.log.info('TCP Connection to ${connectionIdentifier} selected');
                     } else {
                         this.log.warn('Host-address not valid. Should be IP-address or FQDN');
                     }
@@ -167,7 +167,7 @@ class MyVbus extends utils.Adapter {
                                 host: connectionIdentifier,
                                 password: vbusPassword
                             });
-                            this.log.info('TCP Connection selected');
+                            this.log.info('TCP Connection to ${connectionIdentifier} selected');
                         }
                     } else {
                         this.log.warn('Host-address not valid. Should be IP-address or FQDN');
@@ -190,7 +190,7 @@ class MyVbus extends utils.Adapter {
                                 password: vbusPassword,
                                 channel: vbusChannel
                             });
-                            this.log.info('TCP Connection selected');
+                            this.log.info('TCP Connection to ${connectionIdentifier} selected');
                         }
                     } else {
                         this.log.warn('Host-address not valid. Should be IP-address or FQDN');
