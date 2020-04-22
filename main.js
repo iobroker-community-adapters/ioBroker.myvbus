@@ -135,7 +135,7 @@ class MyVbus extends utils.Adapter {
                         ctx.connection = new vbus.SerialConnection({
                             path: connectionIdentifier
                         });
-                        this.log.info('Serial Connection selected');
+                        this.log.info('Serial Connection on ' + connectionIdentifier + ' selected');
                     } else {
                         this.log.warn('Serial port ID not valid. Should be like /dev/tty.usbserial or COM9');
                     }
