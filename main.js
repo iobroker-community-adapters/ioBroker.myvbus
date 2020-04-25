@@ -85,7 +85,7 @@ class MyVbus extends utils.Adapter {
             this.log.debug(`Force ReInit: ${forceReInit}`);
 
             // Check if credentials are not empty and decrypt stored password
-            if (vbusPassword && vbusPassword !== '' && !(connectionDevice == 'serial' || connectionDevice == 'langw') ) {
+            if (vbusPassword && vbusPassword !== '' ) {
                 await this.getForeignObjectAsync('system.config').then(obj => {
                     if (obj && obj.native && obj.native.secret) {
                         //noinspection JSUnresolvedVariable
