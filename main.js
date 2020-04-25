@@ -74,15 +74,15 @@ class MyVbus extends utils.Adapter {
             const vbusInterval = this.config.vbusInterval;
             let forceReInit = this.config.forceReInit;
 
-            this.log.info(`Language: ${language}`);
-            this.log.info(`Connection Type: ${connectionDevice}`);
-            this.log.info(`Connection Identifier: ${connectionIdentifier}`);
-            this.log.info(`Connection Port: ${connectionPort}`);
-            this.log.info(`VBus Password: ${vbusPassword}`);
-            this.log.info(`VBus Channel: ${vbusChannel}`);
-            this.log.info(`VBus Via Tag: ${vbusViaTag}`);
-            this.log.info(`VBus Interval: ${vbusInterval}`);
-            this.log.info(`Force ReInit: ${forceReInit}`);
+            this.log.debug(`Language: ${language}`);
+            this.log.debug(`Connection Type: ${connectionDevice}`);
+            this.log.debug(`Connection Identifier: ${connectionIdentifier}`);
+            this.log.debug(`Connection Port: ${connectionPort}`);
+            this.log.debug(`VBus Password: ${vbusPassword}`);
+            this.log.debug(`VBus Channel: ${vbusChannel}`);
+            this.log.debug(`VBus Via Tag: ${vbusViaTag}`);
+            this.log.debug(`VBus Interval: ${vbusInterval}`);
+            this.log.debug(`Force ReInit: ${forceReInit}`);
 
             // Check if credentials are not empty and decrypt stored password
             if (vbusPassword && vbusPassword !== '') {
@@ -97,11 +97,11 @@ class MyVbus extends utils.Adapter {
                         //this.log.info(`VBus Password decrypted: ${vbusPassword}`);
                     }
                 }).catch(err => {
-                    this.log.info(JSON.stringify(err));
+                    this.log.error(JSON.stringify(err));
                 });
 
             } else {
-                this.log.info('*** Adapter deactivated, credentials missing in Adaptper Settings !!!  ***');
+                this.log.error('*** Credentials missing in Adaptper Settings, Adapter deactivated !!! ***');
                 await this.setForeignStateAsync('system.adapter.' + this.namespace + '.alive', false);
             }
             
