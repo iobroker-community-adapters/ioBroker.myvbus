@@ -101,8 +101,8 @@ class MyVbus extends utils.Adapter {
                 });
 
             } else {
-                this.log.error('*** Credentials missing in Adaptper Settings, Adapter deactivated !!! ***');
-                await this.setForeignStateAsync('system.adapter.' + this.namespace + '.alive', false);
+                this.log.error('*** Credentials missing in Adapter Settings, Adapter deactivated !!! ***');
+                this.setForeignState('system.adapter.' + this.namespace + '.alive', false);
             }
             
             // in this vbus adapter all states changes inside the adapters namespace are subscribed
