@@ -32,22 +32,22 @@ This adapter connects ioBroker to various VBus-based devices using resol-vbus, a
 
 ## Configuration hints
 
-- The default setting for the connection type is VBus/USB, but it must be explicitly selected even for VBus/USB, otherwise no connection will be established.
-- The correct settings for direct LAN access for VBus/LAN, DL3, DL2, KM2 are:
-  - Connection type: VBus/LAN or KM2 or DL2 or DL3
-  - Connection identifier: IP address or FullyQualifiedHostName (e.g. host1.example.com)
-  - VBus password: YourVBusPassword (default: vbus)
-  - Connection port: Default setting 7053 should not be changed
-  - DL3 channel: Only relevant for DL3 (values 1-6, channel 0 cannot be read out)
-  - Update interval: time between updates of the recorded values (default 30s)
-- The correct settings for the DL3, DL2, KM2 access via VBus.net are:
-  - Connection type: DL3 or DL2 or KM2
-  - Connection identifier: vbus.net (or vbus.io) - both without http:// and Via identifier!
-  - Connection port: Default setting 7053 should not be changed
-  - VBus password: YourVBusPassword (default: vbus)
-  - DL3 channel: Only relevant for DL3 (values: 1-6, channel 0 cannot be read out)
-  - Via identifier: d1234567890 - without http:// before or .vbus.io behind
-  - Update interval: time between the update of the recorded values (default 30s)
+* The default setting for the connection type is VBus/USB, but it must be explicitly selected even for VBus/USB, otherwise no connection will be established.
+* The correct settings for direct LAN access for VBus/LAN, DL3, DL2, KM2 are:
+  * Connection type: VBus/LAN or KM2 or DL2 or DL3
+  * Connection identifier: IP address or FullyQualifiedHostName (e.g. host1.example.com)
+  * VBus password: YourVBusPassword (default: vbus)
+  * Connection port: Default setting 7053 should not be changed
+  * DL3 channel: Only relevant for DL3 (values 1-6, channel 0 cannot be read out)
+  * Update interval: time between updates of the recorded values (default 30s)
+* The correct settings for the DL3, DL2, KM2 access via VBus.net are:
+  * Connection type: DL3 or DL2 or KM2
+  * Connection identifier: vbus.net (or vbus.io) - both without http:// and Via identifier!
+  * Connection port: Default setting 7053 should not be changed
+  * VBus password: YourVBusPassword (default: vbus)
+  * DL3 channel: Only relevant for DL3 (values: 1-6, channel 0 cannot be read out)
+  * Via identifier: d1234567890 - without http:// before or .vbus.io behind
+  * Update interval: time between the update of the recorded values (default 30s)
 
 ## Changelog
 
