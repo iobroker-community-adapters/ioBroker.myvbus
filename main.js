@@ -58,7 +58,7 @@ class MyVbus extends utils.Adapter {
                     language = 'en';
                 }
             }).catch(err => {
-                this.log.info(JSON.stringify(err));
+                this.log.error(JSON.stringify(err));
             });
 
             // The adapters config (in the instance object everything under the attribute "native") is accessible via
@@ -85,7 +85,7 @@ class MyVbus extends utils.Adapter {
             this.log.debug(`Force ReInit: ${forceReInit}`);
 
             // Check if credentials are not empty and decrypt stored password
-            if (vbusPassword && vbusPassword !== '') {
+            if (vbusPassword && vbusPassword !== '' && !(connectionDevice == 'serial' || connectionDevice == 'langw') ) {
                 await this.getForeignObjectAsync('system.config').then(obj => {
                     if (obj && obj.native && obj.native.secret) {
                         //noinspection JSUnresolvedVariable
@@ -101,8 +101,8 @@ class MyVbus extends utils.Adapter {
                 });
 
             } else {
-                this.log.error('*** Credentials missing in Adapter Settings, Adapter deactivated !!! ***');
-                this.setForeignState('system.adapter.' + this.namespace + '.alive', false);
+                this.log.error('[Credentials] error: Password missing or empty in Adapter Settings');
+                //this.setForeignState('system.adapter.' + this.namespace + '.alive', false);
             }
             
             // in this vbus adapter all states changes inside the adapters namespace are subscribed
