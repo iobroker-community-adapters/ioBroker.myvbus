@@ -145,6 +145,7 @@ class MyVbus extends utils.Adapter {
                     if (connectionIdentifier.match(ipformat) || connectionIdentifier.match(fqdnformat)) {
                         ctx.connection = new vbus.TcpConnection({
                             host: connectionIdentifier,
+                            port: connectionPort,
                             rawVBusDataOnly: vbusDataOnly
                         });
                         this.log.info('TCP Connection to ' + connectionIdentifier + ' selected');
@@ -158,6 +159,7 @@ class MyVbus extends utils.Adapter {
                         if (connectionIdentifier.match(vbusioformat)) {
                             ctx.connection = new vbus.TcpConnection({
                                 host: connectionIdentifier,
+                                port: connectionPort,
                                 password: vbusPassword,
                                 viaTag: vbusViaTag
                             });
@@ -165,6 +167,7 @@ class MyVbus extends utils.Adapter {
                         } else {
                             ctx.connection = new vbus.TcpConnection({
                                 host: connectionIdentifier,
+                                port: connectionPort,
                                 password: vbusPassword
                             });
                             this.log.info('TCP Connection to ' + connectionIdentifier + ' selected');
@@ -179,6 +182,7 @@ class MyVbus extends utils.Adapter {
                         if (connectionIdentifier.match(vbusioformat)) {
                             ctx.connection = new vbus.TcpConnection({
                                 host: connectionIdentifier,
+                                port: connectionPort,
                                 password: vbusPassword,
                                 viaTag: vbusViaTag,
                                 channel: vbusChannel
@@ -187,6 +191,7 @@ class MyVbus extends utils.Adapter {
                         } else {
                             ctx.connection = new vbus.TcpConnection({
                                 host: connectionIdentifier,
+                                port: connectionPort,
                                 password: vbusPassword,
                                 channel: vbusChannel
                             });
