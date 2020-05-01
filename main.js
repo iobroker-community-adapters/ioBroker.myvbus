@@ -232,11 +232,11 @@ class MyVbus extends utils.Adapter {
                     } else {
                         hasSettled = true;
                         if (forceReInit) {
-                            /*this.extendForeignObject('system.adapter.' + this.namespace, {
+                            this.extendForeignObject('system.adapter.' + this.namespace, {
                                 native: {
                                     forceReInit: false
                                 }
-                            }); */
+                            });
                             forceReInit = false;
                         }
                     }
