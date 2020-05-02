@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "myvbus",
-        "version": "0.0.3",
+        "version": "0.0.4",
         "news": {
+            "0.0.4": {
+                "en": "alpha 4 release",
+                "de": "Alpha 4 Release",
+                "ru": "альфа 4 релиз",
+                "pt": "liberação alfa 4",
+                "nl": "alpha 4 release",
+                "fr": "version alpha 4",
+                "it": "versione alpha 4",
+                "es": "lanzamiento alpha 4",
+                "pl": "wydanie alfa 4",
+                "zh-cn": "alpha 4发布"
+            },           
             "0.0.3": {
                 "en": "alpha 3 release",
                 "de": "Alpha 3 Release",
