@@ -275,8 +275,10 @@ class MyVbus extends utils.Adapter {
                     const deviceId = item.deviceId.replace(/_/g, '');
                     const channelId = deviceId + '.' + item.addressId;
                     const objectId = channelId + '.' + item.id.replace(/_/g, '');
-                    const value = item.rawValue.toFixed(item.precision)
-
+                    const noneUnit = spec.getUnitById('None');
+                    const numberType = spec.getTypeById('Number');
+                    const numberValue = spec.formatTextValueFromRawValueInternal(item.rawValue, noneUnit, numberType, item.precision, noneUnit);
+                    const value = +numberValue;
                     if (forceReInit) {
                         this.initDevice(deviceId, channelId, objectId, item);
                     }
