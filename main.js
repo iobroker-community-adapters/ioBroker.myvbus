@@ -13,7 +13,6 @@ const vbus = require('resol-vbus');
 const _ = require('lodash');
 // Variable definitions
 
-const spec = vbus.Specification.getDefaultSpecification();
 const ctx = {
     headerSet: vbus.HeaderSet(),
     hsc: vbus.HeaderSetConsolidator(),
@@ -60,7 +59,9 @@ class MyVbus extends utils.Adapter {
             }).catch(err => {
                 this.log.error(JSON.stringify(err));
             });
-
+            const spec = new vbus.Specification({
+                language: language
+            });
             // The adapters config (in the instance object everything under the attribute "native") is accessible via
             // this.config:
  
