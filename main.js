@@ -267,7 +267,7 @@ class MyVbus extends utils.Adapter {
                         unitText: pf.packetFieldSpec.type.unit.unitText,
                         typeId: pf.packetFieldSpec.type.typeId,
                         precision: pf.packetFieldSpec.type.precision,
-                        rootTypeId: pf.packetFieldSpec.type.rootTypeId
+                        rootTypeId: pf.packetFieldSpec.type.rootTypeId,
                     };
                 });
                 //this.log.info('received data: ' + JSON.stringify(data));
