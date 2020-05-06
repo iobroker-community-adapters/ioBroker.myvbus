@@ -256,17 +256,17 @@ class MyVbus extends utils.Adapter {
             ctx.hsc.on('headerSet', () => {
                 const packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
                 const data = _.map(packetFields, function (pf) {
-                    const precision = pf.packetFieldSpec.type.precision;
                     return {
                         id: pf.id,
                         name: _.get(pf, ['packetFieldSpec', 'name', language]),
-                        value: pf.rawValue.toFixed(precision),
+                        rawValue: pf.rawValue,
                         deviceName: pf.packetSpec.sourceDevice.fullName,
                         deviceId: pf.packetSpec.sourceDevice.deviceId,
                         addressId: pf.packetSpec.sourceDevice.selfAddress,
                         unitId: pf.packetFieldSpec.type.unit.unitId,
                         unitText: pf.packetFieldSpec.type.unit.unitText,
                         typeId: pf.packetFieldSpec.type.typeId,
+                        precision: pf.packetFieldSpec.type.precision,
                         rootTypeId: pf.packetFieldSpec.type.rootTypeId
                     };
                 });
@@ -275,11 +275,12 @@ class MyVbus extends utils.Adapter {
                     const deviceId = item.deviceId.replace(/_/g, '');
                     const channelId = deviceId + '.' + item.addressId;
                     const objectId = channelId + '.' + item.id.replace(/_/g, '');
+                    const value = item.rawValue.toFixed(item.precision)
 
                     if (forceReInit) {
                         this.initDevice(deviceId, channelId, objectId, item);
                     }
-                    this.setState(objectId, item.value, true);
+                    this.setState(objectId, value, true);
                 });
             });
         } catch (error) {
