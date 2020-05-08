@@ -13,7 +13,6 @@ const vbus = require('resol-vbus');
 const _ = require('lodash');
 // Variable definitions
 
-const spec = vbus.Specification.getDefaultSpecification();
 const ctx = {
     headerSet: vbus.HeaderSet(),
     hsc: vbus.HeaderSetConsolidator(),
@@ -60,7 +59,9 @@ class MyVbus extends utils.Adapter {
             }).catch(err => {
                 this.log.error(JSON.stringify(err));
             });
-
+            const spec = new vbus.Specification({
+                language: language
+            });
             // The adapters config (in the instance object everything under the attribute "native") is accessible via
             // this.config:
  
@@ -255,18 +256,18 @@ class MyVbus extends utils.Adapter {
             ctx.hsc.on('headerSet', () => {
                 const packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
                 const data = _.map(packetFields, function (pf) {
-                    const precision = pf.packetFieldSpec.type.precision;
                     return {
                         id: pf.id,
                         name: _.get(pf, ['packetFieldSpec', 'name', language]),
-                        value: pf.rawValue.toFixed(precision),
+                        rawValue: pf.rawValue,
                         deviceName: pf.packetSpec.sourceDevice.fullName,
                         deviceId: pf.packetSpec.sourceDevice.deviceId,
                         addressId: pf.packetSpec.sourceDevice.selfAddress,
                         unitId: pf.packetFieldSpec.type.unit.unitId,
                         unitText: pf.packetFieldSpec.type.unit.unitText,
                         typeId: pf.packetFieldSpec.type.typeId,
-                        rootTypeId: pf.packetFieldSpec.type.rootTypeId
+                        precision: pf.packetFieldSpec.type.precision,
+                        rootTypeId: pf.packetFieldSpec.type.rootTypeId,
                     };
                 });
                 //this.log.info('received data: ' + JSON.stringify(data));
@@ -274,11 +275,13 @@ class MyVbus extends utils.Adapter {
                     const deviceId = item.deviceId.replace(/_/g, '');
                     const channelId = deviceId + '.' + item.addressId;
                     const objectId = channelId + '.' + item.id.replace(/_/g, '');
-
+                    const noneUnit = spec.getUnitById('None');
+                    const value = spec.formatTextValueFromRawValueInternal(item.rawValue, noneUnit, item.rootTypeId, item.precision, noneUnit);
+                   
                     if (forceReInit) {
                         this.initDevice(deviceId, channelId, objectId, item);
                     }
-                    this.setState(objectId, item.value, true);
+                    this.setState(objectId, value, true);
                 });
             });
         } catch (error) {
