@@ -268,6 +268,7 @@ class MyVbus extends utils.Adapter {
                         typeId: pf.packetFieldSpec.type.typeId,
                         precision: pf.packetFieldSpec.type.precision,
                         rootTypeId: pf.packetFieldSpec.type.rootTypeId,
+                        parts: pf.packetFieldSpec.parts,
                     };
                 });
                 //this.log.info('received data: ' + JSON.stringify(data));
@@ -302,11 +303,12 @@ class MyVbus extends utils.Adapter {
         await this.setObjectNotExistsAsync(channelId, {
             type: 'channel',
             common: {
-                name: channelId
+                name: channelId,
+                role: 'thermo'
             },
             native: {}
         });
-
+        const isBitField = ((item.parts.length == 1) && (item.parts[0].mask != 0xFF));
         const common = {
             name: item.name,
             type: 'number',
@@ -333,7 +335,13 @@ class MyVbus extends utils.Adapter {
                 common.role = 'value.power.generation';
                 break;
             case 'None':
-                common.role = 'value';
+                if (!isBitField) {
+                    common.role = 'value';
+                } else
+                {
+                    common.role = 'indicator.maintenance.alarm';
+                    common.type = 'boolean';
+                }
                 break;
             default:
                 common.role = 'value';
