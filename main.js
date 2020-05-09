@@ -282,7 +282,7 @@ class MyVbus extends utils.Adapter {
                     if (forceReInit) {
                         this.initDevice(deviceId, channelId, objectId, item);
                     }
-                    this.setState(objectId, +value, true);
+                    this.setState(objectId, value, true);
                 });
             });
         } catch (error) {
