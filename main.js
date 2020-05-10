@@ -336,9 +336,13 @@ class MyVbus extends utils.Adapter {
                 break;
             case 'None':
                 if (!isBitField) {
-                    common.role = 'value';
-                } else
-                {
+                    if (item.rootTypeId === 'Time' || item.rootTypeId === 'Weektime' || item.rootTypeId === 'DateTime') {
+                        common.role = 'value';
+                        common.type = 'string'; 
+                    } else {
+                        common.role = 'value';
+                    }
+                } else {
                     common.role = 'indicator.maintenance.alarm';
                     common.type = 'boolean';
                 }
