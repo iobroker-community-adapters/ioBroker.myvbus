@@ -276,9 +276,20 @@ class MyVbus extends utils.Adapter {
                     const deviceId = item.deviceId.replace(/_/g, '');
                     const channelId = deviceId + '.' + item.addressId;
                     const objectId = channelId + '.' + item.id.replace(/_/g, '');
-                    const noneUnit = spec.getUnitById('None');
-                    const value = spec.formatTextValueFromRawValueInternal(item.rawValue, noneUnit, item.rootTypeId, item.precision, noneUnit);
-                   
+                    let value;
+
+                    if ((item.rawValue === undefined) || (item.rawValue === null)) {
+                        value = 0;
+                    } else if (item.rootTypeId === 'Number') {
+                        value = item.rawValue.toFixed(item.precision);
+                    } else if (item.rootTypeId === 'Time') {
+                        value = spec.i18n.moment(item.rawValue * 60000).utc().format('HH:mm');
+                    } else if (item.rootTypeId === 'Weektime') {
+                        value = spec.i18n.moment((item.rawValue + 5760) * 60000).utc().format('dd,HH:mm');
+                    } else if (item.rootTypeId === 'DateTime') {
+                        value = spec.i18n.moment((item.rawValue + 978307200) * 1000).utc().format('L HH:mm:ss');
+                    }
+
                     if (forceReInit) {
                         this.initDevice(deviceId, channelId, objectId, item);
                     }
@@ -309,6 +320,7 @@ class MyVbus extends utils.Adapter {
             native: {}
         });
         const isBitField = ((item.parts.length == 1) && (item.parts[0].mask != 0xFF));
+        const isTimeField = ((item.rootTypeId === 'Time') || (item.rootTypeId === 'Weektime') || (item.rootTypeId === 'DateTime'));
         const common = {
             name: item.name,
             type: 'number',
@@ -336,7 +348,7 @@ class MyVbus extends utils.Adapter {
                 break;
             case 'None':
                 if (!isBitField) {
-                    if (item.rootTypeId === 'Time' || item.rootTypeId === 'Weektime' || item.rootTypeId === 'DateTime') {
+                    if (isTimeField) {
                         common.role = 'value';
                         common.type = 'string'; 
                     } else {
