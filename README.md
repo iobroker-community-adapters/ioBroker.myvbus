@@ -51,6 +51,10 @@ This adapter connects ioBroker to various VBus-based devices using resol-vbus, a
 
 ## Changelog
 
+### 0.0.5
+
+* (pdbjjens) alpha 5 release improved type and role mapping of adapter values
+
 ### 0.0.4
 
 * (pdbjjens) alpha 4 release updated dependency on resol-vbus library to 0.21.0
