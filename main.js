@@ -281,7 +281,7 @@ class MyVbus extends utils.Adapter {
                     if ((item.rawValue === undefined) || (item.rawValue === null)) {
                         value = 0;
                     } else if (item.rootTypeId === 'Number') {
-                        value = item.rawValue.toFixed(item.precision);
+                        value = +item.rawValue.toFixed(item.precision);
                     } else if (item.rootTypeId === 'Time') {
                         value = spec.i18n.moment(item.rawValue * 60000).utc().format('HH:mm');
                     } else if (item.rootTypeId === 'Weektime') {
