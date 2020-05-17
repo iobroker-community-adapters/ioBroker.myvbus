@@ -11,7 +11,7 @@
 
 [![NPM](https://nodei.co/npm/iobroker.myvbus.png?downloads=true)](https://nodei.co/npm/iobroker.myvbus/)
 
-**Tests:**: [![Travis-CI](http://img.shields.io/travis/iobroker-community-adapters/ioBroker.myvbus/master.svg)](https://travis-ci.org/iobroker-community-adapters/ioBroker.myvbus) [![Greenkeeper badge](https://badges.greenkeeper.io/iobroker-community-adapters/ioBroker.myvbus.svg)](https://greenkeeper.io/)
+**Tests:**: [![Travis-CI](http://img.shields.io/travis/iobroker-community-adapters/ioBroker.myvbus/master.svg)](https://travis-ci.org/iobroker-community-adapters/ioBroker.myvbus) 
 
 ## ioBroker Adapter for Resol VBus
 
