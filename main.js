@@ -205,6 +205,9 @@ class MyVbus extends utils.Adapter {
 
             ctx.connection.on('connectionState', (connectionState) => {
                 this.log.info('Connection state changed to ' + connectionState);
+                if (connectionState !== 'CONNECTED') {
+                    this.setStateAsync('info.connection', false, true);
+                };
             });
 
             ctx.hsc = new vbus.HeaderSetConsolidator({
@@ -271,7 +274,7 @@ class MyVbus extends utils.Adapter {
                         parts: pf.packetFieldSpec.parts,
                     };
                 });
-                //this.log.info('received data: ' + JSON.stringify(data));
+                this.log.debug('received data: ' + JSON.stringify(data));
                 _.forEach(data, (item) => {
                     const deviceId = item.deviceId.replace(/_/g, '');
                     const channelId = deviceId + '.' + item.addressId;
