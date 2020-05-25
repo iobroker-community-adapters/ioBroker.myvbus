@@ -204,8 +204,11 @@ class MyVbus extends utils.Adapter {
             }
 
             ctx.connection.on('connectionState', (connectionState) => {
-                this.log.info('Connection state changed to ' + connectionState);
-                if (connectionState !== 'CONNECTED') {
+                this.log.debug('Connection state changed to ' + connectionState);
+                if (connectionState === 'CONNECTED') {
+                    this.log.info('The Adapter is now connected to your Resol vBus hardware.');
+                    this.setStateAsync('info.connection', true, true);
+                }else {
                     this.setStateAsync('info.connection', false, true);
                 };
             });
@@ -252,8 +255,6 @@ class MyVbus extends utils.Adapter {
 
             this.log.info('Wait for Connection...');
             await ctx.connection.connect();
-            this.log.info('Connection established!');
-            await this.setStateAsync('info.connection', true, true);
             ctx.hsc.startTimer();
 
             ctx.hsc.on('headerSet', () => {
@@ -372,7 +373,6 @@ class MyVbus extends utils.Adapter {
             common: common,
             native: {}
         });
-
     }
 
     // Function to decrypt passwords
