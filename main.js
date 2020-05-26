@@ -206,7 +206,7 @@ class MyVbus extends utils.Adapter {
             ctx.connection.on('connectionState', (connectionState) => {
                 this.log.debug('Connection state changed to ' + connectionState);
                 if (connectionState === 'CONNECTED') {
-                    this.log.info('The Adapter is now connected to your Resol vBus hardware.');
+                    this.log.info('Connection established');
                     this.setStateAsync('info.connection', true, true);
                 }else {
                     this.setStateAsync('info.connection', false, true);
