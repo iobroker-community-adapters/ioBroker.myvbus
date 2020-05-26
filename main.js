@@ -204,7 +204,13 @@ class MyVbus extends utils.Adapter {
             }
 
             ctx.connection.on('connectionState', (connectionState) => {
-                this.log.info('Connection state changed to ' + connectionState);
+                this.log.debug('Connection state changed to ' + connectionState);
+                if (connectionState === 'CONNECTED') {
+                    this.log.info('Connection established');
+                    this.setStateAsync('info.connection', true, true);
+                }else {
+                    this.setStateAsync('info.connection', false, true);
+                };
             });
 
             ctx.hsc = new vbus.HeaderSetConsolidator({
@@ -249,8 +255,6 @@ class MyVbus extends utils.Adapter {
 
             this.log.info('Wait for Connection...');
             await ctx.connection.connect();
-            this.log.info('Connection established!');
-            await this.setStateAsync('info.connection', true, true);
             ctx.hsc.startTimer();
 
             ctx.hsc.on('headerSet', () => {
@@ -271,7 +275,7 @@ class MyVbus extends utils.Adapter {
                         parts: pf.packetFieldSpec.parts,
                     };
                 });
-                //this.log.info('received data: ' + JSON.stringify(data));
+                this.log.debug('received data: ' + JSON.stringify(data));
                 _.forEach(data, (item) => {
                     const deviceId = item.deviceId.replace(/_/g, '');
                     const channelId = deviceId + '.' + item.addressId;
@@ -369,7 +373,6 @@ class MyVbus extends utils.Adapter {
             common: common,
             native: {}
         });
-
     }
 
     // Function to decrypt passwords

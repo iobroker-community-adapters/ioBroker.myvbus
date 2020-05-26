@@ -1,4 +1,4 @@
-<html>
+    <html>
 
 <head>
 
@@ -37,67 +37,60 @@
 			return result;
 		}
 
-		function loadHelper(settings, onChange) {
-      // example: select elements with id=key and class=value and insert value
-			if (!settings) return;
-         		$('.value').each(function () {
-					var $key = $(this);
-					var id = $key.attr('id');
-					if (id === 'vbusPassword') {
-						settings[id] = decrypt(secret, settings[id]);
-					}
-					if ($key.attr('type') === 'checkbox') {
-					// do not call onChange direct, because onChange could expect some arguments
-						$key.prop('checked', settings[id]).change(function() {
-						onChange();
-					});
-					}	 else {
-					// do not call onChange direct, because onChange could expect some arguments
-						$key.val(settings[id]).change(function() {
-						onChange();
-					}).keyup(function() {
-						onChange();
-					});
-					}
-				});
-   			onChange(false);
-   			// function Materialize.updateTextFields(); to reinitialize all the Materialize labels on the page if you are dynamically adding inputs.
-        	M.updateTextFields();
-		}
-		// This will be called by the admin adapter when the settings page loads
-		function load(settings, onChange) {
-			// example: select elements with id=key and class=value and insert value
-			if (!settings) return;
-			socket.emit('getObject', 'system.config', function (err, obj) {
-             secret = (obj.native ? obj.native.secret : '') || 'Zgfr56gFe87jJOM';
-             loadHelper(settings, onChange);
-		   });
-		   
-			//onChange(false);
-			// reinitialize all the Materialize labels on the page if you are dynamically adding inputs:
-			//if (M) M.updateTextFields();
-		}
+        function load(settings, onChange) {
+            if (!settings) return;
+            $('.value').each(function () {
+                var $key = $(this);
+                var id = $key.attr('id');
 
-		// This will be called by the admin adapter when the user presses the save button
-		function save(callback) {
-         // example: select elements with class=value and build settings object
-         var obj = {};
-         $('.value').each(function () {
-             var $this = $(this);
-             var id = $this.attr('id');
-             if ($this.attr('type') === 'checkbox') {
-                 obj[id] = $this.prop('checked');
-             } else {
-                 var value = $this.val();
-                 if (id === 'vbusPassword') {
-                    value = encrypt(secret, value);
-                 }
-                 obj[id] = value;
+                if ($key.attr('type') === 'checkbox') {
+                    // do not call onChange direct, because onChange could expect some arguments
+                    $key.prop('checked', settings[id]).change(function () {
+                        onChange();
+                    });
+                } else {
+                    // do not call onChange direct, because onChange could expect some arguments
+                    $key.val(settings[id]).change(function () {
+                        onChange();
+                    }).keyup(function () {
+                        onChange();
+                    });
                 }
-         });
-  
-		callback(obj);
-		}
+            });
+            socket.emit('getObject', 'system.config', function (err, obj) {
+                secret = (obj.native ? obj.native.secret : '') || 'Zgfr56gFe87jJOM';
+                $key = $('#vbusPassword');
+                settings['vbusPassword'] = decrypt(secret, settings['vbusPassword']);
+                $key.val(settings['vbusPassword']).change(function () {
+                    onChange();
+                }).keyup(function () {
+                    onChange();
+                });
+            });
+
+            onChange(false);
+            // (re)initialize all the Materialize labels on the page
+            M.updateTextFields();
+        }
+
+        function save(callback) {
+            let obj = {};
+            $('.value').each(function () {
+                let $this = $(this);
+                let id = $this.attr('id');
+
+                if ($this.attr('type') === 'checkbox') {
+                    obj[id] = $this.prop('checked');
+                } else {
+                    let value = $this.val();
+                    if ( id === 'vbusPassword') {
+                        value = encrypt(secret, value);
+                    }
+                    obj[id] = value;
+                }
+            });
+            callback(obj);
+        }
 	</script>
 
 </head>
