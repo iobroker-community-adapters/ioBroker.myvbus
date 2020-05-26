@@ -59,7 +59,7 @@
             });
             socket.emit('getObject', 'system.config', function (err, obj) {
                 secret = (obj.native ? obj.native.secret : '') || 'Zgfr56gFe87jJOM';
-                $key = $('#Miele_pwd');
+                $key = $('#vbusPassword');
                 settings['vbusPassword'] = decrypt(secret, settings['vbusPassword']);
                 $key.val(settings['vbusPassword']).change(function () {
                     onChange();
