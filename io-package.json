@@ -140,7 +140,7 @@
         "connectionDevice": "",
         "connectionIdentifier": "",
         "connectionPort": 7053,
-        "vbusPassword": "vbus",
+        "vbusPassword": "",
         "vbusChannel": 1,
         "vbusDataOnly": false,
         "vbusViaTag": "",
