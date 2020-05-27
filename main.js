@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* jshint -W097 */// jshint strict:false
+/*jslint node: true */
 'use strict';
 
 /*
@@ -19,16 +22,16 @@ const ctx = {
     connection: vbus.Connection()
 };
 
+const adapterName = require('./package.json').name.split('.').pop();
+
 class MyVbus extends utils.Adapter {
 
     /**
      * @param {Partial<ioBroker.AdapterOptions>} [options={}]
      */
-    constructor(options) {
-        super({
-            ...options,
-            name: 'myvbus',
-        });
+     constructor(options) {
+        super({ ...options, name: adapterName });
+
         this.on('ready', this.onReady.bind(this));
         //this.on('objectChange', this.onObjectChange.bind(this));
         //this.on('stateChange', this.onStateChange.bind(this));
@@ -40,17 +43,13 @@ class MyVbus extends utils.Adapter {
     async onReady() {
         try {
             // Initialize adapter here
-
-            // Reset the connection indicator during startup
-            await this.setStateAsync('info.connection', false, true);
-
             // Get system language
             let language = '';
             await this.getForeignObjectAsync('system.config').then(sysConf => {
                 if (sysConf) {
                     // Get proper file of system language to avoid errors
                     language = sysConf.common.language;
-                    if (!(language == 'en' || language == 'de' || language == 'fr')) {
+                    if (!(language === 'en' || language === 'de' || language === 'fr')) {
                         language = 'en';
                     }
                 } else {
@@ -79,7 +78,7 @@ class MyVbus extends utils.Adapter {
             this.log.debug(`Connection Type: ${connectionDevice}`);
             this.log.debug(`Connection Identifier: ${connectionIdentifier}`);
             this.log.debug(`Connection Port: ${connectionPort}`);
-            this.log.debug(`VBus Password: ${vbusPassword}`);
+            this.log.debug(`VBus Password encrypted: ${vbusPassword}`);
             this.log.debug(`VBus Channel: ${vbusChannel}`);
             this.log.debug(`VBus Via Tag: ${vbusViaTag}`);
             this.log.debug(`VBus Interval: ${vbusInterval}`);
@@ -113,7 +112,7 @@ class MyVbus extends utils.Adapter {
             const ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
             const serialformat = /^(COM|com)[0-9][0-9]?$|^\/dev\/tty.*$/;
             const vbusioformat = /vbus.io|vbus.net$/;
-            const urlformat = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
+            // Currently unused: const urlformat = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
             const fqdnformat = /^(?!:\/\/)(?=.{1,255}$)((.{1,63}\.){1,127}(?![0-9]*$)[a-z0-9-]+\.?)$/;
 
 
@@ -210,7 +209,7 @@ class MyVbus extends utils.Adapter {
                     this.setStateAsync('info.connection', true, true);
                 }else {
                     this.setStateAsync('info.connection', false, true);
-                };
+                }
             });
 
             ctx.hsc = new vbus.HeaderSetConsolidator({
@@ -238,14 +237,6 @@ class MyVbus extends utils.Adapter {
                         settledCountdown -= 1;
                     } else {
                         hasSettled = true;
-                        if (forceReInit) {
-                            /* this.extendForeignObject('system.adapter.' + this.namespace, {
-                                native: {
-                                    forceReInit: false
-                                }
-                            }); */
-                            forceReInit = false;
-                        }
                     }
                 } else {
                     ctx.headerSet.addHeader(packet);
@@ -275,11 +266,37 @@ class MyVbus extends utils.Adapter {
                         parts: pf.packetFieldSpec.parts,
                     };
                 });
-                this.log.debug('received data: ' + JSON.stringify(data));
+                // create device
+                this.createOrExtendObject(data.deviceId, {
+                    type: 'device',
+                    common: {
+                        name: data.deviceName
+                    },
+                    native: {}
+                });
+                // create channel
+                this.createOrExtendObject(data.addressId, {
+                    type: 'channel',
+                    common: {
+                        name: data.deviceId + '.' + data.addressId
+                    },
+                    native: {}
+                });
+                // this.log.debug('received data: ' + JSON.stringify(data));
                 _.forEach(data, (item) => {
+                    this.log.debug('received data: ' + JSON.stringify(item));
                     const deviceId = item.deviceId.replace(/_/g, '');
                     const channelId = deviceId + '.' + item.addressId;
                     const objectId = channelId + '.' + item.id.replace(/_/g, '');
+                    const isBitField = ((item.parts.length === 1) && (item.parts[0].mask !== 0xFF));
+                    const isTimeField = ((item.rootTypeId === 'Time') || (item.rootTypeId === 'Weektime') || (item.rootTypeId === 'DateTime'));
+                    let common = {
+                        name: item.name,
+                        type: 'number',
+                        unit: item.unitText,
+                        read: true,
+                        write: false
+                    };
                     let value;
 
                     if ((item.rawValue === undefined) || (item.rawValue === null)) {
@@ -294,10 +311,45 @@ class MyVbus extends utils.Adapter {
                         value = spec.i18n.moment((item.rawValue + 978307200) * 1000).utc().format('L HH:mm:ss');
                     }
 
-                    if (forceReInit) {
-                        this.initDevice(deviceId, channelId, objectId, item);
+                    switch (item.unitId) {
+                        case 'DegreesCelsius':
+                            common.min = -100;
+                            common.max = +300;
+                            common.role = 'value.temperature';
+                            break;
+                        case 'Percent':
+                            common.min = 0;
+                            common.max = 100;
+                            common.role = 'level.volume';
+                            break;
+                        case 'Hours':
+                            common.role = 'value';
+                            break;
+                        case 'WattHours':
+                            common.role = 'value.power.generation';
+                            break;
+                        case 'None':
+                            if (!isBitField) {
+                                if (isTimeField) {
+                                    common.role = 'value';
+                                    common.type = 'string';
+                                } else {
+                                    common.role = 'value';
+                                }
+                            } else {
+                                common.role = 'indicator.maintenance.alarm';
+                                common.type = 'boolean';
+                                value=(value === 1);
+                            }
+                            break;
+                        default:
+                            common.role = 'value';
+                            break;
                     }
-                    this.setState(objectId, value, true);
+                    this.log.debug('objectId: [' + objectId +']');
+                    this.log.debug('Object: [' + JSON.stringify(common) +']');
+                    this.log.debug('value: [' + value +']');
+                    this.createOrExtendObject(objectId, {type: 'state', common}, value);
                 });
             });
         } catch (error) {
@@ -305,77 +357,19 @@ class MyVbus extends utils.Adapter {
         }
     }
 
-    async initDevice(deviceId, channelId, objectId, item) {
-
-        await this.setObjectNotExistsAsync(deviceId, {
-            type: 'device',
-            common: {
-                name: item.deviceName
-            },
-            native: {}
-        });
-
-        await this.setObjectNotExistsAsync(channelId, {
-            type: 'channel',
-            common: {
-                name: channelId,
-                role: 'thermo'
-            },
-            native: {}
-        });
-        const isBitField = ((item.parts.length == 1) && (item.parts[0].mask != 0xFF));
-        const isTimeField = ((item.rootTypeId === 'Time') || (item.rootTypeId === 'Weektime') || (item.rootTypeId === 'DateTime'));
-        const common = {
-            name: item.name,
-            type: 'number',
-            unit: item.unitText,
-            read: true,
-            write: false
-        };
-
-        switch (item.unitId) {
-            case 'DegreesCelsius':
-                common.min = -100;
-                common.max = +300;
-                common.role = 'value.temperature';
-                break;
-            case 'Percent':
-                common.min = 0;
-                common.max = 100;
-                common.role = 'level.volume';
-                break;
-            case 'Hours':
-                common.role = 'value';
-                break;
-            case 'WattHours':
-                common.role = 'value.power.generation';
-                break;
-            case 'None':
-                if (!isBitField) {
-                    if (isTimeField) {
-                        common.role = 'value';
-                        common.type = 'string'; 
-                    } else {
-                        common.role = 'value';
-                    }
-                } else {
-                    common.role = 'indicator.maintenance.alarm';
-                    common.type = 'boolean';
-                }
-                break;
-            default:
-                common.role = 'value';
-                break;
-        }
-
-        await this.setObjectNotExistsAsync(objectId, {
-            type: 'state',
-            common: common,
-            native: {}
+    createOrExtendObject(id, objData, value, callback) {
+        let self = this;
+        this.getObject(id, function (err, oldObj) {
+            if (!err && oldObj) {
+                self.extendObject(id, objData, callback);
+            } else {
+                self.setObjectNotExists(id, objData, callback);
+            }
+            self.setState(id, value);
         });
     }
 
-    // Function to decrypt passwords
+// Function to decrypt passwords
     decrypt(key, value) {
         let result = '';
         for (let i = 0; i < value.length; ++i) {
@@ -388,14 +382,12 @@ class MyVbus extends utils.Adapter {
     onUnload(callback) {
         try {
             ctx.connection.disconnect();
-            this.setState('info.connection', false, true);
             this.log.info('cleaned everything up...');
             callback();
         } catch (e) {
             callback();
         }
     }
-
 }
 
 // @ts-ignore parent is a valid property on module

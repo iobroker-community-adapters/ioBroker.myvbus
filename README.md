@@ -54,6 +54,8 @@ This adapter connects ioBroker to various VBus-based devices using resol-vbus, a
 * (grizzelbee) Fix: config page shows current settings now (not default anymore) **May raise the need to reenter the password!**
 * (grizzelbee) Fix: "Connected" state is updated correctly now if connection is disrupted.
 * (grizzelbee) Upd: Added Badge for latest version to readme
+* (grizzelbee) Fix: removed default password from config to ensure it's encrypted on first config
+* (grizzelbee) Fix: removed Force-ReInit - it's not needed
 
 
 ### 0.0.6
