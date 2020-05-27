@@ -6,12 +6,11 @@
 [![Downloads](https://img.shields.io/npm/dm/iobroker.myvbus.svg)](https://www.npmjs.com/package/iobroker.myvbus)
 ![Number of Installations (latest)](http://iobroker.live/badges/myvbus-installed.svg)
 ![Number of Installations (stable)](http://iobroker.live/badges/myvbus-stable.svg)
+[![NPM version](https://img.shields.io/npm/v/iobroker.myvbus.svg)](https://www.npmjs.com/package/iobroker.myvbus)
 [![Dependency Status](https://img.shields.io/david/iobroker-community-adapters/iobroker.myvbus.svg)](https://david-dm.org/iobroker-community-adapters/iobroker.myvbus)
 [![Known Vulnerabilities](https://snyk.io/test/github/iobroker-community-adapters/ioBroker.myvbus/badge.svg)](https://snyk.io/test/github/iobroker-community-adapters/ioBroker.myvbus)
-
+[![Travis-CI](http://img.shields.io/travis/iobroker-community-adapters/ioBroker.myvbus/master.svg)](https://travis-ci.org/iobroker-community-adapters/ioBroker.myvbus)
 [![NPM](https://nodei.co/npm/iobroker.myvbus.png?downloads=true)](https://nodei.co/npm/iobroker.myvbus/)
-
-**Tests:**: [![Travis-CI](http://img.shields.io/travis/iobroker-community-adapters/ioBroker.myvbus/master.svg)](https://travis-ci.org/iobroker-community-adapters/ioBroker.myvbus) 
 
 ## ioBroker Adapter for Resol VBus
 
@@ -50,6 +49,12 @@ This adapter connects ioBroker to various VBus-based devices using resol-vbus, a
   * Update interval: Time between the update of the measured values (default 30s)
 
 ## Changelog
+
+### 0.0.7
+* (grizzelbee) Fix: config page shows current settings now (not default anymore) **May raise the need to reenter the password!**
+* (grizzelbee) Fix: "Connected" state is updated correctly now if connection is disrupted.
+* (grizzelbee) Upd: Added Badge for latest version to readme
+
 
 ### 0.0.6
 
