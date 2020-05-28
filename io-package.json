@@ -114,10 +114,11 @@
             "zh-cn": "ioBroker VBUS Adapter"
         },
         "authors": [
-            "Author <jjensen@t-online.de>"
+            "pdbjjens <jjensen@t-online.de>"
         ],
         "contributors": [
-            "DutchmanNL"
+            "DutchmanNL",
+            "grizzelbee <hanjo@hingsen.de>"
         ],
         "keywords": [
             "ioBroker",
