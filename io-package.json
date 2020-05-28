@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "myvbus",
-        "version": "0.0.6",
+        "version": "0.0.7",
         "news": {
+            "0.0.7": {
+                "en": "Bugfixes and a few new features",
+                "de": "Bugfixes und ein paar neue Funktionen",
+                "ru": "Исправления и несколько новых функций",
+                "pt": "Correções de bugs e alguns novos recursos",
+                "nl": "Bugfixes en een paar nieuwe functies",
+                "fr": "Corrections de bugs et quelques nouvelles fonctionnalités",
+                "it": "Bugfix e alcune nuove funzionalità",
+                "es": "Corrección de errores y algunas características nuevas.",
+                "pl": "Poprawki błędów i kilka nowych funkcji",
+                "zh-cn": "错误修正和一些新功能"
+            },
             "0.0.6": {
                 "en": "alpha 6 release",
                 "de": "Alpha 6 Release",
@@ -14,7 +26,8 @@
                 "es": "lanzamiento alpha 6",
                 "pl": "wydanie alfa 6",
                 "zh-cn": "alpha 6发布"
-            },"0.0.5": {
+            },
+            "0.0.5": {
                 "en": "alpha 5 release",
                 "de": "Alpha 5 Release",
                 "ru": "альфа 5 релиз",
@@ -37,7 +50,7 @@
                 "es": "lanzamiento alpha 4",
                 "pl": "wydanie alfa 4",
                 "zh-cn": "alpha 4发布"
-            },           
+            },
             "0.0.3": {
                 "en": "alpha 3 release",
                 "de": "Alpha 3 Release",
@@ -49,7 +62,7 @@
                 "es": "lanzamiento alpha 3",
                 "pl": "wydanie alfa 3",
                 "zh-cn": "alpha 3发布"
-            },           
+            },
             "0.0.2": {
                 "en": "alpha 2 release",
                 "de": "Alpha 2 Release",
@@ -104,8 +117,8 @@
             "Author <jjensen@t-online.de>"
         ],
         "contributors": [
-			"DutchmanNL"
-		  ],
+            "DutchmanNL"
+        ],
         "keywords": [
             "ioBroker",
             "myvbus",
@@ -129,7 +142,7 @@
         "materializeTab": true,
         "supportCustoms": false,
         "connectionType": "local",
-        "dataSource":"push",
+        "dataSource": "push",
         "dependencies": [
             {
                 "js-controller": ">=1.4.2"
@@ -145,7 +158,7 @@
         "vbusDataOnly": false,
         "vbusViaTag": "",
         "vbusInterval": 30,
-        "forceReInit": true		
+        "forceReInit": true
     },
     "objects": [],
     "instanceObjects": [

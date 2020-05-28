@@ -1,10 +1,14 @@
 {
   "name": "iobroker.myvbus",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "ioBroker Adapter for Resol VBus",
   "author": {
     "name": "Jens-Peter Jensen",
     "email": "jjensen@t-online.de"
+  },
+  "contributor": {
+    "name": "grizzelbee",
+    "email": "hanjo@hingsen.de"
   },
   "homepage": "https://github.com/iobroker-community-adapters/ioBroker.myvbus",
   "license": "MIT",
