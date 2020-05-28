@@ -90,28 +90,28 @@
         },
         "title": "MyVBus",
         "titleLang": {
-            "en": "ioBroker VBUS Adapter",
-            "de": "ioBroker VBUS Adapter",
-            "ru": "ioBroker VBUS Adapter",
-            "pt": "ioBroker VBUS Adapter",
-            "nl": "ioBroker VBUS Adapter",
-            "fr": "ioBroker VBUS Adapter",
-            "it": "ioBroker VBUS Adapter",
-            "es": "ioBroker VBUS Adapter",
-            "pl": "ioBroker VBUS Adapter",
-            "zh-cn": "ioBroker VBUS Adapter"
+            "en": "ioBroker Resol VBUS Adapter",
+            "de": "ioBroker Resol VBUS Adapter",
+            "ru": "ioBroker Resol VBUS Adapter",
+            "pt": "ioBroker Resol VBUS Adapter",
+            "nl": "ioBroker Resol VBUS Adapter",
+            "fr": "ioBroker Resol VBUS Adapter",
+            "it": "ioBroker Resol VBUS Adapter",
+            "es": "ioBroker Resol VBUS Adapter",
+            "pl": "ioBroker Resol VBUS Adapter",
+            "zh-cn": "ioBroker Resol VBUS Adapter"
         },
         "desc": {
-            "en": "ioBroker VBUS Adapter",
-            "de": "ioBroker VBUS Adapter",
-            "ru": "ioBroker VBUS Adapter",
-            "pt": "ioBroker VBUS Adapter",
-            "nl": "ioBroker VBUS Adapter",
-            "fr": "ioBroker VBUS Adapter",
-            "it": "ioBroker VBUS Adapter",
-            "es": "ioBroker VBUS Adapter",
-            "pl": "ioBroker VBUS Adapter",
-            "zh-cn": "ioBroker VBUS Adapter"
+            "en": "ioBroker Resol VBUS Adapter",
+            "de": "ioBroker Resol VBUS Adapter",
+            "ru": "ioBroker Resol VBUS Adapter",
+            "pt": "ioBroker Resol VBUS Adapter",
+            "nl": "ioBroker Resol VBUS Adapter",
+            "fr": "ioBroker Resol VBUS Adapter",
+            "it": "ioBroker Resol VBUS Adapter",
+            "es": "ioBroker Resol VBUS Adapter",
+            "pl": "ioBroker Resol VBUS Adapter",
+            "zh-cn": "ioBroker Resol VBUS Adapter"
         },
         "authors": [
             "pdbjjens <jjensen@t-online.de>"
