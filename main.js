@@ -46,7 +46,12 @@ class MyVbus extends utils.Adapter {
     }
 
     async configIsValid(config) {
-        return ('' !== (config.vbusPassword) && ((config.connectionIdentifier.match(ipformat) || config.connectionIdentifier.match(fqdnformat))));
+        return ('' !== (config.vbusPassword) && (
+            (   config.connectionIdentifier.match(ipformat)     || config.connectionIdentifier.match(fqdnformat)
+             || config.connectionIdentifier.match(serialformat) || config.connectionIdentifier.match(vbusioformat)
+            )
+          )
+        );
     }
 
     async main() {
