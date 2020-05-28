@@ -50,7 +50,7 @@ This adapter connects ioBroker to various VBus-based devices using resol-vbus, a
 
 ## Changelog
 
-### 0.0.7
+### 0.9.0
 * (grizzelbee) Fix: config page shows current settings now (not default anymore) **May raise the need to reenter the password!**
 * (grizzelbee) Fix: "Connected" state is updated correctly now if connection is disrupted.
 * (grizzelbee) New: Added Badge for latest(npm) version to readme
