@@ -317,24 +317,25 @@ class MyVbus extends utils.Adapter {
                 });
 
                 this.log.debug('received data: ' + JSON.stringify(data));
+                if (data[1]){
+                    // create device
+                    this.createOrExtendObject(data[1].deviceId, {
+                        type: 'device',
+                        common: {
+                            name: data[1].deviceName
+                        },
+                        native: {}
+                    }, '');
 
-                // create device
-                this.createOrExtendObject(data[1].deviceId, {
-                    type: 'device',
-                    common: {
-                        name: data[1].deviceName
-                    },
-                    native: {}
-                }, '');
-
-                // create channel
-                this.createOrExtendObject(data[1].deviceId + '.' + data[1].addressId, {
-                    type: 'channel',
-                    common: {
-                        name: data[1].deviceId + '.' + data[1].addressId
-                    },
-                    native: {}
-                }, '');
+                    // create channel
+                    this.createOrExtendObject(data[1].deviceId + '.' + data[1].addressId, {
+                        type: 'channel',
+                        common: {
+                            name: data[1].deviceId + '.' + data[1].addressId
+                        },
+                        native: {}
+                    }, '');
+                }
                 // iterate over all data to create datapoints
                 _.forEach(data, (item) => {
                     this.log.debug('received item-data: ' + JSON.stringify(item));
