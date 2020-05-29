@@ -1,9 +1,9 @@
 {
     "common": {
         "name": "myvbus",
-        "version": "0.9.0",
+        "version": "0.1.0",
         "news": {
-            "0.9.0": {
+            "0.1.0": {
                 "en": "Bugfixes and a few new features",
                 "de": "Bugfixes und ein paar neue Funktionen",
                 "ru": "Исправления и несколько новых функций",
