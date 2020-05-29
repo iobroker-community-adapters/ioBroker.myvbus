@@ -55,13 +55,13 @@ class MyVbus extends utils.Adapter {
     }
 
     async main() {
-        let relayActive;
+        let relayActive = 'Relay X active';
+        let language = '';
 
         try {
             // Initialize adapter here
             // test whether config is valid. Terminate adapter if not, because it will crash with invalid config
             // Get system language
-            let language = '';
             await this.getForeignObjectAsync('system.config').then(sysConf => {
                 if (sysConf) {
                     // Get proper file of system language to avoid errors
@@ -74,8 +74,6 @@ class MyVbus extends utils.Adapter {
                 }
                 switch (language) {
                     case 'de': relayActive = "Relais X aktiv";
-                        break;
-                    case 'en': relayActive = "Relay X active";
                         break;
                     case 'fr': relayActive = "Relais X actif";
                         break;
