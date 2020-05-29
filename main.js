@@ -46,31 +46,71 @@ class MyVbus extends utils.Adapter {
     }
 
     async configIsValid(config) {
-        return ('' !== (config.vbusPassword) && (
-            (   config.connectionIdentifier.match(ipformat)     || config.connectionIdentifier.match(fqdnformat)
-             || config.connectionIdentifier.match(serialformat) || config.connectionIdentifier.match(vbusioformat)
-            )
-          )
-        );
+        let isValid = true;
+
+        function testSerialformat(self) {
+            if (!config.connectionIdentifier.match(serialformat)) {
+                self.log.warn('Serialformat is invalid! Please fix.');
+                isValid = false;
+            }
+        }
+
+        function testIPFormat(self) {
+            if (!config.connectionIdentifier.match(ipformat)) {
+                self.log.warn('IP-Format is invalid!');
+                isValid = false;
+            }
+        }
+
+        function testFQDNFormat(self) {
+            if (!config.connectionIdentifier.match(fqdnformat)) {
+                self.log.warn('FQDN-Format is invalid!');
+                isValid = false;
+            }
+        }
+
+        function testVBusIOFormat(self) {
+            if (!config.connectionIdentifier.match(vbusioformat)) {
+                self.log.warn('VBusIO-Format is invalid!');
+                isValid = false;
+            }
+        }
+
+        if ( ('' === config.vbusPassword) && !(config.connectionDevice==='serial' || config.connectionDevice==='langw')) {
+            this.log.warn('Password is missing!');
+            isValid = false;
+        }
+        if (config.connectionDevice==='serial') {
+            testSerialformat(this);
+        } else  if (config.connectionDevice==='lan' || config.connectionDevice==='langw' ) {
+                    if ( !(config.connectionIdentifier.match(ipformat) || config.connectionIdentifier.match(fqdnformat)) ) {
+                        testIPFormat(this);
+                        testFQDNFormat(this);
+                        this.log.warn('Config for LAN/LANGW is invalid! Please fix at least one of the connection identifiers.');
+                    }
+                } else  if (config.connectionDevice==='dl2' || config.connectionDevice==='dl3' ) {
+                            if ( !(config.connectionIdentifier.match(ipformat) || config.connectionIdentifier.match(fqdnformat) || config.connectionIdentifier.match(vbusioformat)) ) {
+                                testIPFormat(this);
+                                testFQDNFormat(this);
+                                testVBusIOFormat(this);
+                                this.log.warn('Config for KM2/DL2/DL3 is invalid! Please fix at least one of the connection identifiers.');
+                            }
+                        }
+        return isValid;
     }
 
     async main() {
         let relayActive = 'Relay X active';
-        let language = '';
+        let language    = 'en';
 
         try {
             // Initialize adapter here
             // test whether config is valid. Terminate adapter if not, because it will crash with invalid config
             // Get system language
             await this.getForeignObjectAsync('system.config').then(sysConf => {
-                if (sysConf) {
-                    // Get proper file of system language to avoid errors
+                if (sysConf && (sysConf.common.language === 'de' || sysConf.common.language === 'fr') ) {
+                    // switch language to a language supported by Resol-Lib (de, fr), or default to english
                     language = sysConf.common.language;
-                    if (!(language === 'en' || language === 'de' || language === 'fr')) {
-                        language = 'en';
-                    }
-                } else {
-                    language = 'en';
                 }
                 switch (language) {
                     case 'de': relayActive = "Relais X aktiv";
@@ -404,7 +444,7 @@ class MyVbus extends utils.Adapter {
             } else {
                 self.setObjectNotExists(id, objData, callback);
             }
-            self.setState(id, value);
+            self.setState(id, value, true);
         });
     }
 
