@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "myvbus",
-        "version": "0.0.6",
+        "version": "0.1.0",
         "news": {
+            "0.1.0": {
+                "en": "Bugfixes and a few new features",
+                "de": "Bugfixes und ein paar neue Funktionen",
+                "ru": "Исправления и несколько новых функций",
+                "pt": "Correções de bugs e alguns novos recursos",
+                "nl": "Bugfixes en een paar nieuwe functies",
+                "fr": "Corrections de bugs et quelques nouvelles fonctionnalités",
+                "it": "Bugfix e alcune nuove funzionalità",
+                "es": "Corrección de errores y algunas características nuevas.",
+                "pl": "Poprawki błędów i kilka nowych funkcji",
+                "zh-cn": "错误修正和一些新功能"
+            },
             "0.0.6": {
                 "en": "alpha 6 release",
                 "de": "Alpha 6 Release",
@@ -14,7 +26,8 @@
                 "es": "lanzamiento alpha 6",
                 "pl": "wydanie alfa 6",
                 "zh-cn": "alpha 6发布"
-            },"0.0.5": {
+            },
+            "0.0.5": {
                 "en": "alpha 5 release",
                 "de": "Alpha 5 Release",
                 "ru": "альфа 5 релиз",
@@ -37,7 +50,7 @@
                 "es": "lanzamiento alpha 4",
                 "pl": "wydanie alfa 4",
                 "zh-cn": "alpha 4发布"
-            },           
+            },
             "0.0.3": {
                 "en": "alpha 3 release",
                 "de": "Alpha 3 Release",
@@ -49,7 +62,7 @@
                 "es": "lanzamiento alpha 3",
                 "pl": "wydanie alfa 3",
                 "zh-cn": "alpha 3发布"
-            },           
+            },
             "0.0.2": {
                 "en": "alpha 2 release",
                 "de": "Alpha 2 Release",
@@ -77,35 +90,36 @@
         },
         "title": "MyVBus",
         "titleLang": {
-            "en": "ioBroker VBUS Adapter",
-            "de": "ioBroker VBUS Adapter",
-            "ru": "ioBroker VBUS Adapter",
-            "pt": "ioBroker VBUS Adapter",
-            "nl": "ioBroker VBUS Adapter",
-            "fr": "ioBroker VBUS Adapter",
-            "it": "ioBroker VBUS Adapter",
-            "es": "ioBroker VBUS Adapter",
-            "pl": "ioBroker VBUS Adapter",
-            "zh-cn": "ioBroker VBUS Adapter"
+            "en": "Resol VBUS Adapter",
+            "de": "Resol VBUS Adapter",
+            "ru": "Resol VBUS адаптер",
+            "pt": "Adaptador Resol VBUS",
+            "nl": "Resol VBUS-adapter",
+            "fr": "Resol VBUS Adapter",
+            "it": "Resol VBUS Adapter",
+            "es": "Adaptador Resol VBUS",
+            "pl": "Adapter Resol VBUS",
+            "zh-cn": "Resol VBUS适配器"
         },
         "desc": {
-            "en": "ioBroker VBUS Adapter",
-            "de": "ioBroker VBUS Adapter",
-            "ru": "ioBroker VBUS Adapter",
-            "pt": "ioBroker VBUS Adapter",
-            "nl": "ioBroker VBUS Adapter",
-            "fr": "ioBroker VBUS Adapter",
-            "it": "ioBroker VBUS Adapter",
-            "es": "ioBroker VBUS Adapter",
-            "pl": "ioBroker VBUS Adapter",
-            "zh-cn": "ioBroker VBUS Adapter"
+            "en": "This adapter connects ioBroker to various VBus-based Resol devices",
+            "de": "Dieser Adapter verbindet ioBroker mit verschiedenen VBus-basierten Resol-Geräten",
+            "ru": "Этот адаптер подключает ioBroker к различным VBus-устройствам Resol",
+            "pt": "Este adaptador conecta o ioBroker a vários dispositivos Resol baseados em VBus",
+            "nl": "Deze adapter verbindt ioBroker met verschillende VBus-gebaseerde Resol-apparaten",
+            "fr": "Cet adaptateur connecte ioBroker à divers appareils Resol basés sur VBus",
+            "it": "Questo adattatore collega ioBroker a vari dispositivi Resol basati su VBus",
+            "es": "Este adaptador conecta ioBroker a varios dispositivos Resol basados ​​en VBus",
+            "pl": "Ten adapter łączy ioBroker z różnymi urządzeniami Resol opartymi na VBus",
+            "zh-cn": "该适配器将ioBroker连接到各种基于VBus的Resol设备"
         },
         "authors": [
-            "Author <jjensen@t-online.de>"
+            "pdbjjens <jjensen@t-online.de>"
         ],
         "contributors": [
-			"DutchmanNL"
-		  ],
+            "DutchmanNL",
+            "grizzelbee <hanjo@hingsen.de>"
+        ],
         "keywords": [
             "ioBroker",
             "myvbus",
@@ -129,7 +143,7 @@
         "materializeTab": true,
         "supportCustoms": false,
         "connectionType": "local",
-        "dataSource":"push",
+        "dataSource": "push",
         "dependencies": [
             {
                 "js-controller": ">=1.4.2"
@@ -140,12 +154,12 @@
         "connectionDevice": "",
         "connectionIdentifier": "",
         "connectionPort": 7053,
-        "vbusPassword": "vbus",
+        "vbusPassword": "",
         "vbusChannel": 1,
         "vbusDataOnly": false,
         "vbusViaTag": "",
         "vbusInterval": 30,
-        "forceReInit": true		
+        "forceReInit": true
     },
     "objects": [],
     "instanceObjects": [
