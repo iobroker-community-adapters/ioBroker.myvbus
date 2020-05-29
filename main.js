@@ -55,6 +55,8 @@ class MyVbus extends utils.Adapter {
     }
 
     async main() {
+        let relayActive;
+
         try {
             // Initialize adapter here
             // test whether config is valid. Terminate adapter if not, because it will crash with invalid config
@@ -69,6 +71,14 @@ class MyVbus extends utils.Adapter {
                     }
                 } else {
                     language = 'en';
+                }
+                switch (language) {
+                    case 'de': relayActive = "Relais X aktiv";
+                        break;
+                    case 'en': relayActive = "Relay X active";
+                        break;
+                    case 'fr': relayActive = "Relais X actif";
+                        break;
                 }
             }).catch(err => {
                 this.log.error(JSON.stringify(err));
@@ -115,13 +125,10 @@ class MyVbus extends utils.Adapter {
 
             } else {
                 this.log.error('[Credentials] error: Password missing or empty in Adapter Settings');
-                //this.setForeignState('system.adapter.' + this.namespace + '.alive', false);
             }
 
             // in this vbus adapter all states changes inside the adapters namespace are subscribed
             // this.subscribeStates('*'); // Not needed now, in current version adapter only receives data
-
-
             switch (connectionDevice) {
                 case 'lan':
                     if (connectionIdentifier.match(ipformat) || connectionIdentifier.match(fqdnformat)) {
@@ -307,7 +314,6 @@ class MyVbus extends utils.Adapter {
                     };
                     let value;
 
-
                     if ((item.rawValue === undefined) || (item.rawValue === null)) {
                         value = 0;
                     } else if (item.rootTypeId === 'Number') {
@@ -330,6 +336,18 @@ class MyVbus extends utils.Adapter {
                             common.min = 0;
                             common.max = 100;
                             common.role = 'level.volume';
+                            // create Relay X active state (as far as we know these are the only percent-unit states )
+                            this.createOrExtendObject(objectId + '1', {
+                                type: 'state',
+                                common: {
+                                    name: relayActive.replace('X', item.name.substr(item.name.length-2).replace(' ', '')),
+                                    type: 'boolean',
+                                    role: 'indicator.activity',
+                                    unit: '',
+                                    read: true,
+                                    write: false
+                                }
+                            }, (value > 0));
                             break;
                         case 'Hours':
                             common.role = 'value';
@@ -355,23 +373,7 @@ class MyVbus extends utils.Adapter {
                             common.role = 'value';
                             break;
                     }
-                    this.log.debug('objectId: [' + objectId + ']');
-                    this.log.debug('Object: [' + JSON.stringify(common) + ']');
-                    this.log.debug('value: [' + value + ']');
                     this.createOrExtendObject(objectId, {type: 'state', common}, value);
-                    if (item.name.substring(0, 15) === 'Drehzahl Relais') {
-                        this.createOrExtendObject(objectId + '_1', {
-                            type: 'state',
-                            common: {
-                                name: item.name.substring(9, 19) + ' aktiv',
-                                type: 'boolean',
-                                role: 'indicator.activity',
-                                unit: '',
-                                read: true,
-                                write: false
-                            }
-                        }, (value > 0));
-                    }
                 })
             });
         } catch (error) {
