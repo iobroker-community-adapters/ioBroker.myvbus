@@ -47,11 +47,10 @@ class MyVbus extends utils.Adapter {
 
     async configIsValid(config) {
         let isValid = true;
-
-        if ( ('' === config.vbusPassword) && !(config.connectionDevice==='serial' || config.connectionDevice==='langw')) {
+        if ((config.vbusPassword  === '') && (!(config.connectionDevice==='serial' || config.connectionDevice==='langw'))) { 
             this.log.warn('Password is missing!');
-            isValid = false;
-        }
+            isValid = false; 
+        }        
         return isValid;
     }
 
@@ -405,7 +404,7 @@ class MyVbus extends utils.Adapter {
         });
     }
 
-// Function to decrypt passwords
+    // Function to decrypt passwords
     decrypt(key, value) {
         let result = '';
         for (let i = 0; i < value.length; ++i) {
