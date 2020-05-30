@@ -46,31 +46,27 @@ class MyVbus extends utils.Adapter {
     }
 
     async configIsValid(config) {
-        return ('' !== (config.vbusPassword) && (
-            (   config.connectionIdentifier.match(ipformat)     || config.connectionIdentifier.match(fqdnformat)
-             || config.connectionIdentifier.match(serialformat) || config.connectionIdentifier.match(vbusioformat)
-            )
-          )
-        );
+        let isValid = true;
+
+        if ( ('' === config.vbusPassword) && !(config.connectionDevice==='serial' || config.connectionDevice==='langw')) {
+            this.log.warn('Password is missing!');
+            isValid = false;
+        }
+        return isValid;
     }
 
     async main() {
         let relayActive = 'Relay X active';
-        let language = '';
+        let language    = 'en';
 
         try {
             // Initialize adapter here
             // test whether config is valid. Terminate adapter if not, because it will crash with invalid config
             // Get system language
             await this.getForeignObjectAsync('system.config').then(sysConf => {
-                if (sysConf) {
-                    // Get proper file of system language to avoid errors
+                if (sysConf && (sysConf.common.language === 'de' || sysConf.common.language === 'fr') ) {
+                    // switch language to a language supported by Resol-Lib (de, fr), or default to english
                     language = sysConf.common.language;
-                    if (!(language === 'en' || language === 'de' || language === 'fr')) {
-                        language = 'en';
-                    }
-                } else {
-                    language = 'en';
                 }
                 switch (language) {
                     case 'de': relayActive = "Relais X aktiv";
@@ -277,24 +273,25 @@ class MyVbus extends utils.Adapter {
                 });
 
                 this.log.debug('received data: ' + JSON.stringify(data));
+                if (data[1]){
+                    // create device
+                    this.createOrExtendObject(data[1].deviceId, {
+                        type: 'device',
+                        common: {
+                            name: data[1].deviceName
+                        },
+                        native: {}
+                    }, '');
 
-                // create device
-                this.createOrExtendObject(data[1].deviceId, {
-                    type: 'device',
-                    common: {
-                        name: data[1].deviceName
-                    },
-                    native: {}
-                }, '');
-
-                // create channel
-                this.createOrExtendObject(data[1].deviceId + '.' + data[1].addressId, {
-                    type: 'channel',
-                    common: {
-                        name: data[1].deviceId + '.' + data[1].addressId
-                    },
-                    native: {}
-                }, '');
+                    // create channel
+                    this.createOrExtendObject(data[1].deviceId + '.' + data[1].addressId, {
+                        type: 'channel',
+                        common: {
+                            name: data[1].deviceId + '.' + data[1].addressId
+                        },
+                        native: {}
+                    }, '');
+                }
                 // iterate over all data to create datapoints
                 _.forEach(data, (item) => {
                     this.log.debug('received item-data: ' + JSON.stringify(item));
@@ -404,7 +401,7 @@ class MyVbus extends utils.Adapter {
             } else {
                 self.setObjectNotExists(id, objData, callback);
             }
-            self.setState(id, value);
+            self.setState(id, value, true);
         });
     }
 
