@@ -47,8 +47,8 @@ class MyVbus extends utils.Adapter {
 
     async configIsValid(config) {
         let isValid = true;
-        if ((config.vbusPassword  === '') && (!(config.connectionDevice==='serial' || config.connectionDevice==='langw'))) { 
-            this.log.warn('Password is missing!');
+        if (config.connectionDevice  === '')  { 
+            this.log.warn('Configuration is missing!');
             isValid = false; 
         }        
         return isValid;
