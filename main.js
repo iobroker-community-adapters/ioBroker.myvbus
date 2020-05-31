@@ -48,7 +48,7 @@ class MyVbus extends utils.Adapter {
     async configIsValid(config) {
         let isValid = true;
         if (config.connectionDevice  === '')  { 
-            this.log.warn('Configuration is missing!');
+            /*this.log.warn('Configuration is missing!');*/
             isValid = false; 
         }        
         return isValid;
@@ -101,25 +101,26 @@ class MyVbus extends utils.Adapter {
             this.log.debug(`VBus Interval: ${vbusInterval}`);
 
             // Check if credentials are not empty and decrypt stored password
-            if (vbusPassword && vbusPassword !== '') {
-                await this.getForeignObjectAsync('system.config').then(obj => {
-                    if (obj && obj.native && obj.native.secret) {
+            if (!(connectionDevice==='serial' || connectionDevice==='langw')) {
+                if (vbusPassword && vbusPassword !== '')  {
+                    await this.getForeignObjectAsync('system.config').then(obj => {
+                        if (obj && obj.native && obj.native.secret) {
                         //noinspection JSUnresolvedVariable
-                        vbusPassword = this.decrypt(obj.native.secret, vbusPassword);
+                            vbusPassword = this.decrypt(obj.native.secret, vbusPassword);
                         //this.log.info(`VBus Password decrypted: ${vbusPassword}`);
-                    } else {
+                        } else {
                         //noinspection JSUnresolvedVariable
-                        vbusPassword = this.decrypt('Zgfr56gFe87jJOM', vbusPassword);
+                            vbusPassword = this.decrypt('Zgfr56gFe87jJOM', vbusPassword);
                         //this.log.info(`VBus Password decrypted: ${vbusPassword}`);
-                    }
-                }).catch(err => {
-                    this.log.error(JSON.stringify(err));
-                });
+                        }
+                    }).catch(err => {
+                        this.log.error(JSON.stringify(err));
+                    });
 
-            } else {
-                this.log.error('[Credentials] error: Password missing or empty in Adapter Settings');
+                } else {
+                    this.log.error('[Credentials] error: Password missing or empty in Adapter Settings');
+                }
             }
-
             // in this vbus adapter all states changes inside the adapters namespace are subscribed
             // this.subscribeStates('*'); // Not needed now, in current version adapter only receives data
             switch (connectionDevice) {
@@ -385,7 +386,7 @@ class MyVbus extends utils.Adapter {
                 await this.main();
             } else {
                 this.setState('info.connection', false);
-                this.terminate('Invalid Configuration.', 11);
+                this.terminate('Stop Adapter until Configuration is complete', 11);
             }
         } catch (error) {
             this.log.error(`[onReady] error: ${error.message}, stack: ${error.stack}`);
