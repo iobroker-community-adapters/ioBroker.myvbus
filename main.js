@@ -50,18 +50,17 @@ class MyVbus extends utils.Adapter {
         let language    = 'en';
 
         try {
-            // Initialize adapter here
-            // test whether config is valid. Terminate adapter if not, because it will crash with invalid config
-            // Get system language
+            // Get system language and set it for this adapter
             await this.getForeignObjectAsync('system.config').then(sysConf => {
                 if (sysConf && (sysConf.common.language === 'de' || sysConf.common.language === 'fr') ) {
                     // switch language to a language supported by Resol-Lib (de, fr), or default to english
                     language = sysConf.common.language;
                 }
+                // Set translation for relay active state
                 switch (language) {
-                    case 'de': relayActive = "Relais X aktiv";
+                    case 'de': relayActive = 'Relais X aktiv';
                         break;
-                    case 'fr': relayActive = "Relais X actif";
+                    case 'fr': relayActive = 'Relais X actif';
                         break;
                 }
             }).catch(err => {
@@ -98,11 +97,9 @@ class MyVbus extends utils.Adapter {
                         if (obj && obj.native && obj.native.secret) {
                         //noinspection JSUnresolvedVariable
                             vbusPassword = this.decrypt(obj.native.secret, vbusPassword);
-                        //this.log.info(`VBus Password decrypted: ${vbusPassword}`);
                         } else {
                         //noinspection JSUnresolvedVariable
                             vbusPassword = this.decrypt('Zgfr56gFe87jJOM', vbusPassword);
-                        //this.log.info(`VBus Password decrypted: ${vbusPassword}`);
                         }
                     }).catch(err => {
                         this.log.error(JSON.stringify(err));
@@ -112,8 +109,8 @@ class MyVbus extends utils.Adapter {
                     this.log.error('[Credentials] error: Password missing or empty in Adapter Settings');
                 }
             }
-            // in this vbus adapter all states changes inside the adapters namespace are subscribed
-            // this.subscribeStates('*'); // Not needed now, in current version adapter only receives data
+
+            // Set up connection depending on connection device and check connection identifier
             switch (connectionDevice) {
                 case 'lan':
                     if (connectionIdentifier.match(ipformat) || connectionIdentifier.match(fqdnformat)) {
@@ -200,6 +197,7 @@ class MyVbus extends utils.Adapter {
                     }
             }
 
+            // Connection state handler
             ctx.connection.on('connectionState', (connectionState) => {
                 this.log.debug('Connection state changed to ' + connectionState);
                 if (connectionState === 'CONNECTED') {
@@ -209,16 +207,11 @@ class MyVbus extends utils.Adapter {
                     this.setStateAsync('info.connection', false, true);
                 }
             });
-
-            ctx.hsc = new vbus.HeaderSetConsolidator({
-                interval: vbusInterval * 1000,
-                timeToLive: (vbusInterval * 1000) + 1000
-            });
-
             ctx.headerSet = new vbus.HeaderSet();
             let hasSettled = false;
             let settledCountdown = 0;
 
+            // Packet handler
             ctx.connection.on('packet', (packet) => {
                 if (!hasSettled) {
                     const headerCountBefore = ctx.headerSet.getHeaderCount();
@@ -240,10 +233,12 @@ class MyVbus extends utils.Adapter {
                 }
             });
 
-            this.log.info('Wait for Connection...');
-            await ctx.connection.connect();
-            ctx.hsc.startTimer();
+            ctx.hsc = new vbus.HeaderSetConsolidator({
+                interval: vbusInterval * 1000,
+                timeToLive: (vbusInterval * 1000) + 1000
+            });
 
+            // HeaderSetConsolidator handler - creates object tree and updates values in preset interval
             ctx.hsc.on('headerSet', () => {
                 const packetFields = spec.getPacketFieldsForHeaders(ctx.headerSet.getSortedHeaders());
                 const data = _.map(packetFields, function (pf) {
@@ -291,7 +286,7 @@ class MyVbus extends utils.Adapter {
                     const objectId = channelId + '.' + item.id.replace(/_/g, '');
                     const isBitField = ((item.parts.length === 1) && (item.parts[0].mask !== 0xFF));
                     const isTimeField = ((item.rootTypeId === 'Time') || (item.rootTypeId === 'Weektime') || (item.rootTypeId === 'DateTime'));
-                    let common = {
+                    const common = {
                         name: item.name,
                         type: 'number',
                         unit: item.unitText,
@@ -360,32 +355,37 @@ class MyVbus extends utils.Adapter {
                             break;
                     }
                     this.createOrExtendObject(objectId, {type: 'state', common}, value);
-                })
+                });
             });
+            // Establish connection             
+            this.log.info('Wait for Connection...');
+            await ctx.connection.connect();
+            ctx.hsc.startTimer();
+                   
         } catch (error) {
             this.log.error(`[main()] error: ${error.message}, stack: ${error.stack}`);
         }
     }
 
-
     // Is called when databases are connected and adapter received configuration.
     async onReady() {
         try {
-            // Terminate adapter if configuration is not yet received after first start.
+            // Terminate adapter after first start because configuration is not yet received
             // Adapter is restarted automatically when config page is closed
             if (this.config.connectionDevice  !== '') {
                 await this.main();
             } else {
                 this.setState('info.connection', false);
-                //this.terminate('Stop Adapter until Configuration is complete', 11);
+                this.terminate('Terminate Adapter until Configuration is completed', 11);
             }
         } catch (error) {
             this.log.error(`[onReady] error: ${error.message}, stack: ${error.stack}`);
         }
     }
 
+    //  Create or extend object
     createOrExtendObject(id, objData, value, callback) {
-        let self = this;
+        const self = this;
         this.getObject(id, function (err, oldObj) {
             if (!err && oldObj) {
                 self.extendObject(id, objData, callback);
@@ -396,20 +396,20 @@ class MyVbus extends utils.Adapter {
         });
     }
 
-    // Function to decrypt passwords
+    // Decrypt passwords
     decrypt(key, value) {
         let result = '';
         for (let i = 0; i < value.length; ++i) {
             result += String.fromCharCode(key[i % key.length].charCodeAt(0) ^ value.charCodeAt(i));
         }
-        //this.log.info('client_secret decrypt ready: '+ result);
         return result;
     }
 
+    // Exit adapter 
     onUnload(callback) {
         try {
             ctx.connection.disconnect();
-            this.log.info('cleaned everything up...');
+            this.log.info('Cleaned up everything...');
             callback();
         } catch (e) {
             callback();
