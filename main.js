@@ -377,7 +377,7 @@ class MyVbus extends utils.Adapter {
                 await this.main();
             } else {
                 this.setState('info.connection', false);
-                this.terminate('Stop Adapter until Configuration is complete', 11);
+                //this.terminate('Stop Adapter until Configuration is complete', 11);
             }
         } catch (error) {
             this.log.error(`[onReady] error: ${error.message}, stack: ${error.stack}`);
