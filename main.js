@@ -45,15 +45,6 @@ class MyVbus extends utils.Adapter {
         this.on('unload', this.onUnload.bind(this));
     }
 
-    async configIsValid(config) {
-        let isValid = true;
-        if (config.connectionDevice  === '')  { 
-            /*this.log.warn('Configuration is missing!');*/
-            isValid = false; 
-        }        
-        return isValid;
-    }
-
     async main() {
         let relayActive = 'Relay X active';
         let language    = 'en';
@@ -332,7 +323,7 @@ class MyVbus extends utils.Adapter {
                             common.max = 100;
                             common.role = 'level.volume';
                             // create Relay X active state (as far as we know these are the only percent-unit states )
-                            this.createOrExtendObject(objectId + '1', {
+                            this.createOrExtendObject(objectId + '_1', {
                                 type: 'state',
                                 common: {
                                     name: relayActive.replace('X', item.name.substr(item.name.length-2).replace(' ', '')),
@@ -380,9 +371,9 @@ class MyVbus extends utils.Adapter {
     // Is called when databases are connected and adapter received configuration.
     async onReady() {
         try {
-            // Initialize adapter here
-            // test whether config is valid. Terminate adapter if not, because it will crash with invalid config
-            if (await this.configIsValid(this.config)) {
+            // Terminate adapter if configuration is not yet received after first start.
+            // Adapter is restarted automatically when config page is closed
+            if (this.config.connectionDevice  !== '') {
                 await this.main();
             } else {
                 this.setState('info.connection', false);
