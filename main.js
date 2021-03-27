@@ -384,18 +384,17 @@ class MyVbus extends utils.Adapter {
     }
 
     //  Create or extend object
-    createOrExtendObject(id, objData, value, callback) {
+    createOrExtendObject(id, objData, value) {
         const self = this;
         this.getObject(id, function (err, oldObj) {
             if (!err && oldObj) {
-                self.extendObject(id, objData, callback);
+                self.extendObject(id, objData, () => {self.setState(id, value, true);});
             } else {
-                self.setObjectNotExists(id, objData, callback);
+                self.setObjectNotExists(id, objData, () => {self.setState(id, value, true);});
             }
-            self.setState(id, value, true);
         });
     }
-
+    
     // Decrypt passwords
     decrypt(key, value) {
         let result = '';
