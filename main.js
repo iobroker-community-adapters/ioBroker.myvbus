@@ -202,9 +202,9 @@ class MyVbus extends utils.Adapter {
                 this.log.debug('Connection state changed to ' + connectionState);
                 if (connectionState === 'CONNECTED') {
                     this.log.info('Connection established');
-                    await this.setStateAsync('info.connection', true, true);
+                    this.setStateAsync('info.connection', true, true);
                 } else {
-                    await this.setStateAsync('info.connection', false, true);
+                    this.setStateAsync('info.connection', false, true);
                 }
             });
             ctx.headerSet = new vbus.HeaderSet();
