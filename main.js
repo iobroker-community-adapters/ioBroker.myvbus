@@ -375,7 +375,7 @@ class MyVbus extends utils.Adapter {
             if (this.config.connectionDevice  !== '') {
                 await this.main();
             } else {
-                this.setState('info.connection', false);
+                this.setState('info.connection', false, true);
                 this.terminate('Terminate Adapter until Configuration is completed', 11);
             }
         } catch (error) {
