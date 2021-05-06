@@ -264,7 +264,8 @@ class MyVbus extends utils.Adapter {
                     this.createOrExtendObject(data[1].deviceId, {
                         type: 'device',
                         common: {
-                            name: data[1].deviceName
+                            name: data[1].deviceName,
+                            type: 'string'
                         },
                         native: {}
                     }, '');
@@ -273,7 +274,8 @@ class MyVbus extends utils.Adapter {
                     this.createOrExtendObject(data[1].deviceId + '.' + data[1].addressId, {
                         type: 'channel',
                         common: {
-                            name: data[1].deviceId + '.' + data[1].addressId
+                            name: data[1].deviceId + '.' + data[1].addressId,
+                            type: 'string'
                         },
                         native: {}
                     }, '');
