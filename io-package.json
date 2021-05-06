@@ -167,7 +167,8 @@
             "_id": "info",
             "type": "channel",
             "common": {
-                "name": "Information"
+                "name": "Information",
+                "type": 'string'
             },
             "native": {}
         },
