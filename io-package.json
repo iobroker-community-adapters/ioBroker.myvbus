@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "myvbus",
-        "version": "0.1.0",
+        "version": "0.1.1",
         "news": {
+            "0.1.1": {
+                "en": "Fixes for supporting js-controller >=3.2.x",
+                "de": "Korrekturen zur Unterstützung von js-controller> = 3.2.x.",
+                "ru": "Исправления для поддержки js-controller> = 3.2.x",
+                "pt": "Correções para suportar js-controller> = 3.2.x",
+                "nl": "Oplossingen voor ondersteuning van js-controller> = 3.2.x",
+                "fr": "Corrections pour la prise en charge de js-controller> = 3.2.x",
+                "it": "Correzioni per il supporto di js-controller> = 3.2.x",
+                "es": "Correcciones para admitir js-controller> = 3.2.x",
+                "pl": "Poprawki dotyczące obsługi js-controller> = 3.2.x",
+                "zh-cn": "修复了支持js-controller> = 3.2.x的问题"
+            },
             "0.1.0": {
                 "en": "Bugfixes and a few new features",
                 "de": "Bugfixes und ein paar neue Funktionen",
