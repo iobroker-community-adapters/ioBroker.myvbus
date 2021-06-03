@@ -29,6 +29,9 @@
     "lodash": "^4.17.20",
     "resol-vbus": "^0.23.0"
   },
+  "engines": {
+    "node": ">= 12"
+  },
   "devDependencies": {
     "@iobroker/testing": "^2.4.4",
     "@types/chai": "^4.2.11",
