@@ -30,7 +30,7 @@
     "resol-vbus": "^0.23.0"
   },
   "engines": {
-    "node": ">= 10"
+    "node": ">= 12"
   },
   "devDependencies": {
     "@iobroker/testing": "^2.4.4",
