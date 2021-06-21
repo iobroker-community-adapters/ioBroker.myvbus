@@ -17,9 +17,9 @@ const _ = require('lodash');
 // Variable definitions
 
 const ctx = {
-    headerSet: vbus.HeaderSet(),
-    hsc: vbus.HeaderSetConsolidator(),
-    connection: vbus.Connection()
+    headerSet: new vbus.HeaderSet(),
+    hsc: new vbus.HeaderSetConsolidator(),
+    connection: new vbus.Connection()
 };
 
 
