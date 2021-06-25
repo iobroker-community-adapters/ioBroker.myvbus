@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "myvbus",
-        "version": "0.1.1",
+        "version": "0.2.0",
         "news": {
+            "0.2.0": {
+                "en": "Dropped node.js 10 support, added node.js 14 and 16 support",
+                "de": "Unterstützung für node.js 10 entfernt, Unterstützung für node.js 14 und 16 hinzugefügt",
+                "ru": "Прекращена поддержка node.js 10, добавлена ​​поддержка node.js 14 и 16",
+                "pt": "Suporte a node.js 10 removido, suporte a node.js 14 e 16 adicionado",
+                "nl": "Ondersteuning voor node.js 10 verwijderd, ondersteuning voor node.js 14 en 16 toegevoegd",
+                "fr": "Prise en charge de node.js 10 supprimée, prise en charge de node.js 14 et 16 ajoutée",
+                "it": "Eliminato il supporto node.js 10, aggiunto il supporto node.js 14 e 16",
+                "es": "Se eliminó la compatibilidad con node.js 10, se agregó compatibilidad con node.js 14 y 16",
+                "pl": "Zrezygnowano z obsługi node.js 10, dodano obsługę node.js 14 i 16",
+                "zh-cn": "删除了 node.js 10 支持，添加了 node.js 14 和 16 支持"
+            },
             "0.1.1": {
                 "en": "Fixes for supporting js-controller >=3.2.x",
                 "de": "Korrekturen zur Unterstützung von js-controller> = 3.2.x.",
@@ -114,16 +126,16 @@
             "zh-cn": "Resol VBUS适配器"
         },
         "desc": {
-            "en": "This adapter connects ioBroker to various VBus-based Resol devices",
-            "de": "Dieser Adapter verbindet ioBroker mit verschiedenen VBus-basierten Resol-Geräten",
-            "ru": "Этот адаптер подключает ioBroker к различным VBus-устройствам Resol",
-            "pt": "Este adaptador conecta o ioBroker a vários dispositivos Resol baseados em VBus",
-            "nl": "Deze adapter verbindt ioBroker met verschillende VBus-gebaseerde Resol-apparaten",
-            "fr": "Cet adaptateur connecte ioBroker à divers appareils Resol basés sur VBus",
-            "it": "Questo adattatore collega ioBroker a vari dispositivi Resol basati su VBus",
-            "es": "Este adaptador conecta ioBroker a varios dispositivos Resol basados ​​en VBus",
-            "pl": "Ten adapter łączy ioBroker z różnymi urządzeniami Resol opartymi na VBus",
-            "zh-cn": "该适配器将ioBroker连接到各种基于VBus的Resol设备"
+            "en": "This adapter connects ioBroker to VBus-based Resol devices",
+            "de": "Dieser Adapter verbindet ioBroker mit VBus-basierten Resol-Geräten",
+            "ru": "Этот адаптер подключает ioBroker к устройствам Resol на базе VBus.",
+            "pt": "Este adaptador conecta o ioBroker a dispositivos Resol baseados em VBus",
+            "nl": "Deze adapter verbindt ioBroker met op VBus gebaseerde Resol-apparaten",
+            "fr": "Cet adaptateur connecte ioBroker aux appareils Resol basés sur VBus",
+            "it": "Questo adattatore collega ioBroker a dispositivi Resol basati su VBus",
+            "es": "Este adaptador conecta ioBroker a dispositivos Resol basados ​​en VBus",
+            "pl": "Ten adapter łączy ioBroker z urządzeniami Resol opartymi na VBus",
+            "zh-cn": "此适配器将 ioBroker 连接到基于 VBus 的 Resol 设备"
         },
         "authors": [
             "pdbjjens <jjensen@t-online.de>"
