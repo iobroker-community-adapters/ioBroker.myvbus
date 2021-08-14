@@ -311,8 +311,8 @@ class MyVbus extends utils.Adapter {
 
                     switch (item.unitId) {
                         case 'DegreesCelsius':
-                            common.min = -100;
-                            common.max = +300;
+                            common.min = -1000;
+                            common.max = +1000;
                             common.role = 'value.temperature';
                             break;
                         case 'Percent':
