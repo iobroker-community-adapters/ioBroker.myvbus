@@ -49,6 +49,10 @@ This adapter connects ioBroker to various VBus-based devices using resol-vbus, a
   * Update interval: Time between the update of the measured values (default 30s)
 
 ## Changelog
+### **WORK IN PROGRESS**
+* Update dependencies
+* Changed allowed range of temperature values to include the error values for short circuit and open circuit
+
 ### 0.2.0 (2021-06-25)
 * Dropped node.js 10 support, added node.js 14 and 16 support
 
