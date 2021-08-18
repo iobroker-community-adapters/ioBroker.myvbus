@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "myvbus",
-        "version": "0.2.0",
+        "version": "0.2.1",
         "news": {
+            "0.2.1": {
+                "en": "Update dependencies\nChanged allowed range of temperature values to include the error values for short circuit and open circuit",
+                "de": "Abhängigkeiten aktualisieren\nDer zulässige Temperaturbereich wurde geändert, um die Fehlerwerte für Kurzschluss und Leerlauf einzuschließen",
+                "ru": "Обновить зависимости\nИзменен допустимый диапазон значений температуры, чтобы включить значения ошибок для короткого замыкания и обрыва.",
+                "pt": "Atualizar dependências\nFaixa permitida de valores de temperatura alterada para incluir os valores de erro para curto-circuito e circuito aberto",
+                "nl": "Afhankelijkheden bijwerken\nToegestaan bereik van temperatuurwaarden gewijzigd om de foutwaarden voor kortsluiting en open circuit op te nemen",
+                "fr": "Mettre à jour les dépendances\nModification de la plage autorisée des valeurs de température pour inclure les valeurs d'erreur pour les courts-circuits et les circuits ouverts",
+                "it": "Aggiorna dipendenze\nModificato l'intervallo consentito di valori di temperatura per includere i valori di errore per cortocircuito e circuito aperto",
+                "es": "Actualizar dependencias\nSe modificó el rango permitido de valores de temperatura para incluir los valores de error para cortocircuito y circuito abierto.",
+                "pl": "Aktualizuj zależności\nZmieniono dozwolony zakres wartości temperatury, aby uwzględnić wartości błędów dla zwarcia i obwodu otwartego",
+                "zh-cn": "更新依赖\n更改了允许的温度值范围以包括短路和开路的误差值"
+            },
             "0.2.0": {
                 "en": "Dropped node.js 10 support, added node.js 14 and 16 support",
                 "de": "Unterstützung für node.js 10 entfernt, Unterstützung für node.js 14 und 16 hinzugefügt",
