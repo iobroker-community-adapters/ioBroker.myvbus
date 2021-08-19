@@ -140,9 +140,9 @@ jobs:
                 body: ${{ steps.extract_release.outputs.BODY }}
 
     # Dummy job for skipped builds - without this, github reports the build as failed
-    skip-ci:
-        if: contains(github.event.head_commit.message, '[skip ci]')
-        runs-on: ubuntu-latest
-        steps:
-            - name: Skip build
-              run: echo "Build skipped!"
+    # skip-ci:
+    #     if: contains(github.event.head_commit.message, '[skip ci]')
+    #     runs-on: ubuntu-latest
+    #     steps:
+    #         - name: Skip build
+    #           run: echo "Build skipped!"
