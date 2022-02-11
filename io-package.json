@@ -1,8 +1,20 @@
 {
     "common": {
         "name": "myvbus",
-        "version": "0.2.1",
+        "version": "0.2.2",
         "news": {
+            "0.2.2": {
+                "en": "Updated dependencies / Compatibility check for js-controller 4.0 / Support for js-controller 1.x dropped",
+                "de": "Aktualisierte Abhängigkeiten / Kompatibilitätsprüfung für js-controller 4.0 / Unterstützung für js-controller 1.x eingestellt",
+                "ru": "Обновлены зависимости / Проверка совместимости для js-controller 4.0 / Прекращена поддержка js-controller 1.x",
+                "pt": "Dependências atualizadas/verificação de compatibilidade para js-controller 4.0/suporte para js-controller 1.x descartado",
+                "nl": "Bijgewerkte afhankelijkheden / Compatibiliteitscontrole voor js-controller 4.0 / Ondersteuning voor js-controller 1.x weggevallen",
+                "fr": "Dépendances mises à jour / Vérification de compatibilité pour js-controller 4.0 / Prise en charge de js-controller 1.x abandonnée",
+                "it": "Dipendenze aggiornate/Verifica compatibilità per js-controller 4.0/Supporto per js-controller 1.x eliminato",
+                "es": "Dependencias actualizadas / Verificación de compatibilidad para js-controller 4.0 / Se eliminó el soporte para js-controller 1.x",
+                "pl": "Zaktualizowane zależności / Sprawdzanie zgodności dla js-controller 4.0 / Porzucono wsparcie dla js-controller 1.x",
+                "zh-cn": "更新了 js-controller 4.0 的依赖项/兼容性检查/对 js-controller 1.x 的支持已删除"
+            },
             "0.2.1": {
                 "en": "Update dependencies\nChanged allowed range of temperature values to include the error values for short circuit and open circuit",
                 "de": "Abhängigkeiten aktualisieren\nDer zulässige Temperaturbereich wurde geändert, um die Fehlerwerte für Kurzschluss und Leerlauf einzuschließen",
@@ -50,78 +62,6 @@
                 "es": "Corrección de errores y algunas características nuevas.",
                 "pl": "Poprawki błędów i kilka nowych funkcji",
                 "zh-cn": "错误修正和一些新功能"
-            },
-            "0.0.6": {
-                "en": "alpha 6 release",
-                "de": "Alpha 6 Release",
-                "ru": "альфа 6 релиз",
-                "pt": "liberação alfa 6",
-                "nl": "alpha 6 release",
-                "fr": "version alpha 6",
-                "it": "versione alpha 6",
-                "es": "lanzamiento alpha 6",
-                "pl": "wydanie alfa 6",
-                "zh-cn": "alpha 6发布"
-            },
-            "0.0.5": {
-                "en": "alpha 5 release",
-                "de": "Alpha 5 Release",
-                "ru": "альфа 5 релиз",
-                "pt": "liberação alfa 4",
-                "nl": "alpha 5 release",
-                "fr": "version alpha 5",
-                "it": "versione alpha 5",
-                "es": "lanzamiento alpha 5",
-                "pl": "wydanie alfa 5",
-                "zh-cn": "alpha 5发布"
-            },
-            "0.0.4": {
-                "en": "alpha 4 release",
-                "de": "Alpha 4 Release",
-                "ru": "альфа 4 релиз",
-                "pt": "liberação alfa 4",
-                "nl": "alpha 4 release",
-                "fr": "version alpha 4",
-                "it": "versione alpha 4",
-                "es": "lanzamiento alpha 4",
-                "pl": "wydanie alfa 4",
-                "zh-cn": "alpha 4发布"
-            },
-            "0.0.3": {
-                "en": "alpha 3 release",
-                "de": "Alpha 3 Release",
-                "ru": "альфа 3 релиз",
-                "pt": "liberação alfa 3",
-                "nl": "alpha 3 release",
-                "fr": "version alpha 3",
-                "it": "versione alpha 3",
-                "es": "lanzamiento alpha 3",
-                "pl": "wydanie alfa 3",
-                "zh-cn": "alpha 3发布"
-            },
-            "0.0.2": {
-                "en": "alpha 2 release",
-                "de": "Alpha 2 Release",
-                "ru": "альфа 2 релиз",
-                "pt": "liberação alfa 2",
-                "nl": "alpha 2 release",
-                "fr": "version alpha 2",
-                "it": "versione alpha 2",
-                "es": "lanzamiento alpha 2",
-                "pl": "wydanie alfa 2",
-                "zh-cn": "alpha 2发布"
-            },
-            "0.0.1": {
-                "en": "initial release",
-                "de": "Erstveröffentlichung",
-                "ru": "Начальная версия",
-                "pt": "lançamento inicial",
-                "nl": "Eerste uitgave",
-                "fr": "Première version",
-                "it": "Versione iniziale",
-                "es": "Versión inicial",
-                "pl": "Pierwsze wydanie",
-                "zh-cn": "首次出版"
             }
         },
         "title": "MyVBus",
