@@ -47,7 +47,7 @@ This adapter connects ioBroker to various VBus-based devices using resol-vbus, a
   * Update interval: Time between the update of the measured values (default 30s)
 
 ## Changelog
-### **WORK IN PROGRESS**
+### 0.2.2 (2022-02-11)
 * Updated dependencies
 * Compatibility check for js-controller 4.0
 * Support for js-controller 1.x dropped
@@ -72,9 +72,6 @@ This adapter connects ioBroker to various VBus-based devices using resol-vbus, a
 * (grizzelbee) New: added activity indicator states for relays
 * (pdbjjens) Fix: Prevent warnings regarding non-existent objects upon adapter instance creation and start-up with js-controller 3.2.x
 * (pdbjjens) Fix: updated dependencies and vulnerabilities
-
-### 0.0.6
-* (pdbjjens) alpha 6 release updated dependencies
 
 ## Legal Notices
 

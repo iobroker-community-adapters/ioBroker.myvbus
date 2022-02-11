@@ -1,4 +1,7 @@
 # Older changes
+## 0.0.6
+* (pdbjjens) alpha 6 release updated dependencies
+
 ## 0.0.5
 * (pdbjjens) alpha 5 release improved type and role mapping of adapter values
 
@@ -14,4 +17,3 @@
 ## 0.0.1
 
 * (pdbjjens) initial release tested only with VBus/USB (Serial) and DeltaSol(R) BS2009 (0x427B)
-
