@@ -1,0 +1,5 @@
+chore: release v0.2.2
+
+* Updated dependencies
+* Compatibility check for js-controller 4.0
+* Support for js-controller 1.x dropped
