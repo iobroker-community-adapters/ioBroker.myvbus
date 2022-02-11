@@ -6,8 +6,6 @@
 [![Downloads](https://img.shields.io/npm/dm/iobroker.myvbus.svg)](https://www.npmjs.com/package/iobroker.myvbus)
 ![Number of Installations (stable)](http://iobroker.live/badges/myvbus-stable.svg)
 [![NPM version](https://img.shields.io/npm/v/iobroker.myvbus.svg)](https://www.npmjs.com/package/iobroker.myvbus)
-[![Dependency Status](https://img.shields.io/david/iobroker-community-adapters/iobroker.myvbus.svg)](https://david-dm.org/iobroker-community-adapters/iobroker.myvbus)
-[![Known Vulnerabilities](https://snyk.io/test/github/iobroker-community-adapters/ioBroker.myvbus/badge.svg)](https://snyk.io/test/github/iobroker-community-adapters/ioBroker.myvbus)
 [![NPM](https://nodei.co/npm/iobroker.myvbus.png?downloads=true)](https://nodei.co/npm/iobroker.myvbus/)
 
 **Tests:** ![Test and Release](https://github.com/iobroker-community-adapters/iobroker.myvbus/workflows/Test%20and%20Release/badge.svg)  
@@ -49,6 +47,11 @@ This adapter connects ioBroker to various VBus-based devices using resol-vbus, a
   * Update interval: Time between the update of the measured values (default 30s)
 
 ## Changelog
+### **WORK IN PROGRESS**
+* Updated dependencies
+* Compatibility check for js-controller 4.0
+* Support for js-controller 1.x dropped
+
 ### 0.2.1 (2021-08-18)
 * Update dependencies
 * Changed allowed range of temperature values to include the error values for short circuit and open circuit
@@ -85,7 +88,7 @@ The authors are in no way endorsed by or affiliated with RESOL GmbH, or any asso
 
 MIT License
 
-Copyright (c) 2021 Jens-Peter Jensen <jjensen@t-online.de>
+Copyright (c) 2022 Jens-Peter Jensen <jjensen@t-online.de>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
