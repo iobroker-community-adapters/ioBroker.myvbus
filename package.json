@@ -13,10 +13,7 @@
   "homepage": "https://github.com/iobroker-community-adapters/ioBroker.myvbus",
   "license": "MIT",
   "keywords": [
-    "ioBroker",
     "myvbus",
-    "Smart Home",
-    "home automation",
     "VBus",
     "Resol"
   ],
@@ -35,6 +32,8 @@
   "devDependencies": {
     "@alcalzone/release-script": "^3.4.0",
     "@alcalzone/release-script-plugin-iobroker": "^3.5.1",
+    "@alcalzone/release-script-plugin-license": "^3.5.9",
+    "@iobroker/adapter-dev": "^1.2.0",
     "@iobroker/testing": "^4.1.0",
     "@types/chai": "^4.2.11",
     "@types/chai-as-promised": "^7.1.2",
@@ -44,11 +43,9 @@
     "@types/proxyquire": "^1.3.28",
     "@types/sinon": "^10.0.0",
     "@types/sinon-chai": "^3.2.3",
-    "axios": "^0.27.2",
     "chai": "^4.2.0",
     "chai-as-promised": "^7.1.1",
     "eslint": "^8.1.0",
-    "gulp": "^4.0.2",
     "mocha": "^10.0.0",
     "proxyquire": "^2.1.3",
     "sinon": "^14.0.0",
@@ -63,6 +60,7 @@
     "test": "npm run test:js && npm run test:package",
     "lint": "npm run lint:js",
     "lint:js": "eslint",
+    "translate": "translate-adapter",
     "release": "release-script"
   },
   "bugs": {

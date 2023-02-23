@@ -13,7 +13,8 @@
                 "it": "Dipendenze aggiornate/Verifica compatibilità per js-controller 4.0/Supporto per js-controller 1.x eliminato",
                 "es": "Dependencias actualizadas / Verificación de compatibilidad para js-controller 4.0 / Se eliminó el soporte para js-controller 1.x",
                 "pl": "Zaktualizowane zależności / Sprawdzanie zgodności dla js-controller 4.0 / Porzucono wsparcie dla js-controller 1.x",
-                "zh-cn": "更新了 js-controller 4.0 的依赖项/兼容性检查/对 js-controller 1.x 的支持已删除"
+                "zh-cn": "更新了 js-controller 4.0 的依赖项/兼容性检查/对 js-controller 1.x 的支持已删除",
+                "uk": "Оновлені залежності / Перевірка сумісності для js-controller 4.0 / Підтримка js-controller 1.x припинена"
             },
             "0.2.1": {
                 "en": "Update dependencies\nChanged allowed range of temperature values to include the error values for short circuit and open circuit",
@@ -25,7 +26,8 @@
                 "it": "Aggiorna dipendenze\nModificato l'intervallo consentito di valori di temperatura per includere i valori di errore per cortocircuito e circuito aperto",
                 "es": "Actualizar dependencias\nSe modificó el rango permitido de valores de temperatura para incluir los valores de error para cortocircuito y circuito abierto.",
                 "pl": "Aktualizuj zależności\nZmieniono dozwolony zakres wartości temperatury, aby uwzględnić wartości błędów dla zwarcia i obwodu otwartego",
-                "zh-cn": "更新依赖\n更改了允许的温度值范围以包括短路和开路的误差值"
+                "zh-cn": "更新依赖\n更改了允许的温度值范围以包括短路和开路的误差值",
+                "uk": "Оновити залежності\nЗмінено дозволений діапазон значень температури, щоб включити значення похибок для короткого замикання та розриву"
             },
             "0.2.0": {
                 "en": "Dropped node.js 10 support, added node.js 14 and 16 support",
@@ -37,7 +39,8 @@
                 "it": "Eliminato il supporto node.js 10, aggiunto il supporto node.js 14 e 16",
                 "es": "Se eliminó la compatibilidad con node.js 10, se agregó compatibilidad con node.js 14 y 16",
                 "pl": "Zrezygnowano z obsługi node.js 10, dodano obsługę node.js 14 i 16",
-                "zh-cn": "删除了 node.js 10 支持，添加了 node.js 14 和 16 支持"
+                "zh-cn": "删除了 node.js 10 支持，添加了 node.js 14 和 16 支持",
+                "uk": "Припинено підтримку node.js 10, додано підтримку node.js 14 і 16"
             },
             "0.1.1": {
                 "en": "Fixes for supporting js-controller >=3.2.x",
@@ -49,7 +52,8 @@
                 "it": "Correzioni per il supporto di js-controller> = 3.2.x",
                 "es": "Correcciones para admitir js-controller> = 3.2.x",
                 "pl": "Poprawki dotyczące obsługi js-controller> = 3.2.x",
-                "zh-cn": "修复了支持js-controller> = 3.2.x的问题"
+                "zh-cn": "修复了支持js-controller> = 3.2.x的问题",
+                "uk": "Виправлення для підтримки js-контролера >=3.2.x"
             },
             "0.1.0": {
                 "en": "Bugfixes and a few new features",
@@ -61,7 +65,8 @@
                 "it": "Bugfix e alcune nuove funzionalità",
                 "es": "Corrección de errores y algunas características nuevas.",
                 "pl": "Poprawki błędów i kilka nowych funkcji",
-                "zh-cn": "错误修正和一些新功能"
+                "zh-cn": "错误修正和一些新功能",
+                "uk": "Виправлення помилок і кілька нових функцій"
             }
         },
         "title": "MyVBus",
@@ -75,7 +80,8 @@
             "it": "Resol VBUS",
             "es": "Resol VBUS",
             "pl": "Resol VBUS",
-            "zh-cn": "Resol VBUS适配器"
+            "zh-cn": "Resol VBUS适配器",
+            "uk": "Розв'язати VBUS"
         },
         "desc": {
             "en": "This adapter connects ioBroker to VBus-based Resol devices",
@@ -87,7 +93,8 @@
             "it": "Questo adattatore collega ioBroker a dispositivi Resol basati su VBus",
             "es": "Este adaptador conecta ioBroker a dispositivos Resol basados ​​en VBus",
             "pl": "Ten adapter łączy ioBroker z urządzeniami Resol opartymi na VBus",
-            "zh-cn": "此适配器将 ioBroker 连接到基于 VBus 的 Resol 设备"
+            "zh-cn": "此适配器将 ioBroker 连接到基于 VBus 的 Resol 设备",
+            "uk": "Цей адаптер підключає ioBroker до пристроїв Resol на основі VBus"
         },
         "authors": [
             "pdbjjens <jjensen@t-online.de>"
