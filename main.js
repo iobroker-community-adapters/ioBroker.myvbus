@@ -391,7 +391,8 @@ class MyVbus extends utils.Adapter {
                 //throw new Error ('Terminate Adapter until Configuration is completed');
             }
         } catch (error) {
-            this.log.error(`[onReady] error: ${error.message}, stack: ${error.stack}`);
+            //this.log.debug(`[onReady] error: ${error.message}, stack: ${error.stack}`);
+            this.log.error(error);
             //throw error;
         }
     }
