@@ -387,8 +387,8 @@ class MyVbus extends utils.Adapter {
                 await this.main();
             } else {
                 await this.setStateAsync('info.connection', false, true);
-                //this.terminate('Terminate Adapter until Configuration is completed', 11);
-                throw new Error ('Terminate Adapter until Configuration is completed');
+                this.terminate('Terminate Adapter until Configuration is completed', 11);
+                //throw new Error ('Terminate Adapter until Configuration is completed');
             }
         } catch (error) {
             this.log.error(`[onReady] error: ${error.message}, stack: ${error.stack}`);
