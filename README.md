@@ -54,7 +54,8 @@ This adapter connects ioBroker to various VBus-based devices using resol-vbus, a
 ### **WORK IN PROGRESS** - 2023 maintenance release
 
 * (pdbjjens) Updated dependencies
-* (pdbjjens) Use adapter-dev instead of gulp translate
+* (pdbjjens) New: Use adapter-dev instead of gulp translate
+* (pdbjjens) Fix: error handling for serial connections
 
 ### 0.2.2 (2022-02-11)
 
@@ -99,7 +100,7 @@ The authors are in no way endorsed by or affiliated with RESOL GmbH, or any asso
 
 MIT License
 
-Copyright (c) 2022 Jens-Peter Jensen <jjensen@t-online.de>
+Copyright (c) 2023 Jens-Peter Jensen <jjensen@t-online.de>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

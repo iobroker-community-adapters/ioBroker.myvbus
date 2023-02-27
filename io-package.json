@@ -69,7 +69,6 @@
                 "uk": "Виправлення помилок і кілька нових функцій"
             }
         },
-        "title": "MyVBus",
         "titleLang": {
             "en": "Resol VBUS",
             "de": "Resol VBUS",
@@ -104,10 +103,7 @@
             "grizzelbee <hanjo@hingsen.de>"
         ],
         "keywords": [
-            "ioBroker",
             "myvbus",
-            "Smart Home",
-            "home automation",
             "VBus",
             "Resol"
         ],

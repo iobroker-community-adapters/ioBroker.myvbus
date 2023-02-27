@@ -45,27 +45,30 @@ class MyVbus extends utils.Adapter {
         this.on('unload', this.onUnload.bind(this));
     }
 
-    async main() {
-        let relayActive = 'Relay X active';
-        let language    = 'en';
+    main() {
+        return new Promise ((resolve, reject) => {
 
-        try {
+            let relayActive = 'Relay X active';
+            let language    = 'en';
+
             // Get system language and set it for this adapter
-            await this.getForeignObjectAsync('system.config').then(sysConf => {
-                if (sysConf && (sysConf.common.language === 'de' || sysConf.common.language === 'fr') ) {
-                    // switch language to a language supported by Resol-Lib (de, fr), or default to english
-                    language = sysConf.common.language;
-                }
-                // Set translation for relay active state
-                switch (language) {
-                    case 'de': relayActive = 'Relais X aktiv';
-                        break;
-                    case 'fr': relayActive = 'Relais X actif';
-                        break;
-                }
-            }).catch(err => {
-                this.log.error(JSON.stringify(err));
-            });
+            this.getForeignObjectAsync('system.config')
+                .then(sysConf => {
+                    if (sysConf && (sysConf.common.language === 'de' || sysConf.common.language === 'fr') ) {
+                        // switch language to a language supported by Resol-Lib (de, fr), or default to english
+                        language = sysConf.common.language;
+                    }
+                    // Set translation for relay active state
+                    switch (language) {
+                        case 'de': relayActive = 'Relais X aktiv';
+                            break;
+                        case 'fr': relayActive = 'Relais X actif';
+                            break;
+                    }
+                })
+                .catch(err => {
+                    reject (err);
+                });
 
             const spec = new vbus.Specification({
                 language: language
@@ -93,20 +96,22 @@ class MyVbus extends utils.Adapter {
             // Check if credentials are not empty and decrypt stored password
             if (!(connectionDevice==='serial' || connectionDevice==='langw')) {
                 if (vbusPassword && vbusPassword !== '')  {
-                    await this.getForeignObjectAsync('system.config').then(obj => {
-                        if (obj && obj.native && obj.native.secret) {
-                        //noinspection JSUnresolvedVariable
-                            vbusPassword = this.decrypt(obj.native.secret, vbusPassword);
-                        } else {
-                        //noinspection JSUnresolvedVariable
-                            vbusPassword = this.decrypt('Zgfr56gFe87jJOM', vbusPassword);
-                        }
-                    }).catch(err => {
-                        this.log.error(JSON.stringify(err));
-                    });
+                    this.getForeignObjectAsync('system.config')
+                        .then(obj => {
+                            if (obj && obj.native && obj.native.secret) {
+                                //noinspection JSUnresolvedVariable
+                                vbusPassword = this.decrypt(obj.native.secret, vbusPassword);
+                            } else {
+                                //noinspection JSUnresolvedVariable
+                                vbusPassword = this.decrypt('Zgfr56gFe87jJOM', vbusPassword);
+                            }
+                        })
+                        .catch(err => {
+                            reject (err);
+                        });
 
                 } else {
-                    this.log.error('[Credentials] error: Password missing or empty in Adapter Settings');
+                    throw new Error ('[Credentials] error: Password missing or empty in Adapter Settings');
                 }
             }
 
@@ -121,7 +126,7 @@ class MyVbus extends utils.Adapter {
                         });
                         this.log.info('TCP Connection to ' + connectionIdentifier + ' selected');
                     } else {
-                        this.log.warn('Host-address not valid. Should be IP-address or FQDN');
+                        reject (new Error ('Host-address not valid. Should be IP-address or FQDN'));
                     }
                     break;
 
@@ -132,7 +137,7 @@ class MyVbus extends utils.Adapter {
                         });
                         this.log.info('Serial Connection at ' + connectionIdentifier + ' selected');
                     } else {
-                        this.log.warn('Serial port ID not valid. Should be like /dev/tty.usbserial or COM9');
+                        reject (new Error ('Serial port ID not valid. Should be like /dev/tty.usbserial or COM9'));
                     }
                     break;
 
@@ -145,7 +150,7 @@ class MyVbus extends utils.Adapter {
                         });
                         this.log.info('TCP Connection to ' + connectionIdentifier + ' selected');
                     } else {
-                        this.log.warn('Host-address not valid. Should be IP-address or FQDN');
+                        reject (new Error ('Host-address not valid. Should be IP-address or FQDN'));
                     }
                     break;
 
@@ -168,7 +173,7 @@ class MyVbus extends utils.Adapter {
                             this.log.info('TCP Connection to ' + connectionIdentifier + ' selected');
                         }
                     } else {
-                        this.log.warn('Host-address not valid. Should be IP-address or FQDN');
+                        reject (new Error ('Host-address not valid. Should be IP-address or FQDN'));
                     }
                     break;
 
@@ -193,7 +198,7 @@ class MyVbus extends utils.Adapter {
                             this.log.info('TCP Connection to ' + connectionIdentifier + ' selected');
                         }
                     } else {
-                        this.log.warn('Host-address not valid. Should be IP-address or FQDN');
+                        reject (new Error ('Host-address not valid. Should be IP-address or FQDN'));
                     }
             }
 
@@ -207,6 +212,7 @@ class MyVbus extends utils.Adapter {
                     this.setStateAsync('info.connection', false, true);
                 }
             });
+            
             ctx.headerSet = new vbus.HeaderSet();
             let hasSettled = false;
             let settledCountdown = 0;
@@ -260,7 +266,7 @@ class MyVbus extends utils.Adapter {
 
                 this.log.debug('received data: ' + JSON.stringify(data));
                 if (data[1]){
-                    // create device
+                // create device
                     this.createOrExtendObject(data[1].deviceId, {
                         type: 'device',
                         common: {
@@ -282,7 +288,7 @@ class MyVbus extends utils.Adapter {
                 }
                 // iterate over all data to create datapoints
                 _.forEach(data, (item) => {
-                    this.log.debug('received item-data: ' + JSON.stringify(item));
+                    //this.log.debug('received item-data: ' + JSON.stringify(item));
                     const deviceId = item.deviceId.replace(/_/g, '');
                     const channelId = deviceId + '.' + item.addressId;
                     const objectId = channelId + '.' + item.id.replace(/_/g, '');
@@ -361,13 +367,16 @@ class MyVbus extends utils.Adapter {
             });
             // Establish connection             
             this.log.info('Wait for Connection...');
-            await ctx.connection.connect();
-            ctx.hsc.startTimer();
-                   
-        } catch (error) {
-            this.log.error(`[main()] error: ${error.message}, stack: ${error.stack}`);
-        }
+            ctx.connection.connect()
+                .then(()=>{
+                    ctx.hsc.startTimer();})
+                .catch ((error) => {
+                    reject (error);
+                });
+        });
+    
     }
+
 
     // Is called when databases are connected and adapter received configuration.
     async onReady() {
@@ -378,10 +387,12 @@ class MyVbus extends utils.Adapter {
                 await this.main();
             } else {
                 await this.setStateAsync('info.connection', false, true);
-                this.terminate('Terminate Adapter until Configuration is completed', 11);
+                //this.terminate('Terminate Adapter until Configuration is completed', 11);
+                throw new Error ('Terminate Adapter until Configuration is completed');
             }
         } catch (error) {
             this.log.error(`[onReady] error: ${error.message}, stack: ${error.stack}`);
+            //throw error;
         }
     }
 
