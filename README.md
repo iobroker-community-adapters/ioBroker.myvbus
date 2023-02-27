@@ -51,7 +51,7 @@ This adapter connects ioBroker to various VBus-based devices using resol-vbus, a
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS** - 2023 maintenance release
+### 0.2.3 (2023-02-27) - 2023 maintenance release
 
 * (pdbjjens) Updated dependencies
 * (pdbjjens) New: Use adapter-dev instead of gulp translate
@@ -75,18 +75,6 @@ This adapter connects ioBroker to various VBus-based devices using resol-vbus, a
 ### 0.1.1 (2021-05-18)
 
 * Fixes for supporting js-controller >=3.2.x
-
-### 0.1.0
-
-* (grizzelbee) Fix: config page shows current settings now (not default anymore)
-* (grizzelbee) Fix: "Connected" state is updated correctly now if connection is disrupted.
-* (grizzelbee) New: Added Badge for latest(npm) version to readme
-* (grizzelbee) Fix: removed default password from config to ensure it's encrypted on first config
-* (grizzelbee) Fix: removed Force-ReInit
-* (grizzelbee) Fix: sensor maintenance indicators are booleans now
-* (grizzelbee) New: added activity indicator states for relays
-* (pdbjjens) Fix: Prevent warnings regarding non-existent objects upon adapter instance creation and start-up with js-controller 3.2.x
-* (pdbjjens) Fix: updated dependencies and vulnerabilities
 
 ## Legal Notices
 

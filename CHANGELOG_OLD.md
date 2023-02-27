@@ -1,4 +1,16 @@
 # Older changes
+## 0.1.0
+
+* (grizzelbee) Fix: config page shows current settings now (not default anymore)
+* (grizzelbee) Fix: "Connected" state is updated correctly now if connection is disrupted.
+* (grizzelbee) New: Added Badge for latest(npm) version to readme
+* (grizzelbee) Fix: removed default password from config to ensure it's encrypted on first config
+* (grizzelbee) Fix: removed Force-ReInit
+* (grizzelbee) Fix: sensor maintenance indicators are booleans now
+* (grizzelbee) New: added activity indicator states for relays
+* (pdbjjens) Fix: Prevent warnings regarding non-existent objects upon adapter instance creation and start-up with js-controller 3.2.x
+* (pdbjjens) Fix: updated dependencies and vulnerabilities
+
 ## 0.0.6
 * (pdbjjens) alpha 6 release updated dependencies
 
