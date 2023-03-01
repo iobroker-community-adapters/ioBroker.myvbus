@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "myvbus",
-    "version": "0.2.3",
+    "version": "0.2.4",
     "news": {
+      "0.2.4": {
+        "en": "Fix password check",
+        "de": "Passwort überprüfen",
+        "ru": "Исправлена проверка пароля",
+        "pt": "Corrigir verificação de senha",
+        "nl": "Vertaling:",
+        "fr": "Correction du mot de passe",
+        "it": "Verifica password",
+        "es": "Control de contraseña",
+        "pl": "Fix password",
+        "uk": "Перевірка пароля",
+        "zh-cn": "Fix 密码检查"
+      },
       "0.2.3": {
         "en": "Updated dependencies\nNew: Use adapter-dev instead of gulp translate\nFix: error handling for serial connections",
         "de": "Aktualisierte Abhängigkeiten\nNeu: Verwenden Sie Adapter-dev anstelle von gulp translate\nFix: Fehlerbehandlung für serielle Verbindungen",

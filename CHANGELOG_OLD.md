@@ -1,4 +1,8 @@
 # Older changes
+## 0.1.1 (2021-05-18)
+
+* Fixes for supporting js-controller >=3.2.x
+
 ## 0.1.0
 
 * (grizzelbee) Fix: config page shows current settings now (not default anymore)
