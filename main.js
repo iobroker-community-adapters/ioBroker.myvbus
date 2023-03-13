@@ -137,7 +137,7 @@ class MyVbus extends utils.Adapter {
                         });
                         this.log.info('Serial Connection at ' + connectionIdentifier + ' selected');
                     } else {
-                        throw new Error(('Serial port ID not valid. Should be like /dev/tty.usbserial or COM9'));
+                        throw new Error(('Serial port ID not valid. Should be like /dev/ttyUSBserial or COM9'));
                     }
                     break;
 
@@ -204,12 +204,21 @@ class MyVbus extends utils.Adapter {
 
             // Connection state handler
             ctx.connection.on('connectionState', (connectionState) => {
-                this.log.debug('Connection state changed to ' + connectionState);
-                if (connectionState === 'CONNECTED') {
-                    this.log.info('Connection established');
-                    this.setStateAsync('info.connection', true, true);
-                } else {
-                    this.setStateAsync('info.connection', false, true);
+                
+                switch (connectionState) {
+                    case 'CONNECTED':
+                        this.log.info('Connection established');
+                        this.setStateAsync('info.connection', true, true);
+                        break;
+                    case 'INTERRUPTED': 
+                        this.log.debug('Connection interrupted');               
+                        this.setStateAsync('info.connection', false, true);
+                        break;
+                    case 'RECONNECTING':
+                        this.log.warn('Connection interrupted, trying to reconnect');
+                        break;
+                    default:
+                        this.log.debug('Connection state changed to ' + connectionState);        
                 }
             });
             
@@ -371,7 +380,7 @@ class MyVbus extends utils.Adapter {
             await ctx.connection.connect();
             ctx.hsc.startTimer();
         } catch (error) {
-            this.log.error(`[main()] error: ${error.message}, stack: ${error.stack}`);
+            this.log.error(`[main()] error: ${error.message}`);
         }
     }
     
