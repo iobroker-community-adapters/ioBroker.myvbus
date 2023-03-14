@@ -51,6 +51,11 @@ This adapter connects ioBroker to various VBus-based devices using resol-vbus, a
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (pdbjjens) Updated dependencies
+* (pdbjjens) Fix: reconnect handling for serial connections
+
 ### 0.2.4 (2023-03-01)
 
 * (pdbjjens) Fix password check

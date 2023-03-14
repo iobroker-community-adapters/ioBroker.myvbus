@@ -273,7 +273,7 @@ class MyVbus extends utils.Adapter {
                     };
                 });
 
-                //this.log.debug('received data: ' + JSON.stringify(data));
+                this.log.debug('received data: ' + JSON.stringify(data));
                 if (data[1]){
                 // create device
                     this.createOrExtendObject(data[1].deviceId, {
