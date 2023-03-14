@@ -1,4 +1,8 @@
 # Older changes
+## 0.2.0 (2021-06-25)
+
+* Dropped node.js 10 support, added node.js 14 and 16 support
+
 ## 0.1.1 (2021-05-18)
 
 * Fixes for supporting js-controller >=3.2.x

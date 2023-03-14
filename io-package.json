@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "myvbus",
-    "version": "0.2.4",
+    "version": "0.2.5",
     "news": {
+      "0.2.5": {
+        "en": "Updated dependencies\nFix: reconnect handling for serial connections",
+        "de": "Aktualisierte Abhängigkeiten\nFix: Reconnect-Handling für serielle Verbindungen",
+        "ru": "Обновленные зависимости\nИсправление: переподключение обработки для серийных соединений",
+        "pt": "Dependências atualizadas\nFix: manuseio de reconectar para conexões seriais",
+        "nl": "Verouderde afhankelijkheid\nVerbinding met de serieverbinding",
+        "fr": "Mise à jour des dépendances\nCorrection : reconnecter la manipulation pour les connexions série",
+        "it": "Dipendenze aggiornate\nFisso: ricollegare la gestione per connessioni seriali",
+        "es": "Dependencias actualizadas\nFijación: manipulación de reconexión para conexiones serie",
+        "pl": "Zależność od upoważnienia\nFix: reconnecting",
+        "uk": "Оновлені залежності\nВиправлення: відключення обробки для серійних підключень",
+        "zh-cn": "A. 最新依赖情况\n九:重新联系"
+      },
       "0.2.4": {
         "en": "Fix password check",
         "de": "Passwort überprüfen",
@@ -80,19 +93,6 @@
         "pl": "Poprawki dotyczące obsługi js-controller> = 3.2.x",
         "zh-cn": "修复了支持js-controller> = 3.2.x的问题",
         "uk": "Виправлення для підтримки js-контролера >=3.2.x"
-      },
-      "0.1.0": {
-        "en": "Bugfixes and a few new features",
-        "de": "Bugfixes und ein paar neue Funktionen",
-        "ru": "Исправления и несколько новых функций",
-        "pt": "Correções de bugs e alguns novos recursos",
-        "nl": "Bugfixes en een paar nieuwe functies",
-        "fr": "Corrections de bugs et quelques nouvelles fonctionnalités",
-        "it": "Bugfix e alcune nuove funzionalità",
-        "es": "Corrección de errores y algunas características nuevas.",
-        "pl": "Poprawki błędów i kilka nowych funkcji",
-        "zh-cn": "错误修正和一些新功能",
-        "uk": "Виправлення помилок і кілька нових функцій"
       }
     },
     "titleLang": {
