@@ -216,6 +216,7 @@ class MyVbus extends utils.Adapter {
                         break;
                     case 'RECONNECTING':
                         this.log.warn('Connection interrupted, trying to reconnect');
+                        this.setStateAsync('info.connection', false, true);
                         break;
                     default:
                         this.log.debug('Connection state changed to ' + connectionState);        
