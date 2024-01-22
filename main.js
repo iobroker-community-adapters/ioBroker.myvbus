@@ -73,12 +73,94 @@ class MyVbus extends utils.Adapter {
             const spec = new vbus.Specification({
                 language: language
             });
+
+            // Set up connection depending on connection device
+            switch (this.config.connectionDevice) {
+                case 'lan':
+                    ctx.connection = new vbus.TcpConnection({
+                        host: this.config.connectionIdentifier,
+                        port: this.config.connectionPort,
+                        password: this.config.vbusPassword
+                    });
+                    this.log.info('TCP Connection via LAN to [' + this.config.connectionIdentifier + ':' + this.config.connectionPort + '] selected');
+                    break;
+            
+                case 'serial':
+                    ctx.connection = new vbus.SerialConnection({
+                        path: this.config.connectionIdentifier
+                    });
+                    this.log.info('Serial Connection at [' + this.config.connectionIdentifier + '] selected');
+                    break;
+            
+                case 'langw':
+                    ctx.connection = new vbus.TcpConnection({
+                        host: this.config.connectionIdentifier,
+                        port: this.config.connectionPort,
+                        rawVBusDataOnly: true
+                    });
+                    this.log.info('TCP Connection via LAN-gw to [' + this.config.connectionIdentifier + ':' + this.config.connectionPort + '] selected');
+                    break;
+                    /**            
+                case 'inet':
+                    this.log.debug('VBus.net Connection via [' + this.config.vbusViaTag.substring(12, this.config.vbusViaTag.length) + '] selected');
+                    this.log.debug('VBus.net Connection via [' + this.config.vbusViaTag.substring(0, 11) + '] selected');
+                    ctx.connection = new vbus.TcpConnection({
+                        //host: this.config.connectionIdentifier,
+                        host: this.config.vbusViaTag.substring(12, this.config.vbusViaTag.length),
+                        port: this.config.connectionPort,
+                        password: this.config.vbusPassword,
+                        viaTag: this.config.vbusViaTag.substring(0, 11)
+                    });
+                    this.log.info('VBus.net Connection via [' + this.config.vbusViaTag + '] selected');
+                    break;
+**/            
+                case 'dl2':
+                    if (this.config.connectionIdentifier.match(vbusioformat)) {
+                        ctx.connection = new vbus.TcpConnection({
+                            host: this.config.connectionIdentifier,
+                            port: this.config.connectionPort,
+                            password: this.config.vbusPassword,
+                            viaTag: this.config.vbusViaTag
+                        });
+                        this.log.info('VBus.net Connection to KM2/DL2 via [' + this.config.connectionIdentifier + ' via ' + this.config.vbusViaTag + '] selected');
+                    } else {
+                        ctx.connection = new vbus.TcpConnection({
+                            host: this.config.connectionIdentifier,
+                            port: this.config.connectionPort,
+                            password: this.config.vbusPassword
+                        });
+                        this.log.info('TCP Connection to KM2/DL2 on [' + this.config.connectionIdentifier + ':' + this.config.connectionPort + '] selected');
+                    }
+                    break;
+            
+                case 'dl3':
+                    if (this.config.connectionIdentifier.match(vbusioformat)) {
+                        ctx.connection = new vbus.TcpConnection({
+                            host: this.config.connectionIdentifier,
+                            port: this.config.connectionPort,
+                            password: this.config.vbusPassword,
+                            channel: this.config.vbusChannel,
+                            viaTag: this.config.vbusViaTag
+                        });
+                        this.log.info('VBus.net Connection to DL3 channel ' + this.config.vbusChannel + ' via [' + this.config.connectionIdentifier + ' via ' + this.config.vbusViaTag + '] selected');
+                    } else {
+                        ctx.connection = new vbus.TcpConnection({
+                            host: this.config.connectionIdentifier,
+                            port: this.config.connectionPort,
+                            password: this.config.vbusPassword,
+                            channel: this.config.vbusChannel
+                        });
+                        this.log.info('TCP Connection to DL3 channel ' + this.config.vbusChannel + ' on [' + this.config.connectionIdentifier + ':' + this.config.connectionPort + '] selected');
+                    }
+            }
+            
+            /**
             // The adapters config (in the instance object everything under the attribute "native") is accessible via
             // this.config:
             const connectionDevice = this.config.connectionDevice;
             const connectionIdentifier = this.config.connectionIdentifier;
             const connectionPort = this.config.connectionPort;
-            let vbusPassword = this.config.vbusPassword;
+            const vbusPassword = this.config.vbusPassword;
             const vbusChannel = this.config.vbusChannel;
             const vbusDataOnly = this.config.vbusDataOnly;
             const vbusViaTag = this.config.vbusViaTag;
@@ -88,32 +170,11 @@ class MyVbus extends utils.Adapter {
             this.log.debug(`Connection Type: ${connectionDevice}`);
             this.log.debug(`Connection Identifier: ${connectionIdentifier}`);
             this.log.debug(`Connection Port: ${connectionPort}`);
-            this.log.debug(`VBus Password encrypted: ${vbusPassword}`);
+            this.log.debug(`VBus Password: ${vbusPassword}`);
             this.log.debug(`VBus Channel: ${vbusChannel}`);
             this.log.debug(`VBus Via Tag: ${vbusViaTag}`);
             this.log.debug(`VBus Interval: ${vbusInterval}`);
 
-            // Check if credentials are not empty and decrypt stored password
-            if (!(connectionDevice==='serial' || connectionDevice==='langw')) {
-                if (vbusPassword && vbusPassword !== '')  {
-                    await this.getForeignObjectAsync('system.config')
-                        .then(obj => {
-                            if (obj && obj.native && obj.native.secret) {
-                                //noinspection JSUnresolvedVariable
-                                vbusPassword = this.decrypt(obj.native.secret, vbusPassword);
-                            } else {
-                                //noinspection JSUnresolvedVariable
-                                vbusPassword = this.decrypt('Zgfr56gFe87jJOM', vbusPassword);
-                            }
-                        });
-                    //.catch(err => {
-                    //    throw (err);
-                    //});
-
-                } else {
-                    throw new Error(('[Credentials] error: Password missing or empty in Adapter Settings'));
-                }
-            }
 
             // Set up connection depending on connection device and check connection identifier
             switch (connectionDevice) {
@@ -201,7 +262,7 @@ class MyVbus extends utils.Adapter {
                         throw new Error(('Host-address not valid. Should be IP-address or FQDN'));
                     }
             }
-
+**/
             // Connection state handler
             ctx.connection.on('connectionState', (connectionState) => {
                 
@@ -250,8 +311,8 @@ class MyVbus extends utils.Adapter {
             });
 
             ctx.hsc = new vbus.HeaderSetConsolidator({
-                interval: vbusInterval * 1000,
-                timeToLive: (vbusInterval * 1000) + 1000
+                interval: this.config.vbusInterval * 1000,
+                timeToLive: (this.config.vbusInterval * 1000) + 1000
             });
 
             // HeaderSetConsolidator handler - creates object tree and updates values in preset interval
@@ -274,7 +335,7 @@ class MyVbus extends utils.Adapter {
                     };
                 });
 
-                this.log.debug('received data: ' + JSON.stringify(data));
+                //this.log.debug('received data: ' + JSON.stringify(data));
                 if (data[1]){
                 // create device
                     this.createOrExtendObject(data[1].deviceId, {
@@ -385,11 +446,118 @@ class MyVbus extends utils.Adapter {
         }
     }
     
+    /*
+    * @param {object} config Current  active config for adapter
+    * @returns {string} Result of the check
+    * */
+    async configIsValid(config) {
+        //this.log.debug('configIsValid Function ');
+        //this.log.debug('Entering Function [configIsValid]');
+        // Log the current config given to the function
+        this.log.debug(`Connection Type: ${this.config.connectionDevice}`);
+        this.log.debug(`Connection Identifier: ${this.config.connectionIdentifier}`);
+        this.log.debug(`Connection Port: ${this.config.connectionPort}`);
+        this.log.debug(`VBus Password: ${this.config.vbusPassword}`);
+        this.log.debug(`VBus Channel: ${this.config.vbusChannel}`);
+        this.log.debug(`VBus Via Tag: ${this.config.vbusViaTag}`);
+        this.log.debug(`VBus Interval: ${this.config.vbusInterval}`);
+        return new Promise(
+            function (resolve, reject) {
+                // some helper functions
+                function testSerialformat(config) {
+                    if (!config.connectionIdentifier.match(serialformat)) {
+                        reject('Serialformat is invalid! Please fix.');
+                    }
+                }
+    
+                function testIP_and_FQDN_Format(config) {
+                    if (!config.connectionIdentifier.match(ipformat) && !config.connectionIdentifier.match(fqdnformat)) {
+                        reject('[' + config.connectionIdentifier + '] is neither a valid IP-Format nor a fully qualified domain name (FQDN)!');
+                    }
+                }
+                /**
+                function testVBusIOFormat(config) {
+                    if (!config.vbusViaTag.match(vbusioformat)) {
+                        reject('VBusIO-Format is invalid! Should be something like [d01234567890.vbus.io] or [d01234567890.vbus.net].');
+                    }
+                }
+                **/
+                function testPassword(config) {
+                    if (!config.vbusPassword || '' === config.vbusPassword) {
+                        reject('Password is missing!');
+                    }
+                }
+
+                function testPort(config) {
+                    if ('' === config.connectionPort || 0 === config.connectionPort) {
+                        reject('Invalid connection port given! Should be > 0.');
+                    }
+                }
+
+                function testChannel(config) {
+                    if (config.vbusChannel < 1 || config.vbusChannel >= 7) {
+                        reject('Invalid DL3 channel given! Should be between 1 and 6.');
+                    }
+                }
+
+                // switch connectionDevice seleted by User
+                if (config.connectionDevice === 'serial') {
+                    testSerialformat(config);
+                    resolve('Config seems to be valid for USB/Serial.');
+                } else if (config.connectionDevice === 'lan') {
+                    testIP_and_FQDN_Format(config);
+                    testPassword(config);
+                    testPort(config);
+                    resolve('Config seems to be valid for LAN.');
+                } else if (config.connectionDevice === 'langw') {
+                    testIP_and_FQDN_Format(config);
+                    testPort(config);
+                    resolve('Config seems to be valid for Serial-to-LAN-Gateway.');
+                } else if (config.connectionDevice === 'dl2') {
+                    testIP_and_FQDN_Format(config);
+                    testPort(config);
+                    testPassword(config);
+                    resolve('Config seems to be valid for KM2/DL2.');
+                } else if (config.connectionDevice === 'dl3') {
+                    testIP_and_FQDN_Format(config);
+                    testPort(config);
+                    testPassword(config);
+                    testChannel(config);
+                    resolve('Config seems to be valid for DL3/DL2Plus.');
+                    /**
+                } else if (config.connectionDevice === 'inet') {
+                    testPort(config);
+                    testVBusIOFormat(config);
+                    testPassword(config);
+                    resolve('Config seems to be valid for KM2/DL2/DL3 via VBus.net.');
+**/
+                } else {
+                    reject('Config is invalid! Please select at least a connection device to get further tests - or even better, complete your whole config.');
+                }
+            }
+        );
+    }
     
 
 
     // Is called when databases are connected and adapter received configuration.
     async onReady() {
+        this.configIsValid(this.config)
+            .then(result => {
+                this.log.info(result);
+                this.main().then(null, err => {
+                    this.log.error(err);
+                    this.setState('info.connection', false, true);
+                });
+            })
+            .catch(err => {
+                this.log.error(err);
+                this.setStateAsync('info.connection', false, true);
+                return;
+                //this.terminate('Terminating Adapter until Configuration is completed', 11);
+            });
+
+        /**     
         try {
             // Terminate adapter after first start because configuration is not yet received
             // Adapter is restarted automatically when config page is closed
@@ -402,7 +570,9 @@ class MyVbus extends utils.Adapter {
             }
         } catch (error) {
             this.log.error(`[onReady] error: ${error.message}, stack: ${error.stack}`);
-        }
+        } 
+        **/
+        
     }
 
     //  Create or extend object
@@ -415,15 +585,6 @@ class MyVbus extends utils.Adapter {
                 self.setObjectNotExists(id, objData, () => {self.setState(id, value, true);});
             }
         });
-    }
-    
-    // Decrypt passwords
-    decrypt(key, value) {
-        let result = '';
-        for (let i = 0; i < value.length; ++i) {
-            result += String.fromCharCode(key[i % key.length].charCodeAt(0) ^ value.charCodeAt(i));
-        }
-        return result;
     }
 
     // Exit adapter 
