@@ -173,7 +173,7 @@
         "connectionDevice": "",
         "connectionIdentifier": "",
         "connectionPort": 7053,
-        "vbusPassword": "",
+        "vbusPassword": "vbus",
         "vbusChannel": 7,
         "vbusViaTag": "",
         "vbusInterval": 30
