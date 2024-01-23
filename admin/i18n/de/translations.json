@@ -17,7 +17,7 @@
     "Ttip_DL3Channel": "DL3/DL2Plus-Kanal 0 wird nicht unterstützt",
     "Lbl_DeviceAddress": "Geräteadresse",
     "Desc_DeviceAddress": "Hostadresse (IP oder FQDN) für LAN und VBus.net oder Port-ID für Seriell/USB-Port.",
-    "Ttip_DeviceAddress": "Beispiele: IP: 192.168.1.123 FQDN: yourioBroker.fritz.box VBus.net: d0123456789.vbus.net oder myDL2.vbus.io SerialPort-ID: /dev/ttyUSB0 oder COM5",
+    "Ttip_DeviceAddress": "Beispiele: IP: 192.168.178.188 FQDN: myDL2.fritz.box VBus.net: d0123456789.vbus.net oder myDL2.vbus.io SerialPort-ID: /dev/ttyUSB0 oder COM5",
     "Lbl_DevicePassword": "Gerätepasswort",
     "Desc_DevicePassword": "Passwort Ihres Verbindungsgeräts.",
     "Ttip_DevicePassword": "Standard: vbus",

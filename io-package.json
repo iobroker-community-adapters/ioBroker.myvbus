@@ -159,7 +159,7 @@
         ],
         "globalDependencies": [
             {
-                "admin": ">=5.2.28"
+                "admin": ">=6.3.5"
             }
         ]
     },

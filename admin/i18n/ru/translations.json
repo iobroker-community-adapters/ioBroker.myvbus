@@ -17,7 +17,7 @@
     "Ttip_DL3Channel": "Канал 0 DL3/DL2Plus не поддерживается.",
     "Lbl_DeviceAddress": "Адрес устройства",
     "Desc_DeviceAddress": "Адрес хоста (IP или полное доменное имя) для LAN и VBus.net или идентификатор порта для последовательного/USB-порта.",
-    "Ttip_DeviceAddress": "Примеры: IP: 192.168.1.123 Полное доменное имя: yourioBroker.fritz.box VBus.net: d0123456789.vbus.net или myDL2.vbus.io Идентификатор последовательного порта: /dev/ttyUSB0 или COM5",
+    "Ttip_DeviceAddress": "Примеры: IP: 192.168.178.188 Полное доменное имя: myDL2.fritz.box VBus.net: d0123456789.vbus.net или myDL2.vbus.io Идентификатор последовательного порта: /dev/ttyUSB0 или COM5",
     "Lbl_DevicePassword": "Пароль устройства",
     "Desc_DevicePassword": "Пароль вашего подключаемого устройства.",
     "Ttip_DevicePassword": "По умолчанию: vbus",

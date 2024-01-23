@@ -29,22 +29,19 @@ This adapter connects ioBroker to various VBus-based devices using resol-vbus, a
 
 ## Configuration hints
 
-* The default setting for the connection type is VBus/LAN, but it must be explicitly selected even for VBus/LAN, otherwise no connection will be established.
+* The connection device type must be explicitly selected, otherwise no connection will be established.
+* TCP connection port: The default setting 7053 should not be changed
+* Device password: The password which you have set in your connection device (default: vbus)
+* DL3 channel: Only relevant for DL3/DL2Plus - leave at "None" for all other connection devices.  
+(allowed values: 1-6, channel 0 cannot be read out)
+* Update interval: The time between updates of the measured values (default 30s)
 * The correct settings for direct LAN access for VBus/LAN, DL3, DL2, KM2 are:
-  * Connection type: VBus/LAN or KM2/DL2 or DL3/DL2Plus
-  * Connection identifier: IP address (e.g. 192.168.178.188) or FullyQualifiedHostName (e.g. host1.example.com)
-  * VBus password: YourVBusPassword (default: vbus)
-  * Connection port: Default setting 7053 should not be changed
-  * DL3 channel: Only relevant for DL3/DL2Plus (values 1-6, channel 0 can not be read out)
-  * Update interval: Time between updates of the measured values (default 30s)
+  * Connection Device: VBus/LAN or KM2/DL2 or DL3/DL2Plus
+  * Device Address: IP address (e.g. 192.168.178.188) or FullyQualifiedHostName (e.g. myDL2.fritz.box)
 * The correct settings for the DL3, DL2, KM2 access via VBus.net are:
-  * Connection type: DL3/DL2Plus or DL2/KM2
-  * Connection identifier: vbus.net (or vbus.io) - both without http:// and Via identifier!
-  * Connection port: Default setting 7053 should not be changed
-  * VBus password: YourVBusPassword (default: vbus)
-  * DL3 channel: Only relevant for DL3/DL2Plus (values: 1-6, channel 0 cannot be read out)
-  * Via identifier: YourViaIdentifier (e.g. d1234567890) - without http:// before or .vbus.io behind
-  * Update interval: Time between the update of the measured values (default 30s)
+  * Connection Device: DL3/DL2Plus or DL2/KM2
+  * Device Address: vbus.net (or vbus.io) - both without http:// and Via identifier!  
+  * Via Tag: YourViaIdentifier (e.g. d1234567890) - without http:// before or .vbus.io behind
 
 ## Changelog
 <!--
@@ -52,7 +49,7 @@ This adapter connects ioBroker to various VBus-based devices using resol-vbus, a
   ### **WORK IN PROGRESS**
 -->
 
-**WORK IN PROGRESS**
+### **WORK IN PROGRESS**
 
 * (pdbjjens) New: Support ioBroker discovery
 * (pdbjjens) Change: node>=16, js-contoller>=4 and admin>=6 required
