@@ -1,194 +1,206 @@
 {
-  "common": {
-    "name": "myvbus",
-    "version": "0.2.5",
-    "news": {
-      "0.2.5": {
-        "en": "Updated dependencies\nFix: reconnect handling for serial connections",
-        "de": "Aktualisierte Abhängigkeiten\nFix: Reconnect-Handling für serielle Verbindungen",
-        "ru": "Обновленные зависимости\nИсправление: переподключение обработки для серийных соединений",
-        "pt": "Dependências atualizadas\nFix: manuseio de reconectar para conexões seriais",
-        "nl": "Verouderde afhankelijkheid\nVerbinding met de serieverbinding",
-        "fr": "Mise à jour des dépendances\nCorrection : reconnecter la manipulation pour les connexions série",
-        "it": "Dipendenze aggiornate\nFisso: ricollegare la gestione per connessioni seriali",
-        "es": "Dependencias actualizadas\nFijación: manipulación de reconexión para conexiones serie",
-        "pl": "Zależność od upoważnienia\nFix: reconnecting",
-        "uk": "Оновлені залежності\nВиправлення: відключення обробки для серійних підключень",
-        "zh-cn": "A. 最新依赖情况\n九:重新联系"
-      },
-      "0.2.4": {
-        "en": "Fix password check",
-        "de": "Passwort überprüfen",
-        "ru": "Исправлена проверка пароля",
-        "pt": "Corrigir verificação de senha",
-        "nl": "Vertaling:",
-        "fr": "Correction du mot de passe",
-        "it": "Verifica password",
-        "es": "Control de contraseña",
-        "pl": "Fix password",
-        "uk": "Перевірка пароля",
-        "zh-cn": "Fix 密码检查"
-      },
-      "0.2.3": {
-        "en": "Updated dependencies\nNew: Use adapter-dev instead of gulp translate\nFix: error handling for serial connections",
-        "de": "Aktualisierte Abhängigkeiten\nNeu: Verwenden Sie Adapter-dev anstelle von gulp translate\nFix: Fehlerbehandlung für serielle Verbindungen",
-        "ru": "Обновленные зависимости\nНовый: Используйте адаптер-dev вместо gulp перевести\nИсправление: обработка ошибок для серийных соединений",
-        "pt": "Dependências atualizadas\nNovo: Use o adaptador-dev em vez de gulp traduzir\nFix: manipulação de erros para conexões seriais",
-        "nl": "Verouderde afhankelijkheid\nGebruik adapter-dev in plaats van gulp vertaal\nVergissing voor serieverbindingen",
-        "fr": "Mise à jour des dépendances\nNouveau: Utilisez adaptateur-dev au lieu de traduire gulp\nCorrection : manipulation d'erreurs pour les connexions série",
-        "it": "Dipendenze aggiornate\nNuovo: Utilizzare adattatore-dev invece di gulp tradurre\nFix: gestione degli errori per connessioni seriali",
-        "es": "Dependencias actualizadas\nNuevo: Usar adaptador-dev en lugar de traducir gulp\nCorrección: manejo de errores para conexiones seriales",
-        "pl": "Zależność od upoważnienia\nNowy: Zastosowanie adapter-dev zamiast gulpów\nObserwowanie błędów dla połączeń szeregowych",
-        "uk": "Оновлені залежності\nНовий: Використовуйте адаптер-dev замість гіпульти перекладу\nВиправлення: обробка помилок для серійних підключень",
-        "zh-cn": "A. 最新依赖情况\n新的:使用适应器而不是固体字。\nFix:对帐篷的错误处理"
-      },
-      "0.2.2": {
-        "en": "Updated dependencies / Compatibility check for js-controller 4.0 / Support for js-controller 1.x dropped",
-        "de": "Aktualisierte Abhängigkeiten / Kompatibilitätsprüfung für js-controller 4.0 / Unterstützung für js-controller 1.x eingestellt",
-        "ru": "Обновлены зависимости / Проверка совместимости для js-controller 4.0 / Прекращена поддержка js-controller 1.x",
-        "pt": "Dependências atualizadas/verificação de compatibilidade para js-controller 4.0/suporte para js-controller 1.x descartado",
-        "nl": "Bijgewerkte afhankelijkheden / Compatibiliteitscontrole voor js-controller 4.0 / Ondersteuning voor js-controller 1.x weggevallen",
-        "fr": "Dépendances mises à jour / Vérification de compatibilité pour js-controller 4.0 / Prise en charge de js-controller 1.x abandonnée",
-        "it": "Dipendenze aggiornate/Verifica compatibilità per js-controller 4.0/Supporto per js-controller 1.x eliminato",
-        "es": "Dependencias actualizadas / Verificación de compatibilidad para js-controller 4.0 / Se eliminó el soporte para js-controller 1.x",
-        "pl": "Zaktualizowane zależności / Sprawdzanie zgodności dla js-controller 4.0 / Porzucono wsparcie dla js-controller 1.x",
-        "zh-cn": "更新了 js-controller 4.0 的依赖项/兼容性检查/对 js-controller 1.x 的支持已删除",
-        "uk": "Оновлені залежності / Перевірка сумісності для js-controller 4.0 / Підтримка js-controller 1.x припинена"
-      },
-      "0.2.1": {
-        "en": "Update dependencies\nChanged allowed range of temperature values to include the error values for short circuit and open circuit",
-        "de": "Abhängigkeiten aktualisieren\nDer zulässige Temperaturbereich wurde geändert, um die Fehlerwerte für Kurzschluss und Leerlauf einzuschließen",
-        "ru": "Обновить зависимости\nИзменен допустимый диапазон значений температуры, чтобы включить значения ошибок для короткого замыкания и обрыва.",
-        "pt": "Atualizar dependências\nFaixa permitida de valores de temperatura alterada para incluir os valores de erro para curto-circuito e circuito aberto",
-        "nl": "Afhankelijkheden bijwerken\nToegestaan bereik van temperatuurwaarden gewijzigd om de foutwaarden voor kortsluiting en open circuit op te nemen",
-        "fr": "Mettre à jour les dépendances\nModification de la plage autorisée des valeurs de température pour inclure les valeurs d'erreur pour les courts-circuits et les circuits ouverts",
-        "it": "Aggiorna dipendenze\nModificato l'intervallo consentito di valori di temperatura per includere i valori di errore per cortocircuito e circuito aperto",
-        "es": "Actualizar dependencias\nSe modificó el rango permitido de valores de temperatura para incluir los valores de error para cortocircuito y circuito abierto.",
-        "pl": "Aktualizuj zależności\nZmieniono dozwolony zakres wartości temperatury, aby uwzględnić wartości błędów dla zwarcia i obwodu otwartego",
-        "zh-cn": "更新依赖\n更改了允许的温度值范围以包括短路和开路的误差值",
-        "uk": "Оновити залежності\nЗмінено дозволений діапазон значень температури, щоб включити значення похибок для короткого замикання та розриву"
-      },
-      "0.2.0": {
-        "en": "Dropped node.js 10 support, added node.js 14 and 16 support",
-        "de": "Unterstützung für node.js 10 entfernt, Unterstützung für node.js 14 und 16 hinzugefügt",
-        "ru": "Прекращена поддержка node.js 10, добавлена ​​поддержка node.js 14 и 16",
-        "pt": "Suporte a node.js 10 removido, suporte a node.js 14 e 16 adicionado",
-        "nl": "Ondersteuning voor node.js 10 verwijderd, ondersteuning voor node.js 14 en 16 toegevoegd",
-        "fr": "Prise en charge de node.js 10 supprimée, prise en charge de node.js 14 et 16 ajoutée",
-        "it": "Eliminato il supporto node.js 10, aggiunto il supporto node.js 14 e 16",
-        "es": "Se eliminó la compatibilidad con node.js 10, se agregó compatibilidad con node.js 14 y 16",
-        "pl": "Zrezygnowano z obsługi node.js 10, dodano obsługę node.js 14 i 16",
-        "zh-cn": "删除了 node.js 10 支持，添加了 node.js 14 和 16 支持",
-        "uk": "Припинено підтримку node.js 10, додано підтримку node.js 14 і 16"
-      },
-      "0.1.1": {
-        "en": "Fixes for supporting js-controller >=3.2.x",
-        "de": "Korrekturen zur Unterstützung von js-controller> = 3.2.x.",
-        "ru": "Исправления для поддержки js-controller> = 3.2.x",
-        "pt": "Correções para suportar js-controller> = 3.2.x",
-        "nl": "Oplossingen voor ondersteuning van js-controller> = 3.2.x",
-        "fr": "Corrections pour la prise en charge de js-controller> = 3.2.x",
-        "it": "Correzioni per il supporto di js-controller> = 3.2.x",
-        "es": "Correcciones para admitir js-controller> = 3.2.x",
-        "pl": "Poprawki dotyczące obsługi js-controller> = 3.2.x",
-        "zh-cn": "修复了支持js-controller> = 3.2.x的问题",
-        "uk": "Виправлення для підтримки js-контролера >=3.2.x"
-      }
+    "common": {
+        "name": "myvbus",
+        "version": "0.2.5",
+        "news": {
+            "0.2.5": {
+                "en": "Updated dependencies\nFix: reconnect handling for serial connections",
+                "de": "Aktualisierte Abhängigkeiten\nFix: Reconnect-Handling für serielle Verbindungen",
+                "ru": "Обновленные зависимости\nИсправление: переподключение обработки для серийных соединений",
+                "pt": "Dependências atualizadas\nFix: manuseio de reconectar para conexões seriais",
+                "nl": "Verouderde afhankelijkheid\nVerbinding met de serieverbinding",
+                "fr": "Mise à jour des dépendances\nCorrection : reconnecter la manipulation pour les connexions série",
+                "it": "Dipendenze aggiornate\nFisso: ricollegare la gestione per connessioni seriali",
+                "es": "Dependencias actualizadas\nFijación: manipulación de reconexión para conexiones serie",
+                "pl": "Zależność od upoważnienia\nFix: reconnecting",
+                "uk": "Оновлені залежності\nВиправлення: відключення обробки для серійних підключень",
+                "zh-cn": "A. 最新依赖情况\n九:重新联系"
+            },
+            "0.2.4": {
+                "en": "Fix password check",
+                "de": "Passwort überprüfen",
+                "ru": "Исправлена проверка пароля",
+                "pt": "Corrigir verificação de senha",
+                "nl": "Vertaling:",
+                "fr": "Correction du mot de passe",
+                "it": "Verifica password",
+                "es": "Control de contraseña",
+                "pl": "Fix password",
+                "uk": "Перевірка пароля",
+                "zh-cn": "Fix 密码检查"
+            },
+            "0.2.3": {
+                "en": "Updated dependencies\nNew: Use adapter-dev instead of gulp translate\nFix: error handling for serial connections",
+                "de": "Aktualisierte Abhängigkeiten\nNeu: Verwenden Sie Adapter-dev anstelle von gulp translate\nFix: Fehlerbehandlung für serielle Verbindungen",
+                "ru": "Обновленные зависимости\nНовый: Используйте адаптер-dev вместо gulp перевести\nИсправление: обработка ошибок для серийных соединений",
+                "pt": "Dependências atualizadas\nNovo: Use o adaptador-dev em vez de gulp traduzir\nFix: manipulação de erros para conexões seriais",
+                "nl": "Verouderde afhankelijkheid\nGebruik adapter-dev in plaats van gulp vertaal\nVergissing voor serieverbindingen",
+                "fr": "Mise à jour des dépendances\nNouveau: Utilisez adaptateur-dev au lieu de traduire gulp\nCorrection : manipulation d'erreurs pour les connexions série",
+                "it": "Dipendenze aggiornate\nNuovo: Utilizzare adattatore-dev invece di gulp tradurre\nFix: gestione degli errori per connessioni seriali",
+                "es": "Dependencias actualizadas\nNuevo: Usar adaptador-dev en lugar de traducir gulp\nCorrección: manejo de errores para conexiones seriales",
+                "pl": "Zależność od upoważnienia\nNowy: Zastosowanie adapter-dev zamiast gulpów\nObserwowanie błędów dla połączeń szeregowych",
+                "uk": "Оновлені залежності\nНовий: Використовуйте адаптер-dev замість гіпульти перекладу\nВиправлення: обробка помилок для серійних підключень",
+                "zh-cn": "A. 最新依赖情况\n新的:使用适应器而不是固体字。\nFix:对帐篷的错误处理"
+            },
+            "0.2.2": {
+                "en": "Updated dependencies / Compatibility check for js-controller 4.0 / Support for js-controller 1.x dropped",
+                "de": "Aktualisierte Abhängigkeiten / Kompatibilitätsprüfung für js-controller 4.0 / Unterstützung für js-controller 1.x eingestellt",
+                "ru": "Обновлены зависимости / Проверка совместимости для js-controller 4.0 / Прекращена поддержка js-controller 1.x",
+                "pt": "Dependências atualizadas/verificação de compatibilidade para js-controller 4.0/suporte para js-controller 1.x descartado",
+                "nl": "Bijgewerkte afhankelijkheden / Compatibiliteitscontrole voor js-controller 4.0 / Ondersteuning voor js-controller 1.x weggevallen",
+                "fr": "Dépendances mises à jour / Vérification de compatibilité pour js-controller 4.0 / Prise en charge de js-controller 1.x abandonnée",
+                "it": "Dipendenze aggiornate/Verifica compatibilità per js-controller 4.0/Supporto per js-controller 1.x eliminato",
+                "es": "Dependencias actualizadas / Verificación de compatibilidad para js-controller 4.0 / Se eliminó el soporte para js-controller 1.x",
+                "pl": "Zaktualizowane zależności / Sprawdzanie zgodności dla js-controller 4.0 / Porzucono wsparcie dla js-controller 1.x",
+                "zh-cn": "更新了 js-controller 4.0 的依赖项/兼容性检查/对 js-controller 1.x 的支持已删除",
+                "uk": "Оновлені залежності / Перевірка сумісності для js-controller 4.0 / Підтримка js-controller 1.x припинена"
+            },
+            "0.2.1": {
+                "en": "Update dependencies\nChanged allowed range of temperature values to include the error values for short circuit and open circuit",
+                "de": "Abhängigkeiten aktualisieren\nDer zulässige Temperaturbereich wurde geändert, um die Fehlerwerte für Kurzschluss und Leerlauf einzuschließen",
+                "ru": "Обновить зависимости\nИзменен допустимый диапазон значений температуры, чтобы включить значения ошибок для короткого замыкания и обрыва.",
+                "pt": "Atualizar dependências\nFaixa permitida de valores de temperatura alterada para incluir os valores de erro para curto-circuito e circuito aberto",
+                "nl": "Afhankelijkheden bijwerken\nToegestaan bereik van temperatuurwaarden gewijzigd om de foutwaarden voor kortsluiting en open circuit op te nemen",
+                "fr": "Mettre à jour les dépendances\nModification de la plage autorisée des valeurs de température pour inclure les valeurs d'erreur pour les courts-circuits et les circuits ouverts",
+                "it": "Aggiorna dipendenze\nModificato l'intervallo consentito di valori di temperatura per includere i valori di errore per cortocircuito e circuito aperto",
+                "es": "Actualizar dependencias\nSe modificó el rango permitido de valores de temperatura para incluir los valores de error para cortocircuito y circuito abierto.",
+                "pl": "Aktualizuj zależności\nZmieniono dozwolony zakres wartości temperatury, aby uwzględnić wartości błędów dla zwarcia i obwodu otwartego",
+                "zh-cn": "更新依赖\n更改了允许的温度值范围以包括短路和开路的误差值",
+                "uk": "Оновити залежності\nЗмінено дозволений діапазон значень температури, щоб включити значення похибок для короткого замикання та розриву"
+            },
+            "0.2.0": {
+                "en": "Dropped node.js 10 support, added node.js 14 and 16 support",
+                "de": "Unterstützung für node.js 10 entfernt, Unterstützung für node.js 14 und 16 hinzugefügt",
+                "ru": "Прекращена поддержка node.js 10, добавлена ​​поддержка node.js 14 и 16",
+                "pt": "Suporte a node.js 10 removido, suporte a node.js 14 e 16 adicionado",
+                "nl": "Ondersteuning voor node.js 10 verwijderd, ondersteuning voor node.js 14 en 16 toegevoegd",
+                "fr": "Prise en charge de node.js 10 supprimée, prise en charge de node.js 14 et 16 ajoutée",
+                "it": "Eliminato il supporto node.js 10, aggiunto il supporto node.js 14 e 16",
+                "es": "Se eliminó la compatibilidad con node.js 10, se agregó compatibilidad con node.js 14 y 16",
+                "pl": "Zrezygnowano z obsługi node.js 10, dodano obsługę node.js 14 i 16",
+                "zh-cn": "删除了 node.js 10 支持，添加了 node.js 14 和 16 支持",
+                "uk": "Припинено підтримку node.js 10, додано підтримку node.js 14 і 16"
+            },
+            "0.1.1": {
+                "en": "Fixes for supporting js-controller >=3.2.x",
+                "de": "Korrekturen zur Unterstützung von js-controller> = 3.2.x.",
+                "ru": "Исправления для поддержки js-controller> = 3.2.x",
+                "pt": "Correções para suportar js-controller> = 3.2.x",
+                "nl": "Oplossingen voor ondersteuning van js-controller> = 3.2.x",
+                "fr": "Corrections pour la prise en charge de js-controller> = 3.2.x",
+                "it": "Correzioni per il supporto di js-controller> = 3.2.x",
+                "es": "Correcciones para admitir js-controller> = 3.2.x",
+                "pl": "Poprawki dotyczące obsługi js-controller> = 3.2.x",
+                "zh-cn": "修复了支持js-controller> = 3.2.x的问题",
+                "uk": "Виправлення для підтримки js-контролера >=3.2.x"
+            }
+        },
+        "titleLang": {
+            "en": "Resol VBUS",
+            "de": "Resol VBUS",
+            "ru": "Resol VBUS",
+            "pt": "Resol VBUS",
+            "nl": "Resol VBUS",
+            "fr": "Resol VBUS",
+            "it": "Resol VBUS",
+            "es": "Resol VBUS",
+            "pl": "Resol VBUS",
+            "zh-cn": "Resol VBUS适配器",
+            "uk": "Розв'язати VBUS"
+        },
+        "desc": {
+            "en": "This adapter connects ioBroker to VBus-based Resol devices",
+            "de": "Dieser Adapter verbindet ioBroker mit VBus-basierten Resol-Geräten",
+            "ru": "Этот адаптер подключает ioBroker к устройствам Resol на базе VBus.",
+            "pt": "Este adaptador conecta o ioBroker a dispositivos Resol baseados em VBus",
+            "nl": "Deze adapter verbindt ioBroker met op VBus gebaseerde Resol-apparaten",
+            "fr": "Cet adaptateur connecte ioBroker aux appareils Resol basés sur VBus",
+            "it": "Questo adattatore collega ioBroker a dispositivi Resol basati su VBus",
+            "es": "Este adaptador conecta ioBroker a dispositivos Resol basados ​​en VBus",
+            "pl": "Ten adapter łączy ioBroker z urządzeniami Resol opartymi na VBus",
+            "zh-cn": "此适配器将 ioBroker 连接到基于 VBus 的 Resol 设备",
+            "uk": "Цей адаптер підключає ioBroker до пристроїв Resol на основі VBus"
+        },
+        "authors": [
+            "pdbjjens <jjensen@t-online.de>"
+        ],
+        "contributors": [
+            "DutchmanNL",
+            "grizzelbee <hanjo@hingsen.de>"
+        ],
+        "keywords": [
+            "myvbus",
+            "VBus",
+            "Resol"
+        ],
+        "license": "MIT",
+        "platform": "Javascript/Node.js",
+        "main": "main.js",
+        "icon": "myvbus.png",
+        "enabled": true,
+        "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.myvbus/master/admin/myvbus.png",
+        "readme": "https://github.com/iobroker-community-adapters/ioBroker.myvbus/blob/master/README.md",
+        "loglevel": "info",
+        "mode": "daemon",
+        "type": "climate-control",
+        "compact": true,
+        "materialize": true,
+        "materializeTab": true,
+        "supportCustoms": false,
+        "connectionType": "local",
+        "dataSource": "push",
+        "adminUI": {
+            "config": "json"
+        },
+        "dependencies": [
+            {
+                "js-controller": ">=4.0.15"
+            }
+        ],
+        "globalDependencies": [
+            {
+                "admin": ">=6.3.5"
+            }
+        ]
     },
-    "titleLang": {
-      "en": "Resol VBUS",
-      "de": "Resol VBUS",
-      "ru": "Resol VBUS",
-      "pt": "Resol VBUS",
-      "nl": "Resol VBUS",
-      "fr": "Resol VBUS",
-      "it": "Resol VBUS",
-      "es": "Resol VBUS",
-      "pl": "Resol VBUS",
-      "zh-cn": "Resol VBUS适配器",
-      "uk": "Розв'язати VBUS"
+    "protectedNative": [
+        "vbusPassword"
+    ],
+    "encryptedNative": [
+        "vbusPassword"
+    ],
+    "native": {
+        "connectionDevice": "",
+        "connectionIdentifier": "",
+        "connectionPort": 7053,
+        "vbusPassword": "vbus",
+        "vbusChannel": 7,
+        "vbusViaTag": "",
+        "vbusInterval": 30
     },
-    "desc": {
-      "en": "This adapter connects ioBroker to VBus-based Resol devices",
-      "de": "Dieser Adapter verbindet ioBroker mit VBus-basierten Resol-Geräten",
-      "ru": "Этот адаптер подключает ioBroker к устройствам Resol на базе VBus.",
-      "pt": "Este adaptador conecta o ioBroker a dispositivos Resol baseados em VBus",
-      "nl": "Deze adapter verbindt ioBroker met op VBus gebaseerde Resol-apparaten",
-      "fr": "Cet adaptateur connecte ioBroker aux appareils Resol basés sur VBus",
-      "it": "Questo adattatore collega ioBroker a dispositivi Resol basati su VBus",
-      "es": "Este adaptador conecta ioBroker a dispositivos Resol basados ​​en VBus",
-      "pl": "Ten adapter łączy ioBroker z urządzeniami Resol opartymi na VBus",
-      "zh-cn": "此适配器将 ioBroker 连接到基于 VBus 的 Resol 设备",
-      "uk": "Цей адаптер підключає ioBroker до пристроїв Resol на основі VBus"
-    },
-    "authors": [
-      "pdbjjens <jjensen@t-online.de>"
-    ],
-    "contributors": [
-      "DutchmanNL",
-      "grizzelbee <hanjo@hingsen.de>"
-    ],
-    "keywords": [
-      "myvbus",
-      "VBus",
-      "Resol"
-    ],
-    "license": "MIT",
-    "platform": "Javascript/Node.js",
-    "main": "main.js",
-    "icon": "myvbus.png",
-    "enabled": true,
-    "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.myvbus/master/admin/myvbus.png",
-    "readme": "https://github.com/iobroker-community-adapters/ioBroker.myvbus/blob/master/README.md",
-    "loglevel": "info",
-    "mode": "daemon",
-    "type": "climate-control",
-    "compact": true,
-    "materialize": true,
-    "materializeTab": true,
-    "supportCustoms": false,
-    "connectionType": "local",
-    "dataSource": "push",
-    "dependencies": [
-      {
-        "js-controller": ">=2.0.0"
-      }
+    "objects": [],
+    "instanceObjects": [
+        {
+            "_id": "info",
+            "type": "channel",
+            "common": {
+                "name": "Information",
+                "type": "string"
+            },
+            "native": {}
+        },
+        {
+            "_id": "info.connection",
+            "type": "state",
+            "common": {
+                "role": "indicator.connected",
+                "name": "VBus device connected",
+                "type": "boolean",
+                "read": true,
+                "write": false,
+                "def": false
+            },
+            "native": {}
+        }
     ]
-  },
-  "native": {
-    "connectionDevice": "",
-    "connectionIdentifier": "",
-    "connectionPort": 7053,
-    "vbusPassword": "",
-    "vbusChannel": 1,
-    "vbusDataOnly": false,
-    "vbusViaTag": "",
-    "vbusInterval": 30,
-    "forceReInit": true
-  },
-  "objects": [],
-  "instanceObjects": [
-    {
-      "_id": "info",
-      "type": "channel",
-      "common": {
-        "name": "Information",
-        "type": "string"
-      },
-      "native": {}
-    },
-    {
-      "_id": "info.connection",
-      "type": "state",
-      "common": {
-        "role": "indicator.connected",
-        "name": "VBus device connected",
-        "type": "boolean",
-        "read": true,
-        "write": false,
-        "def": false
-      },
-      "native": {}
-    }
-  ]
 }
