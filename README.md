@@ -49,8 +49,7 @@ A derived version of this adapter supporting control of VBus devices is availabl
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-
-### **WORK IN PROGRESS** - 2024 maintenance release
+### 0.3.0 (2024-01-24) - 2024 maintenance release
 
 * (pdbjjens) New: Use JSON config UI
 * (pdbjjens) New: Support ioBroker discovery
@@ -78,11 +77,6 @@ A derived version of this adapter supporting control of VBus devices is availabl
 * Updated dependencies
 * Compatibility check for js-controller 4.0
 * Support for js-controller 1.x dropped
-
-### 0.2.1 (2021-08-18)
-
-* Update dependencies
-* Changed allowed range of temperature values to include the error values for short circuit and open circuit
 
 ## Legal Notices
 

@@ -1,4 +1,9 @@
 # Older changes
+## 0.2.1 (2021-08-18)
+
+* Update dependencies
+* Changed allowed range of temperature values to include the error values for short circuit and open circuit
+
 ## 0.2.0 (2021-06-25)
 
 * Dropped node.js 10 support, added node.js 14 and 16 support
