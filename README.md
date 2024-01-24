@@ -24,12 +24,13 @@ This adapter connects ioBroker to various VBus-based devices using resol-vbus, a
 * Device access using the VBus/USB serial interface adapter or via VBus.net(R) using DLx/KMx is also supported.
 * Processes live VBus data streams and makes them available as ioBroker states.
 * Values are updated with a configurable cycle time.
-* Reading or setting the VBus device configuration parameters is not supported. The tools provided by Resol should be used for this, e.g. via VBus.net or the parameterization tool RPT.
+* Reading or setting the VBus device configuration parameters is not supported. The tools provided by Resol should be used for this, e.g. via VBus.net or the parameterization tool RPT.  
+A derived version of this adapter supporting control of VBus devices is available at <https://github.com/Grizzelbee/ioBroker.resol>
 * Reading DL3 channel 0 (sensors directly connected to the DL3 device) is not supported due to limitations of the DL3 interface.
 
 ## Configuration hints
 
-* The connection device type must be explicitly selected, otherwise no connection will be established.
+* The connection device type e.g. VBus/LAN or DL2 must be explicitly selected, otherwise no connection will be established.
 * TCP connection port: The default setting 7053 should not be changed
 * Device password: The password which you have set in your connection device (default: vbus)
 * DL3 channel: Only relevant for DL3/DL2Plus - leave at "None" for all other connection devices.  
@@ -37,7 +38,7 @@ This adapter connects ioBroker to various VBus-based devices using resol-vbus, a
 * Update interval: The time between updates of the measured values (default 30s)
 * The correct settings for direct LAN access for VBus/LAN, DL3, DL2, KM2 are:
   * Connection Device: VBus/LAN or KM2/DL2 or DL3/DL2Plus
-  * Device Address: IP address (e.g. 192.168.178.188) or FullyQualifiedHostName (e.g. myDL2.fritz.box)
+  * Device Address: IP address (e.g. 192.168.178.188) or FullyQualifiedHostName (e.g. myKM2.fritz.box)
 * The correct settings for the DL3, DL2, KM2 access via VBus.net are:
   * Connection Device: DL3/DL2Plus or DL2/KM2
   * Device Address: vbus.net (or vbus.io) - both without http:// and Via identifier!  
@@ -49,11 +50,11 @@ This adapter connects ioBroker to various VBus-based devices using resol-vbus, a
   ### **WORK IN PROGRESS**
 -->
 
-### **WORK IN PROGRESS**
+### **WORK IN PROGRESS** - 2024 maintenance release
 
+* (pdbjjens) New: Use JSON config UI
 * (pdbjjens) New: Support ioBroker discovery
 * (pdbjjens) Change: node>=16, js-contoller>=4 and admin>=6 required
-* (pdbjjens) New: Use JSON config UI
 * (pdbjjens) Updated dependencies
 * (pdbjjens) Fix: Set info.connection false when reconnecting
 

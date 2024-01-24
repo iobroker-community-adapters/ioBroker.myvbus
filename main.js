@@ -96,20 +96,7 @@ class MyVbus extends utils.Adapter {
                 });
                 this.log.info('TCP connection via LAN-gw to [' + this.config.connectionIdentifier + ':' + this.config.connectionPort + '] selected');
                 break;
-                /**            
-                case 'inet':
-                    this.log.debug('VBus.net Connection via [' + this.config.vbusViaTag.substring(12, this.config.vbusViaTag.length) + '] selected');
-                    this.log.debug('VBus.net Connection via [' + this.config.vbusViaTag.substring(0, 11) + '] selected');
-                    ctx.connection = new vbus.TcpConnection({
-                        //host: this.config.connectionIdentifier,
-                        host: this.config.vbusViaTag.substring(12, this.config.vbusViaTag.length),
-                        port: this.config.connectionPort,
-                        password: this.config.vbusPassword,
-                        viaTag: this.config.vbusViaTag.substring(0, 11)
-                    });
-                    this.log.info('VBus.net Connection via [' + this.config.vbusViaTag + '] selected');
-                    break;
-**/            
+            
             case 'dl2':
                 if (this.config.connectionIdentifier.match(vbusioformat)) {
                     ctx.connection = new vbus.TcpConnection({
@@ -359,13 +346,7 @@ class MyVbus extends utils.Adapter {
                         reject('Connection ID [' + config.connectionIdentifier + '] is neither a valid IP-Format nor a fully qualified domain name (FQDN)!');
                     }
                 }
-                /**
-                function testVBusIOFormat(config) {
-                    if (!config.vbusViaTag.match(vbusioformat)) {
-                        reject('VBusIO-Format is invalid! Should be something like [d01234567890.vbus.io] or [d01234567890.vbus.net].');
-                    }
-                }
-                **/
+
                 function testPassword(config) {
                     if (!config.vbusPassword || '' === config.vbusPassword) {
                         reject('Password is missing!');
@@ -408,13 +389,6 @@ class MyVbus extends utils.Adapter {
                     testPassword(config);
                     testChannel(config);
                     resolve('Config valid for DL3/DL2Plus.');
-                    /**
-                } else if (config.connectionDevice === 'inet') {
-                    testPort(config);
-                    testVBusIOFormat(config);
-                    testPassword(config);
-                    resolve('Config seems to be valid for KM2/DL2/DL3 via VBus.net.');
-**/
                 } else {
                     reject('Configuration is invalid! Please select a connection device and complete or fix the configuration.');
                 }
