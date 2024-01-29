@@ -27,7 +27,7 @@
   "dependencies": {
     "@iobroker/adapter-core": "^3.0.4",
     "lodash": "^4.17.20",
-    "resol-vbus": "^0.28.0"
+    "resol-vbus": "^0.29.0"
   },
   "devDependencies": {
     "@alcalzone/release-script": "^3.7.0",
