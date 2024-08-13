@@ -49,7 +49,7 @@ A derived version of this adapter supporting control of VBus devices is availabl
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS** - 2024H2 maintenance release
+### 0.4.0 (2024-08-13) - 2024H2 maintenance release
 
 * (pdbjjens) Change: node>=18, js-contoller>=5 and admin>=6 required
 * (pdbjjens) Change: Removed .npmignore
@@ -77,12 +77,6 @@ A derived version of this adapter supporting control of VBus devices is availabl
 * (pdbjjens) Updated dependencies
 * (pdbjjens) New: Use adapter-dev instead of gulp translate
 * (pdbjjens) Fix: error handling for serial connections
-
-### 0.2.2 (2022-02-11)
-
-* Updated dependencies
-* Compatibility check for js-controller 4.0
-* Support for js-controller 1.x dropped
 
 ## Legal Notices
 

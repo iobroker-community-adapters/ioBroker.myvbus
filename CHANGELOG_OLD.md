@@ -1,4 +1,10 @@
 # Older changes
+## 0.2.2 (2022-02-11)
+
+* Updated dependencies
+* Compatibility check for js-controller 4.0
+* Support for js-controller 1.x dropped
+
 ## 0.2.1 (2021-08-18)
 
 * Update dependencies

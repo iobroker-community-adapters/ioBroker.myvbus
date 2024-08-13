@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "myvbus",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "news": {
+      "0.4.0": {
+        "en": "Change: node>=18, js-contoller>=5 and admin>=6 required\nChange: Removed .npmignore\nNew: Updated dependencies",
+        "de": "Änderung: node>=18, js-contoller>=5 und admin>=6 erforderlich\nÄnderung: Removed .npmignore\nNeu: Aktualisierte Abhängigkeiten",
+        "ru": "Изменение: node>=18, js-contoller>=5 и admin>=6 требуется\nИзменение: Удалено .npmignore\nНовые: Обновленные зависимости",
+        "pt": "Alteração: node>=18, js-contoller>=5 e admin>=6 requerido\nMudança: Removido .npmignore\nNovo: Dependências atualizadas",
+        "nl": "Verandering: node>=18, js-contoller>=5 en admin>=6 vereist\nWijzigen: verwijderd .npmignore\nNieuw: Bijgewerkte afhankelijkheden",
+        "fr": "Changement: noeud>=18, js-contoller>=5 et admin>=6 requis\nChangement : supprimé .npmignore\nNouveau: Dépendances actualisées",
+        "it": "Modifica: nodo>=18, js-contoller>=5 e admin>=6 richiesto\nModifica: Removed .npmignore\nNuovo: dipendenze aggiornate",
+        "es": "Cambio: node confianza=18, js-contoller=5 y administración=6 requerido\nCambio: Quitado .npmignore\nNuevas: dependencias actualizadas",
+        "pl": "Zmiana: węzeł > = 18, js- contoller > = 5 i admin > = 6 wymagane\nZmiana: Usunięto .npmignore\nNowy: Aktualizacja zależności",
+        "uk": "Зміна: вершина>=18, js-contoller>=5 і admin>=6\nЗміна: Видалити .npmignore\nНовий: Оновлені залежності",
+        "zh-cn": "更改:节点18、js-contoller%5和管理员6\n更改: 删除 .npmignore\n新建:更新的依赖关系"
+      },
       "0.3.0": {
         "en": "New: Use JSON config UI\nNew: Support ioBroker discovery\nChange: node>=16, js-contoller>=4 and admin>=6 required\nUpdated dependencies\nFix: Set info.connection false when reconnecting",
         "de": "Neu: Verwendung von JSON config UI\nNeu: Unterstützung ioBroker Discovery\nÄnderung: node>=16, js-contoller>=4 und admin>=6 erforderlich\nAktualisierte Abhängigkeiten\nFix: info.connection auf false setzen beim Wiederverbinden",
@@ -80,19 +93,6 @@
         "pl": "Aktualizuj zależności\nZmieniono dozwolony zakres wartości temperatury, aby uwzględnić wartości błędów dla zwarcia i obwodu otwartego",
         "zh-cn": "更新依赖\n更改了允许的温度值范围以包括短路和开路的误差值",
         "uk": "Оновити залежності\nЗмінено дозволений діапазон значень температури, щоб включити значення похибок для короткого замикання та розриву"
-      },
-      "0.2.0": {
-        "en": "Dropped node.js 10 support, added node.js 14 and 16 support",
-        "de": "Unterstützung für node.js 10 entfernt, Unterstützung für node.js 14 und 16 hinzugefügt",
-        "ru": "Прекращена поддержка node.js 10, добавлена ​​поддержка node.js 14 и 16",
-        "pt": "Suporte a node.js 10 removido, suporte a node.js 14 e 16 adicionado",
-        "nl": "Ondersteuning voor node.js 10 verwijderd, ondersteuning voor node.js 14 en 16 toegevoegd",
-        "fr": "Prise en charge de node.js 10 supprimée, prise en charge de node.js 14 et 16 ajoutée",
-        "it": "Eliminato il supporto node.js 10, aggiunto il supporto node.js 14 e 16",
-        "es": "Se eliminó la compatibilidad con node.js 10, se agregó compatibilidad con node.js 14 y 16",
-        "pl": "Zrezygnowano z obsługi node.js 10, dodano obsługę node.js 14 i 16",
-        "zh-cn": "删除了 node.js 10 支持，添加了 node.js 14 和 16 支持",
-        "uk": "Припинено підтримку node.js 10, додано підтримку node.js 14 і 16"
       }
     },
     "titleLang": {
