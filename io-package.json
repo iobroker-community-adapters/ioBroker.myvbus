@@ -133,9 +133,11 @@
       "VBus",
       "Resol"
     ],
-    "license": "MIT",
+    "licenseInformation": {
+      "license": "MIT",
+      "type": "free"
+    },
     "platform": "Javascript/Node.js",
-    "main": "main.js",
     "icon": "myvbus.png",
     "enabled": true,
     "extIcon": "https://raw.githubusercontent.com/iobroker-community-adapters/ioBroker.myvbus/master/admin/myvbus.png",
@@ -144,22 +146,21 @@
     "mode": "daemon",
     "type": "climate-control",
     "compact": true,
-    "materialize": true,
-    "materializeTab": true,
     "supportCustoms": false,
     "connectionType": "local",
     "dataSource": "push",
+    "tier": 2,
     "adminUI": {
       "config": "json"
     },
     "dependencies": [
       {
-        "js-controller": ">=4.0.15"
+        "js-controller": ">=5.0.19"
       }
     ],
     "globalDependencies": [
       {
-        "admin": ">=6.3.5"
+        "admin": ">=6.13.16"
       }
     ]
   },

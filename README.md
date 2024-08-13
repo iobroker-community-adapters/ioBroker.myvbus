@@ -49,6 +49,12 @@ A derived version of this adapter supporting control of VBus devices is availabl
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS** - 2024H2 maintenance release
+
+* (pdbjjens) Change: node>=18, js-contoller>=5 and admin>=6 required
+* (pdbjjens) Change: Removed .npmignore
+* (pdbjjens) New: Updated dependencies
+
 ### 0.3.0 (2024-01-24) - 2024 maintenance release
 
 * (pdbjjens) New: Use JSON config UI
