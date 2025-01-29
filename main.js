@@ -26,7 +26,7 @@ const ctx = {
 const adapterName = require('./package.json').name.split('.').pop();
 const ipformat = /^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
 const fqdnformat = /^(?!:\/\/)(?=.{1,255}$)((.{1,63}\.){1,127}(?![0-9]*$)[a-z0-9-]+\.?)$/;
-const serialformat = /^(COM|com)[0-9][0-9]?$|^\/dev\/tty.*$/;
+const serialformat = /^(COM|com)[0-9][0-9]?$|^\/dev\/tty.*$|^\/dev\/serial\/by-id\/usb-.*$|^\/dev\/serial\/by-path\/platform-.*$/i;
 const vbusioformat = /vbus.io|vbus.net$/;
 
 // Currently unused: const urlformat = /^(?:http(s)?:\/\/)?[\w.-]+(?:\.[\w\.-]+)+[\w\-\._~:/?#[\]@!\$&'\(\)\*\+,;=.]+$/;
