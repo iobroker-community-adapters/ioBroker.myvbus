@@ -49,8 +49,10 @@ A derived version of this adapter supporting control of VBus devices is availabl
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### **WORK IN PROGRESS** - 2025H1 maintenance release
 
+* (pdbjjens) New: Accept serial port paths /dev/serial/by-id/usb-xxxxxxxxxxxxxxxxxxx or /dev/serial/by-path/platform-xxxxxxxxxxxxxxxxxxx
+* (pdbjjens) Change: Migration to ESLint 9
 * (simatec) Responsive Design added
 
 ### 0.4.0 (2024-08-13) - 2024H2 maintenance release
@@ -94,7 +96,7 @@ The authors are in no way endorsed by or affiliated with RESOL GmbH, or any asso
 
 MIT License
 
-Copyright (c) 2024 Jens-Peter Jensen <jjensen@t-online.de>
+Copyright (c) 2025 Jens-Peter Jensen <jjensen@t-online.de>
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
