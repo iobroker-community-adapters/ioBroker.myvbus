@@ -57,7 +57,7 @@ A derived version of this adapter supporting control of VBus devices is availabl
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS** - 2025H1 maintenance release
+### 0.5.0 (2025-01-30) - 2025H1 maintenance release
 
 * (pdbjjens) New: Accept serial port paths /dev/serial/by-id/usb-xxxxxxxxxxxxxxxxxxx or /dev/serial/by-path/platform-xxxxxxxxxxxxxxxxxxx
 * (pdbjjens) Change: Migration to ESLint 9
@@ -85,12 +85,6 @@ A derived version of this adapter supporting control of VBus devices is availabl
 ### 0.2.4 (2023-03-01)
 
 * (pdbjjens) Fix password check
-
-### 0.2.3 (2023-02-27) - 2023 maintenance release
-
-* (pdbjjens) Updated dependencies
-* (pdbjjens) New: Use adapter-dev instead of gulp translate
-* (pdbjjens) Fix: error handling for serial connections
 
 ## Legal Notices
 

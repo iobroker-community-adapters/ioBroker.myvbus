@@ -1,4 +1,10 @@
 # Older changes
+## 0.2.3 (2023-02-27) - 2023 maintenance release
+
+* (pdbjjens) Updated dependencies
+* (pdbjjens) New: Use adapter-dev instead of gulp translate
+* (pdbjjens) Fix: error handling for serial connections
+
 ## 0.2.2 (2022-02-11)
 
 * Updated dependencies

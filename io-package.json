@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "myvbus",
-    "version": "0.4.0",
+    "version": "0.5.0",
     "news": {
+      "0.5.0": {
+        "en": "New: Accept serial port paths /dev/serial/by-id/usb-xxxxxxxxxxxxxxxxxxx or /dev/serial/by-path/platform-xxxxxxxxxxxxxxxxxxx\nChange: Migration to ESLint 9\nResponsive Design added",
+        "de": "Neu: Akzeptieren von seriellen Portpfaden z.B. /dev/serial/by-id/usb-xxxxxxxxxxxxxxxxxxxx oder /dev/serial/by-path/platform-xxxxxxxxxxxxxxxxxxx\nVeränderung: Migration auf ESLint 9\nResponsive Design hinzugefügt",
+        "ru": "Новый: Примите серийные портовые пути /dev/serial/by-id/usb-xxxxxxxxxxxxxxxxxxxxxxxxx или /dev/serial/by-path/platform-xxxxxxxxxxxxxxxxx\nИзменение: Миграция в ESLint 9\nResponsive Design",
+        "pt": "Novo: Aceitar caminhos de porta serial /dev/serial/by-id/usb-xxxxxxxxxxxxxxxxxxx ou /dev/serial/por-path/platform-xxxxxxxxxxxxxxxx\nMudança: Migração para ESLint 9\nDesign responsivo adicionado",
+        "nl": "Nieuw: Accepteer seriële poortpaden /dev/serial/by-id/usb-xxxxxxxxxxxxxxxxxxx of /dev/serial/by-path/platform-xxxxxxxxxxxxxxxxxx\nWijziging: migratie naar ESLint 9\nResponsive Design toegevoegd",
+        "fr": "Nouveau: Accepter les chemins de port série /dev/serial/by-id/usb-xxxxxxxxxxxxxxxxxxx ou /dev/serial/by-path/platform-xxxxxxxxxxxxxx\nChangement: Migration vers ESLint 9\nDesign sensible ajouté",
+        "it": "Novità: Accetta i percorsi della porta seriale /dev/serial/by-id/usb-xxxxxxxxxx o /dev/serial/by-path/platform-xxxxxxxxxxxxxxxx\nCambiamento: migrazione a ESLint 9\nResponsive Design aggiunto",
+        "es": "Nuevo: Aceptar las rutas portuarias serie /dev/serial/by-id/usb-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\nCambio: Migración a ESLint 9\nDiseño responsable añadido",
+        "pl": "Nowy: Akceptuj ścieżki portu szeregowego / dev / serial / by- id / usb- xxxxxxxxxxxxxxxxxxx lub / dev / serial / by- path / platform- xxxxxxxxxxxxxxxxxxxxx\nZmiana: migracja do ESLint 9\nDodano projekt odpowiedzialny",
+        "uk": "Останні фотографії / HD XXX / безкоштовно порно фільми / hdxxx.top\nЗміна: Міграція до ESLint 9\nДодано адаптивний дизайн",
+        "zh-cn": "新建:接受串行端口路径 /dev/serial/by-id/usb-xxxxxxxxxxxx或/dev/serial/by-path/platform-xxxxxxxxxxxxxxxxxxxxx\n变化:向ESLint 9迁移\n添加响应设计"
+      },
       "0.4.0": {
         "en": "Change: node>=18, js-contoller>=5 and admin>=6 required\nChange: Removed .npmignore\nNew: Updated dependencies",
         "de": "Änderung: node>=18, js-contoller>=5 und admin>=6 erforderlich\nÄnderung: .npmignore enfernt\nNeu: Aktualisierte Abhängigkeiten",
@@ -80,19 +93,6 @@
         "pl": "Zaktualizowane zależności / Sprawdzanie zgodności dla js-controller 4.0 / Porzucono wsparcie dla js-controller 1.x",
         "zh-cn": "更新了 js-controller 4.0 的依赖项/兼容性检查/对 js-controller 1.x 的支持已删除",
         "uk": "Оновлені залежності / Перевірка сумісності для js-controller 4.0 / Підтримка js-controller 1.x припинена"
-      },
-      "0.2.1": {
-        "en": "Update dependencies\nChanged allowed range of temperature values to include the error values for short circuit and open circuit",
-        "de": "Abhängigkeiten aktualisieren\nDer zulässige Temperaturbereich wurde geändert, um die Fehlerwerte für Kurzschluss und Leerlauf einzuschließen",
-        "ru": "Обновить зависимости\nИзменен допустимый диапазон значений температуры, чтобы включить значения ошибок для короткого замыкания и обрыва.",
-        "pt": "Atualizar dependências\nFaixa permitida de valores de temperatura alterada para incluir os valores de erro para curto-circuito e circuito aberto",
-        "nl": "Afhankelijkheden bijwerken\nToegestaan bereik van temperatuurwaarden gewijzigd om de foutwaarden voor kortsluiting en open circuit op te nemen",
-        "fr": "Mettre à jour les dépendances\nModification de la plage autorisée des valeurs de température pour inclure les valeurs d'erreur pour les courts-circuits et les circuits ouverts",
-        "it": "Aggiorna dipendenze\nModificato l'intervallo consentito di valori di temperatura per includere i valori di errore per cortocircuito e circuito aperto",
-        "es": "Actualizar dependencias\nSe modificó el rango permitido de valores de temperatura para incluir los valores de error para cortocircuito y circuito abierto.",
-        "pl": "Aktualizuj zależności\nZmieniono dozwolony zakres wartości temperatury, aby uwzględnić wartości błędów dla zwarcia i obwodu otwartego",
-        "zh-cn": "更新依赖\n更改了允许的温度值范围以包括短路和开路的误差值",
-        "uk": "Оновити залежності\nЗмінено дозволений діапазон значень температури, щоб включити значення похибок для короткого замикання та розриву"
       }
     },
     "titleLang": {
