@@ -5,7 +5,7 @@
     "news": {
       "0.4.0": {
         "en": "Change: node>=18, js-contoller>=5 and admin>=6 required\nChange: Removed .npmignore\nNew: Updated dependencies",
-        "de": "Änderung: node>=18, js-contoller>=5 und admin>=6 erforderlich\nÄnderung: Removed .npmignore\nNeu: Aktualisierte Abhängigkeiten",
+        "de": "Änderung: node>=18, js-contoller>=5 und admin>=6 erforderlich\nÄnderung: .npmignore enfernt\nNeu: Aktualisierte Abhängigkeiten",
         "ru": "Изменение: node>=18, js-contoller>=5 и admin>=6 требуется\nИзменение: Удалено .npmignore\nНовые: Обновленные зависимости",
         "pt": "Alteração: node>=18, js-contoller>=5 e admin>=6 requerido\nMudança: Removido .npmignore\nNovo: Dependências atualizadas",
         "nl": "Verandering: node>=18, js-contoller>=5 en admin>=6 vereist\nWijzigen: verwijderd .npmignore\nNieuw: Bijgewerkte afhankelijkheden",
