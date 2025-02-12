@@ -6,10 +6,6 @@
     "name": "Jens-Peter Jensen",
     "email": "jjensen@t-online.de"
   },
-  "contributor": {
-    "name": "grizzelbee",
-    "email": "hanjo@hingsen.de"
-  },
   "homepage": "https://github.com/iobroker-community-adapters/ioBroker.myvbus",
   "license": "MIT",
   "keywords": [

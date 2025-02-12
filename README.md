@@ -57,6 +57,10 @@ A derived version of this adapter supporting control of VBus devices is availabl
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (pdbjjens) Fix: Removed attribute "contributor" from package.json (#718)
+
 ### 0.5.0 (2025-01-30) - 2025H1 maintenance release
 
 * (pdbjjens) New: Accept serial port paths /dev/serial/by-id/usb-xxxxxxxxxxxxxxxxxxx or /dev/serial/by-path/platform-xxxxxxxxxxxxxxxxxxx
