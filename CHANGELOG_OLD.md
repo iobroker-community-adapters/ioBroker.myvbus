@@ -1,4 +1,8 @@
 # Older changes
+## 0.2.4 (2023-03-01)
+
+* (pdbjjens) Fix password check
+
 ## 0.2.3 (2023-02-27) - 2023 maintenance release
 
 * (pdbjjens) Updated dependencies

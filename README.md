@@ -57,7 +57,7 @@ A derived version of this adapter supporting control of VBus devices is availabl
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.5.1 (2025-02-15)
 
 * (pdbjjens) Fix: Removed attribute "contributor" from package.json (#718)
 
@@ -85,10 +85,6 @@ A derived version of this adapter supporting control of VBus devices is availabl
 
 * (pdbjjens) Updated dependencies
 * (pdbjjens) Fix: reconnect handling for serial connections
-
-### 0.2.4 (2023-03-01)
-
-* (pdbjjens) Fix password check
 
 ## Legal Notices
 

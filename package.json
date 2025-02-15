@@ -1,6 +1,6 @@
 {
   "name": "iobroker.myvbus",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "ioBroker Adapter for Resol VBus",
   "author": {
     "name": "Jens-Peter Jensen",

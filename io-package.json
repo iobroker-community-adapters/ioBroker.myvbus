@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "myvbus",
-    "version": "0.5.0",
+    "version": "0.5.1",
     "news": {
+      "0.5.1": {
+        "en": "Fix: Removed attribute \"contributor\" from package.json (#718)",
+        "de": "Fix: Entfernen des Attributs \"contributor\" von package.json (#718)",
+        "ru": "Исправление: Удаленный атрибут \"Contributor\" из package.json (#718)",
+        "pt": "Corrigir: Atributo removido \"contributor\" de package.json (#718)",
+        "nl": "Fix: verwijderd attribuut \"contributor\" uit package.json (#718)",
+        "fr": "Correction : attribut supprimé \"contributeur\" de package.json (#718)",
+        "it": "Fisso: attributo rimosso \"contributor\" da package.json (#718)",
+        "es": "Fijación: Atributo eliminado \"contributor\" de package.json (#718)",
+        "pl": "Fix: Usunięto atrybut \"contributor\" z package.json (# 718)",
+        "uk": "Виправлення: Видалити атрибут \"contributor\" з package.json (#718)",
+        "zh-cn": "Fix: 从 package.json (# 718) 中删除属性\"贡献者\""
+      },
       "0.5.0": {
         "en": "New: Accept serial port paths /dev/serial/by-id/usb-xxxxxxxxxxxxxxxxxxx or /dev/serial/by-path/platform-xxxxxxxxxxxxxxxxxxx\nChange: Migration to ESLint 9\nResponsive Design added",
         "de": "Neu: Akzeptieren von seriellen Portpfaden z.B. /dev/serial/by-id/usb-xxxxxxxxxxxxxxxxxxxx oder /dev/serial/by-path/platform-xxxxxxxxxxxxxxxxxxx\nVeränderung: Migration auf ESLint 9\nResponsive Design hinzugefügt",
@@ -80,19 +93,6 @@
         "pl": "Zależność od upoważnienia\nNowy: Zastosowanie adapter-dev zamiast gulpów\nObserwowanie błędów dla połączeń szeregowych",
         "uk": "Оновлені залежності\nНовий: Використовуйте адаптер-dev замість гіпульти перекладу\nВиправлення: обробка помилок для серійних підключень",
         "zh-cn": "A. 最新依赖情况\n新的:使用适应器而不是固体字。\nFix:对帐篷的错误处理"
-      },
-      "0.2.2": {
-        "en": "Updated dependencies / Compatibility check for js-controller 4.0 / Support for js-controller 1.x dropped",
-        "de": "Aktualisierte Abhängigkeiten / Kompatibilitätsprüfung für js-controller 4.0 / Unterstützung für js-controller 1.x eingestellt",
-        "ru": "Обновлены зависимости / Проверка совместимости для js-controller 4.0 / Прекращена поддержка js-controller 1.x",
-        "pt": "Dependências atualizadas/verificação de compatibilidade para js-controller 4.0/suporte para js-controller 1.x descartado",
-        "nl": "Bijgewerkte afhankelijkheden / Compatibiliteitscontrole voor js-controller 4.0 / Ondersteuning voor js-controller 1.x weggevallen",
-        "fr": "Dépendances mises à jour / Vérification de compatibilité pour js-controller 4.0 / Prise en charge de js-controller 1.x abandonnée",
-        "it": "Dipendenze aggiornate/Verifica compatibilità per js-controller 4.0/Supporto per js-controller 1.x eliminato",
-        "es": "Dependencias actualizadas / Verificación de compatibilidad para js-controller 4.0 / Se eliminó el soporte para js-controller 1.x",
-        "pl": "Zaktualizowane zależności / Sprawdzanie zgodności dla js-controller 4.0 / Porzucono wsparcie dla js-controller 1.x",
-        "zh-cn": "更新了 js-controller 4.0 的依赖项/兼容性检查/对 js-controller 1.x 的支持已删除",
-        "uk": "Оновлені залежності / Перевірка сумісності для js-controller 4.0 / Підтримка js-controller 1.x припинена"
       }
     },
     "titleLang": {
