@@ -57,7 +57,7 @@ A derived version of this adapter supporting control of VBus devices is availabl
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS** - 2025H2 maintenance release
+### 0.6.0 (2025-08-29) - 2025H2 maintenance release
 
 * (pdbjjens) Change: node>=20, js-controller>=7.0.7 and admin>=7.6.17 required
 * (pdbjjens) Change: Cleanup devDependencies
@@ -85,11 +85,6 @@ A derived version of this adapter supporting control of VBus devices is availabl
 * (pdbjjens) Change: node>=16, js-contoller>=4 and admin>=6 required
 * (pdbjjens) Updated dependencies
 * (pdbjjens) Fix: Set info.connection false when reconnecting
-
-### 0.2.5 (2023-03-14)
-
-* (pdbjjens) Updated dependencies
-* (pdbjjens) Fix: reconnect handling for serial connections
 
 ## Legal Notices
 

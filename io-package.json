@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "myvbus",
-    "version": "0.5.1",
+    "version": "0.6.0",
     "news": {
+      "0.6.0": {
+        "en": "Change: node>=20, js-controller>=7.0.7 and admin>=7.6.17 required\nChange: Cleanup devDependencies",
+        "de": "Änderung: node>=20, js-controller>=7.0.7 und admin>=7.6.17 erforderlich\nÄnderung: Cleanup devDependencies",
+        "ru": "Изменение: node>=20, js-контроллер>=7.0.7 и admin>=7.6.17 требуется\nОбновление: Cleanup devDependencies",
+        "pt": "Alteração: nó>=20, js-controlador>=7.07 e admin>=7.6.17 necessários\nAlteração: Limpeza devDependências",
+        "nl": "Verandering: node>=20, js-controller>=7.7 en admin>=7.617 vereist\nVerandering: Opruimen van devDependencies",
+        "fr": "Changement : noeud>=20, js-controller>=7.0.7 et admin>=7.6.17 requis\nChangement: Dépendances de nettoyage",
+        "it": "Modifica: nodo>=20, js-controller>=7.0.7 e admin>=7.6.17 richiesto\nCambiamento: Cleanup devDependencies",
+        "es": "Cambio: node confianza=20, js-controller confianza=7.0.7 y administración=7.6.17 requerido\nCambio: DevDependencies de limpieza",
+        "pl": "Zmiana: węzeł > = 20, kontroler js- > = 7.0.7 i admin > = 7.6.17 wymagane\nZmiana: Oczyszczenie devDevendences",
+        "uk": "Зміна: вершина>=20, js-controller>=7.0.7 і admin>=7.6.17 потрібно\nЗміна: Прибиральники",
+        "zh-cn": "变化:节点20、js控制器7.0.7和管理员7.6.17\n变化: 清理依赖性"
+      },
       "0.5.1": {
         "en": "Fix: Removed attribute \"contributor\" from package.json (#718)",
         "de": "Fix: Entfernen des Attributs \"contributor\" von package.json (#718)",
@@ -80,19 +93,6 @@
         "pl": "Fix password",
         "uk": "Перевірка пароля",
         "zh-cn": "Fix 密码检查"
-      },
-      "0.2.3": {
-        "en": "Updated dependencies\nNew: Use adapter-dev instead of gulp translate\nFix: error handling for serial connections",
-        "de": "Aktualisierte Abhängigkeiten\nNeu: Verwenden Sie Adapter-dev anstelle von gulp translate\nFix: Fehlerbehandlung für serielle Verbindungen",
-        "ru": "Обновленные зависимости\nНовый: Используйте адаптер-dev вместо gulp перевести\nИсправление: обработка ошибок для серийных соединений",
-        "pt": "Dependências atualizadas\nNovo: Use o adaptador-dev em vez de gulp traduzir\nFix: manipulação de erros para conexões seriais",
-        "nl": "Verouderde afhankelijkheid\nGebruik adapter-dev in plaats van gulp vertaal\nVergissing voor serieverbindingen",
-        "fr": "Mise à jour des dépendances\nNouveau: Utilisez adaptateur-dev au lieu de traduire gulp\nCorrection : manipulation d'erreurs pour les connexions série",
-        "it": "Dipendenze aggiornate\nNuovo: Utilizzare adattatore-dev invece di gulp tradurre\nFix: gestione degli errori per connessioni seriali",
-        "es": "Dependencias actualizadas\nNuevo: Usar adaptador-dev en lugar de traducir gulp\nCorrección: manejo de errores para conexiones seriales",
-        "pl": "Zależność od upoważnienia\nNowy: Zastosowanie adapter-dev zamiast gulpów\nObserwowanie błędów dla połączeń szeregowych",
-        "uk": "Оновлені залежності\nНовий: Використовуйте адаптер-dev замість гіпульти перекладу\nВиправлення: обробка помилок для серійних підключень",
-        "zh-cn": "A. 最新依赖情况\n新的:使用适应器而不是固体字。\nFix:对帐篷的错误处理"
       }
     },
     "titleLang": {
