@@ -57,9 +57,10 @@ A derived version of this adapter supporting control of VBus devices is availabl
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### **WORK IN PROGRESS** - 2025H2 maintenance release
 
-* (pdbjjens) Change: node>=20, js-controller>=7 and admin>=7 required
+* (pdbjjens) Change: node>=20, js-controller>=7.0.7 and admin>=7.6.17 required
+* (pdbjjens) Change: Cleanup devDependencies
 
 ### 0.5.1 (2025-02-15)
 
