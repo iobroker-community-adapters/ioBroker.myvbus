@@ -1,4 +1,12 @@
 # Older changes
+## 0.3.0 (2024-01-24) - 2024 maintenance release
+
+* (pdbjjens) New: Use JSON config UI
+* (pdbjjens) New: Support ioBroker discovery
+* (pdbjjens) Change: node>=16, js-contoller>=4 and admin>=6 required
+* (pdbjjens) Updated dependencies
+* (pdbjjens) Fix: Set info.connection false when reconnecting
+
 ## 0.2.5 (2023-03-14)
 
 * (pdbjjens) Updated dependencies

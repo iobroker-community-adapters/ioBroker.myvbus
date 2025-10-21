@@ -57,7 +57,7 @@ A derived version of this adapter supporting control of VBus devices is availabl
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
-### **WORK IN PROGRESS**
+### 0.6.1-alpha.0 (2025-10-21)
 
 * (pdbjjens) Fix: Add GitHub as npm Trusted Publisher
 * (pdbjjens) Change: Update dependencies
@@ -83,14 +83,6 @@ A derived version of this adapter supporting control of VBus devices is availabl
 * (pdbjjens) Change: node>=18, js-controller>=5 and admin>=6 required
 * (pdbjjens) Change: Removed .npmignore
 * (pdbjjens) New: Updated dependencies
-
-### 0.3.0 (2024-01-24) - 2024 maintenance release
-
-* (pdbjjens) New: Use JSON config UI
-* (pdbjjens) New: Support ioBroker discovery
-* (pdbjjens) Change: node>=16, js-contoller>=4 and admin>=6 required
-* (pdbjjens) Updated dependencies
-* (pdbjjens) Fix: Set info.connection false when reconnecting
 
 ## Legal Notices
 
