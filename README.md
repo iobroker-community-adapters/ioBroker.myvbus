@@ -8,7 +8,7 @@
 [![NPM version](https://img.shields.io/npm/v/iobroker.myvbus.svg)](https://www.npmjs.com/package/iobroker.myvbus)
 **Tests:** ![Test and Release](https://github.com/iobroker-community-adapters/iobroker.myvbus/workflows/Test%20and%20Release/badge.svg)  
 
-[![NPM](https://nodei.co/npm/iobroker.myvbus.png?downloads=true)](https://nodei.co/npm/iobroker.myvbus/)
+[![NPM](https://nodei.co/npm/iobroker.myvbus.svg?data=d,s)](https://www.npmjs.com/package/iobroker.myvbus/)
 
 ## ioBroker Adapter for Resol VBus
 
@@ -57,6 +57,12 @@ A derived version of this adapter supporting control of VBus devices is availabl
   Placeholder for the next version (at the beginning of the line):
   ### **WORK IN PROGRESS**
 -->
+### **WORK IN PROGRESS**
+
+* (pdbjjens) Fix: Add GitHub as npm Trusted Publisher
+* (pdbjjens) Change: Update dependencies
+* (pdbjjens) Change: Update npm badge
+
 ### 0.6.0 (2025-08-29) - 2025H2 maintenance release
 
 * (pdbjjens) Change: node>=20, js-controller>=7.0.7 and admin>=7.6.17 required
