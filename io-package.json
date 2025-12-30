@@ -122,7 +122,8 @@
       "uk": "Цей адаптер підключає ioBroker до пристроїв Resol на основі VBus"
     },
     "authors": [
-      "pdbjjens <jjensen@t-online.de>"
+      "pdbjjens <jjensen@t-online.de>",
+      "iobroker-community-adapters <iobroker-community-adapters@gmx.de>"
     ],
     "keywords": [
       "myvbus",
