@@ -1,8 +1,21 @@
 {
   "common": {
     "name": "myvbus",
-    "version": "0.6.1-alpha.0",
+    "version": "0.6.1",
     "news": {
+      "0.6.1": {
+        "en": "Adapter requires admin >= 7.7.22 now\n**Fixed**: update release-script (#786)",
+        "de": "Adapter benötigt jetzt admin >= 7.7.22\n**Fixed**: Update-Release-script (#786)",
+        "ru": "Адаптер требует администратора >= 7.7.22\n**Fixed**: Update Release-Script (#786)",
+        "pt": "Adaptador requer admin >= 7.7.22 agora\n**Fixed**: update release-script (#786)",
+        "nl": "Adapter vereist admin < 7.7.22 nu\n**Fixed**: update release-script (#786)",
+        "fr": "Adaptateur nécessite admin >= 7.7.22 maintenant\n**Fixed**: mise à jour de la version-script (#786)",
+        "it": "Adattatore richiede admin >= 7.7.22 ora\n**Fixed**: update release-script (#786)",
+        "es": "El adaptador requiere admin= 7.7.22 ahora\n**Fixed**: actualización de la versión-script (#786)",
+        "pl": "Adapter wymaga admin > = 7.7.22\n* *Fixed* *: update release- script (# 786) ",
+        "uk": "Адаптер вимагає адмін >= 7.7.22 тепер\n**Fixed***: скрипт релізу (#786)",
+        "zh-cn": "适任者需要管理员 \\ 7.7.22 现在\n** Fixed**:更新发布标记(# 786)"
+      },
       "0.6.1-alpha.0": {
         "en": "Fix: Add GitHub as npm Trusted Publisher\nChange: Update dependencies\nChange: Update npm badge",
         "de": "Fix: GitHub als npm Trusted Publisher hinzufügen\nÄnderung: Abhängigkeiten aktualisieren\nÄnderung: Update npm badge",
@@ -80,19 +93,6 @@
         "pl": "Nowy: Użyj interfejsu konfiguracyjnego JSON\nNowy: Wsparcie dla odkrycia jOBroker\nZmiana: węzeł > = 16, js- contoller > = 4 i admin > = 6 wymagane\nAktualizacja zależności\nFix: Ustaw informacje. połączenie false przy ponownym połączeniu",
         "uk": "Новий: Використовуйте JSON config UI\nНовий: Підтримка ioBroker Відкриття\nЗміна: вершина>=16, js-contoller>=4 і admin>=6 потрібно\nОновлені залежності\nФіксація: Настроювання інформації. підключення false при відключенні",
         "zh-cn": "新建: 使用 JSON 配置 UI\n新建: 支持 ioBroker 发现\n更改: 节点 16、js-contoller 4和 admin 6\n更新的依赖关系\nFix:设置信息. 重新连接时的连接错误"
-      },
-      "0.2.5": {
-        "en": "Updated dependencies\nFix: reconnect handling for serial connections",
-        "de": "Aktualisierte Abhängigkeiten\nFix: Reconnect-Handling für serielle Verbindungen",
-        "ru": "Обновленные зависимости\nИсправление: переподключение обработки для серийных соединений",
-        "pt": "Dependências atualizadas\nFix: manuseio de reconectar para conexões seriais",
-        "nl": "Verouderde afhankelijkheid\nVerbinding met de serieverbinding",
-        "fr": "Mise à jour des dépendances\nCorrection : reconnecter la manipulation pour les connexions série",
-        "it": "Dipendenze aggiornate\nFisso: ricollegare la gestione per connessioni seriali",
-        "es": "Dependencias actualizadas\nFijación: manipulación de reconexión para conexiones serie",
-        "pl": "Zależność od upoważnienia\nFix: reconnecting",
-        "uk": "Оновлені залежності\nВиправлення: відключення обробки для серійних підключень",
-        "zh-cn": "A. 最新依赖情况\n九:重新联系"
       }
     },
     "titleLang": {
