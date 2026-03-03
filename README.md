@@ -58,8 +58,10 @@ A derived version of this adapter supporting control of VBus devices is availabl
   ### **WORK IN PROGRESS**
 -->
 
-### **WORK IN PROGRESS**
-- (copilot) Adapter requires admin >= 7.7.22 now
+### **WORK IN PROGRESS** - 2026H1 maintenance release
+
+* (copilot) Adapter requires admin >= 7.7.22 now
+* (pdbjjens) **Fixed**: update release-script (#786)
 
 ### 0.6.1-alpha.0 (2025-10-21)
 
